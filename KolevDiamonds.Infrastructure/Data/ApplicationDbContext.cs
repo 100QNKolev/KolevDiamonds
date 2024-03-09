@@ -13,9 +13,9 @@ namespace KolevDiamonds.Data
 
         public DbSet<Ring> Rings { get; set; }
         public DbSet<Necklace> Necklaces { get; set; }
-        public DbSet<InvestmentDiamond> investmentDiamonds { get; set; }
-        public DbSet<InvestmentCoin> investmentCoins { get; set; }
-        public DbSet<MetalBar> metalBars { get; set; }
+        public DbSet<InvestmentDiamond> InvestmentDiamonds { get; set; }
+        public DbSet<InvestmentCoin> InvestmentCoins { get; set; }
+        public DbSet<MetalBar> MetalBars { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -4,6 +4,7 @@ using KolevDiamonds.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KolevDiamonds.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240309134555_added_needed_database_classes")]
+    partial class added_needed_database_classes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +74,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
 
                     b.HasKey("CoindId");
 
-                    b.ToTable("InvestmentCoins");
+                    b.ToTable("investmentCoins");
 
                     b.HasComment("Investment coin specifications");
                 });
@@ -114,7 +116,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
 
                     b.HasKey("DiamondId");
 
-                    b.ToTable("InvestmentDiamonds");
+                    b.ToTable("investmentDiamonds");
 
                     b.HasComment("Investment diamond specifications");
                 });
@@ -148,7 +150,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
 
                     b.HasKey("BarId");
 
-                    b.ToTable("MetalBars");
+                    b.ToTable("metalBars");
 
                     b.HasComment("Metal bar specifications");
                 });
