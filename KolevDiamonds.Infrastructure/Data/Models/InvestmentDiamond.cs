@@ -28,6 +28,10 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public string DiamondImagePath { get; set; } = string.Empty;
 
         [Required]
+        [Comment("Price of the product")]
+        public decimal Price { get; set; }
+
+        [Required]
         [Comment("How much carats is the diamond")]
         public double Carats { get; set; }
 
