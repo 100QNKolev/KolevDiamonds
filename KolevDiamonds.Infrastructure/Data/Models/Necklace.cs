@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static KolevDiamonds.Infrastructure.Constants.DataConstants;
+
 namespace KolevDiamonds.Infrastructure.Data.Models
 {
     [Comment("Necklace specifications")]
@@ -15,6 +17,11 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         [Key]
         [Comment("Necklace unique identifier")]
         public int NecklaceId { get; set; }
+
+        [Required]
+        [Comment("Name of the necklace")]
+        [MaxLength(NecklaceNameMaximumLength)]
+        public string NecklaceName { get; set; } = string.Empty;
 
         [Required]
         [Comment("Metal, which necklace is made of")]
@@ -38,6 +45,7 @@ namespace KolevDiamonds.Infrastructure.Data.Models
 
         [Required]
         [Comment("Purity of the metal expressed in carat for gold or sample for silver")]
+        [MaxLength(NecklacePurityMaximumLength)]
         public string Purity { get; set; } = string.Empty;
 
         [Required]
