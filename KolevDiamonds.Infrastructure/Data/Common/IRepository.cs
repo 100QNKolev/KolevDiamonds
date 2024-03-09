@@ -1,9 +1,9 @@
-﻿namespace KolevDiamonds.Infrastructure.Data.Common
+namespace KolevDiamonds.Infrastructure.Data.Common
 {
     public interface IRepository
     {
-        IQueryable<T> All<T>();
+        IQueryable<T> All<T>() where T : class;
 
-        IQueryable<T> AllReadOnly<T>();
+        IQueryable<T> AllReadOnly<T>() where T : class;
     }
 }

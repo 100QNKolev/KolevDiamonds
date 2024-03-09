@@ -1,16 +1,32 @@
-﻿
+
+using KolevDiamonds.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace KolevDiamonds.Infrastructure.Data.Common
 {
     public class Repository : IRepository
     {
-        public IQueryable<T> All<T>()
+        private readonly DbContext _context;
+
+        public Repository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            this._context = context;
         }
 
-        public IQueryable<T> AllReadOnly<T>()
+        private DbSet<T> DbSet<T> () where T : class
         {
-            throw new NotImplementedException();
+            return this._context.Set<T>();
+        }
+
+        public IQueryable<T> All<T>() where T : class
+        {
+            return DbSet<T>();
+        }
+
+        public IQueryable<T> AllReadOnly<T>() where T : class
+        {
+            return DbSet<T>()
+                .AsNoTracking();
         }
     }
 }

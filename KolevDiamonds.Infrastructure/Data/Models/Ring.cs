@@ -28,6 +28,10 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public string RingImagePath { get; set; } = string.Empty;
 
         [Required]
+        [Comment("Price of the product")]
+        public decimal Price { get; set; }
+
+        [Required]
         [Comment("Metal, which ring is made of")]
         public MetalVariation Metal { get; set; }
 

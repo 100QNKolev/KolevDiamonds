@@ -28,6 +28,10 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public string MetalBarImagePath { get; set; } = string.Empty;
 
         [Required]
+        [Comment("Price of the product")]
+        public decimal Price { get; set; }
+
+        [Required]
         [Comment("Type of metal")]
         public MetalVariation Metal { get; set; }
 
