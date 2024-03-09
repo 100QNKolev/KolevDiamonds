@@ -37,5 +37,9 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         [Required]
         [Comment("How well the diamond is cut")]
         public DiamondCut Cut { get; set; }
+
+        [Required]
+        [Comment("Purity of the metal expressed in carat for gold or sample for silver")]
+        public string Purity { get; set; } = string.Empty;
     }
 }
