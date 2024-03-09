@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KolevDiamonds.Infrastructure.Constants
 {
-    internal class DataConstants
+    public class DataConstants
     {
     }
 }
