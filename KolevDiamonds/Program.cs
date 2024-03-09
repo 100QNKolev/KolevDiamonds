@@ -34,4 +34,4 @@ app.UseAuthorization();
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
-app.RunAsync();
+app.Run();
