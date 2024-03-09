@@ -1,7 +1,8 @@
-﻿using KolevDiamonds.Data;
-using KolevDiamonds.Infrastructure.Data;
+﻿using KolevDiamonds.Core.Contracts.Ring;
+using KolevDiamonds.Core.Services.Ring;
+using KolevDiamonds.Data;
+using KolevDiamonds.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -10,6 +11,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IRingService, RingService>();
+
             return services;
         }
 
@@ -18,6 +21,9 @@ namespace Microsoft.Extensions.DependencyInjection
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            services.AddScoped<IRepository, Repository>();
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             return services;
