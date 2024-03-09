@@ -24,6 +24,10 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public string RingName { get; set; } = string.Empty;
 
         [Required]
+        [Comment("Server file system image path")]
+        public string RingImagePath { get; set; } = string.Empty;
+
+        [Required]
         [Comment("Metal, which ring is made of")]
         public MetalVariation Metal { get; set; }
 

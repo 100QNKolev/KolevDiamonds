@@ -24,6 +24,10 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public string DiamondName { get; set; } = string.Empty;
 
         [Required]
+        [Comment("Server file system image path")]
+        public string DiamondImagePath { get; set; } = string.Empty;
+
+        [Required]
         [Comment("How much carats is the diamond")]
         public double Carats { get; set; }
 

@@ -25,6 +25,10 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public string CoinName { get; set; } = string.Empty;
 
         [Required]
+        [Comment("Server file system image path")]
+        public string CoinImagePath { get; set; } = string.Empty;
+
+        [Required]
         [Comment("Type of metal")]
         public MetalVariation Metal { get; set; }
 

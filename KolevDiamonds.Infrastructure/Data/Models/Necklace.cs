@@ -24,6 +24,10 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public string NecklaceName { get; set; } = string.Empty;
 
         [Required]
+        [Comment("Server file system image path")]
+        public string NecklaceImagePath { get; set; } = string.Empty;
+
+        [Required]
         [Comment("Metal, which necklace is made of")]
         public MetalVariation Metal { get; set; }
 

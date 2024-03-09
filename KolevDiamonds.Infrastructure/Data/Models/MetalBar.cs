@@ -24,6 +24,10 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public string MetalBarName { get; set; } = string.Empty;
 
         [Required]
+        [Comment("Server file system image path")]
+        public string MetalBarImagePath { get; set; } = string.Empty;
+
+        [Required]
         [Comment("Type of metal")]
         public MetalVariation Metal { get; set; }
 
