@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KolevDiamonds.Infrastructure.Data.Models
 {
-    [Comment("Investment gold specifications")]
+    [Comment("Investment coin specifications")]
     public class InvestmentCoin
     {
         [Key]
@@ -22,15 +22,15 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public MetalVariation Metal { get; set; }
 
         [Required]
-        [Comment("Weight of the gold in grams")]
+        [Comment("Weight of the metal in grams")]
         public double Weight { get; set; }
 
         [Required]
-        [Comment("Purity of the gold expressed as a ratio")]
+        [Comment("Purity of the metal expressed as a ratio")]
         public double Purity { get; set; }
 
         [Required]
-        [Comment("Quality of the gold")]
+        [Comment("Quality of the metal")]
         public GoldQuality Quality { get; set; }
 
         [Required]
@@ -38,7 +38,7 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public int Circulation { get; set; }
 
         [Required]
-        [Comment("Diameter of the gold piece in millimeters")]
+        [Comment("Diameter of the coin in millimeters")]
         public double Diameter { get; set; }
 
         [Required]
@@ -46,11 +46,11 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public string LegalTender { get; set; } = string.Empty;
 
         [Required]
-        [Comment("Manufacturer of the gold")]
+        [Comment("Manufacturer of the coin")]
         public string Manufacturer { get; set; } = string.Empty;
 
         [Required]
-        [Comment("Packaging for the gold")]
+        [Comment("Packaging for the coin")]
         public string Packaging { get; set; } = string.Empty;
     }
 }
