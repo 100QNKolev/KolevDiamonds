@@ -33,5 +33,9 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         [Required]
         [Comment("What clarity is the main diamond in the ring")]
         public DiamondClarity Clarity { get; set; }
+
+        [Required]
+        [Comment("How well the diamond is cut")]
+        public DiamondCut Cut { get; set; }
     }
 }
