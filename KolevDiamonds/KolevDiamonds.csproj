@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KolevDiamonds.Core\KolevDiamonds.Core.csproj" />
     <ProjectReference Include="..\KolevDiamonds.Infrastructure\KolevDiamonds.Infrastructure.csproj" />
   </ItemGroup>
 
