@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static KolevDiamonds.Infrastructure.Constants.DataConstants;
+
 namespace KolevDiamonds.Infrastructure.Data.Models
 {
     [Comment("Investment coin specifications")]
@@ -15,7 +17,12 @@ namespace KolevDiamonds.Infrastructure.Data.Models
     {
         [Key]
         [Comment("Coin unique identifier")]
-        public int CoindId { get; set; }
+        public int CoinId { get; set; }
+
+        [Required]
+        [Comment("Name of the coin")]
+        [MaxLength(InvestmentCoinNameMaximumLength)]
+        public string CoinName { get; set; } = string.Empty;
 
         [Required]
         [Comment("Type of metal")]
@@ -43,14 +50,17 @@ namespace KolevDiamonds.Infrastructure.Data.Models
 
         [Required]
         [Comment("Legal tender value in the specified currency")]
+        [MaxLength(InvestmentCoinLegalTenderMaximumLength)]
         public string LegalTender { get; set; } = string.Empty;
 
         [Required]
         [Comment("Manufacturer of the coin")]
+        [MaxLength(InvestmentCoinManufacturerMaximumLength)]
         public string Manufacturer { get; set; } = string.Empty;
 
         [Required]
         [Comment("Packaging for the coin")]
+        [MaxLength(InvestmentCoinPackagingMaximumLength)]
         public string Packaging { get; set; } = string.Empty;
     }
 }

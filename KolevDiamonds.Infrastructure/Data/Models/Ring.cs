@@ -19,6 +19,11 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public int RingId { get; set; }
 
         [Required]
+        [Comment("Name of the ring")]
+        [MaxLength(RingNameMaximumLength)]
+        public string RingName { get; set; } = string.Empty;
+
+        [Required]
         [Comment("Metal, which ring is made of")]
         public MetalVariation Metal { get; set; }
 
@@ -40,6 +45,7 @@ namespace KolevDiamonds.Infrastructure.Data.Models
 
         [Required]
         [Comment("Purity of the metal expressed in carat for gold or sample for silver")]
+        [MaxLength(RingPurityMaximumLength)]
         public string Purity { get; set; } = string.Empty;
     }
 }

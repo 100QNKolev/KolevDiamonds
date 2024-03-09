@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using static KolevDiamonds.Infrastructure.Constants.DataConstants;
+
 namespace KolevDiamonds.Infrastructure.Data.Models
 {
     [Comment("Investment diamond specifications")]
@@ -15,6 +17,11 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         [Key]
         [Comment("Diamond unique identifier")]
         public int DiamondId { get; set; }
+
+        [Required]
+        [Comment("Name of the diamond")]
+        [MaxLength(InvestmentDiamondNameMaximumLength)]
+        public string DiamondName { get; set; } = string.Empty;
 
         [Required]
         [Comment("How much carats is the diamond")]
@@ -34,10 +41,12 @@ namespace KolevDiamonds.Infrastructure.Data.Models
 
         [Required]
         [Comment("The certifying gemological laboratory")]
+        [MaxLength(InvestmentDiamondCertifyingLaboratoryMaximumLength)]
         public string CertifyingLaboratory { get; set; } = string.Empty;
 
         [Required]
         [Comment("The proportions of the diamond")]
+        [MaxLength(InvestmentDiamondProportionsMaximumLength)]
         public string Proportions { get; set; } = string.Empty;
     }
 }
