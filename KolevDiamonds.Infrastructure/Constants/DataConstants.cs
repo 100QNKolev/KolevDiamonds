@@ -8,9 +8,9 @@ namespace KolevDiamonds.Infrastructure.Constants
 {
     public class DataConstants
     {
-        //Constants for InvestmentGoldCoin class
-        public const double InvestmentGoldPurityRatioMaximum = 1000;
-        public const double InvestmentGoldPurityRatioMinimum = 333;
+        //Constants for metal
+        public const double MetalPurityRatioMaximum = 1000;
+        public const double MetalPurityRatioMinimum = 333;
 
     }
 }
