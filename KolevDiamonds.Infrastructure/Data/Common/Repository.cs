@@ -1,4 +1,4 @@
-﻿
+
 using KolevDiamonds.Data;
 using Microsoft.EntityFrameworkCore;
 

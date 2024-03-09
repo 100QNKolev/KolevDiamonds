@@ -1,4 +1,4 @@
-﻿using KolevDiamonds.Core.Contracts.Ring;
+using KolevDiamonds.Core.Contracts.Ring;
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Infrastructure.Data;
 using KolevDiamonds.Infrastructure.Data.Common;

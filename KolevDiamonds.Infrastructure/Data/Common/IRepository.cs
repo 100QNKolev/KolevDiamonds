@@ -1,4 +1,4 @@
-﻿namespace KolevDiamonds.Infrastructure.Data.Common
+namespace KolevDiamonds.Infrastructure.Data.Common
 {
     public interface IRepository
     {
