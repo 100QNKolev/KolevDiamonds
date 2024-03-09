@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 namespace KolevDiamonds.Infrastructure.Data.Models
 {
     [Comment("Investment gold specifications")]
-    public class InvestmentGoldCoin
+    public class InvestmentCoin
     {
         [Key]
-        [Comment("Gold unique identifier")]
-        public int GoldId { get; set; }
+        [Comment("Coin unique identifier")]
+        public int CoindId { get; set; }
 
         [Required]
-        [Comment("Type of fine gold")]
-        public string Metal { get; set; } = string.Empty;
+        [Comment("Type of metal")]
+        public MetalVariation Metal { get; set; }
 
         [Required]
         [Comment("Weight of the gold in grams")]
