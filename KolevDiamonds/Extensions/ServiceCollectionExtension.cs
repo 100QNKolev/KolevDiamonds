@@ -1,4 +1,12 @@
-﻿using KolevDiamonds.Core.Contracts.Ring;
+﻿using KolevDiamonds.Core.Contracts.InvestmentCoin;
+using KolevDiamonds.Core.Contracts.InvestmentDiamond;
+using KolevDiamonds.Core.Contracts.MetalBar;
+using KolevDiamonds.Core.Contracts.Necklace;
+using KolevDiamonds.Core.Contracts.Ring;
+using KolevDiamonds.Core.Services.InvestmentCoin;
+using KolevDiamonds.Core.Services.InvestmentDiamond;
+using KolevDiamonds.Core.Services.MetalBar;
+using KolevDiamonds.Core.Services.Necklace;
 using KolevDiamonds.Core.Services.Ring;
 using KolevDiamonds.Data;
 using KolevDiamonds.Infrastructure.Data.Common;
@@ -12,6 +20,10 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IRingService, RingService>();
+            services.AddScoped<INecklaceService, NecklaceService>();
+            services.AddScoped<IMetalBarService, MetalBarService>();
+            services.AddScoped<IInvestmentDiamondService, InvestmentDiamondService>();
+            services.AddScoped<IInvestmentCoinService, InvestmentCoinService>();
 
             return services;
         }
