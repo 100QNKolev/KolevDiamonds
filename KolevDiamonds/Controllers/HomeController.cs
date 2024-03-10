@@ -1,4 +1,5 @@
-﻿using KolevDiamonds.Models;
+﻿using KolevDiamonds.Core.Contracts.Ring;
+using KolevDiamonds.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,21 @@ namespace KolevDiamonds.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IRingService ringService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> logger,
+            IRingService ringService)
         {
             _logger = logger;
+            this.ringService = ringService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = await ringService.AllRings();
+
+            return View(model);
         }
 
         public IActionResult Privacy()

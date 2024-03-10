@@ -1,6 +1,8 @@
-
 using KolevDiamonds.Data;
+using KolevDiamonds.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Principal;
 
 namespace KolevDiamonds.Infrastructure.Data.Common
 {

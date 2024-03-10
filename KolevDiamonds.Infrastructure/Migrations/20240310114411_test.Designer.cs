@@ -4,6 +4,7 @@ using KolevDiamonds.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KolevDiamonds.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240310114411_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -333,7 +335,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Metal = 2,
                             Price = 1000.00m,
                             Purity = "18K",
-                            RingImagePath = "https://www.tanishq.co.in/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw5721e8ec/images/hi-res/50D2FFFFRAA02_1.jpg",
+                            RingImagePath = "/images/ring1.jpg",
                             RingName = "Gold Diamond Ring"
                         },
                         new
@@ -346,7 +348,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Metal = 2,
                             Price = 10020.00m,
                             Purity = "18K",
-                            RingImagePath = "https://4.imimg.com/data4/QW/YU/FUSIONI-3520335/prod-image.jpg",
+                            RingImagePath = "/images/ring2.jpg",
                             RingName = "Gold Ring With Crown Diamond"
                         },
                         new
@@ -359,7 +361,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Metal = 4,
                             Price = 12000.00m,
                             Purity = "18K",
-                            RingImagePath = "https://love-and-co.com/cdn/shop/files/CR591-LGD_lifestyle.jpg?v=1697793277&width=2000",
+                            RingImagePath = "/images/ring3.jpg",
                             RingName = "Rose Gold Diamond Ring"
                         });
                 });

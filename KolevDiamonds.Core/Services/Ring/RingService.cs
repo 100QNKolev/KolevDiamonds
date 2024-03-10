@@ -20,9 +20,12 @@ namespace KolevDiamonds.Core.Services.Ring
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Ring>()
                 .OrderByDescending(r => r.RingId)
-                .Select(r => new RingIndexServiceModel() 
+                .Select(r => new RingIndexServiceModel()
                 {
-                
+                    Id = r.RingId,
+                    Name = r.RingName,
+                    ImagePath = r.RingImagePath,
+                    Price = r.Price
                 })
                 .ToListAsync();
         }

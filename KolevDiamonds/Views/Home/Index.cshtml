@@ -1,8 +1,154 @@
-﻿@{
+﻿@model IEnumerable<RingIndexServiceModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Our Jewelry Store</h1>
+        <p>Discover exquisite jewelry pieces crafted with precision and passion.</p>
+        <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">Shop Now</a>
+    </div>
+</section>
+
+<section class="recent-products">
+    <div class="container">
+        <h2>Most Recent Products</h2>
+        @if (Model.Any())
+        {
+            <div class="product-grid">
+                @foreach (var product in Model)
+                {
+                    <div class="product-card">
+                        <img src="@product.ImagePath" alt="@product.Name" class="product-image">
+                        <h3 class="product-name">@product.Name</h3>
+                        <span class="product-price">@product.Price.ToString("C")</span>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <h2>No rings available</h2>
+        }
+        <a asp-area="" asp-controller="Products" asp-action="Index" class="btn btn-secondary">View More Products</a>
+    </div>
+</section>
+
+
+
+<style>
+    .hero {
+        position: relative;
+        height: 500px; /* Adjust height as needed */
+        background-image: url('hero-image.jpg'); /* Replace with your background image URL */
+        background-size: cover;
+        background-position: center;
+        color: black;
+        text-align: center;
+    }
+
+    .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ffcc00; /* Adjust button color as needed */
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #ff9900; /* Adjust button hover color as needed */
+        }
+
+    .recent-products {
+        padding: 50px 0;
+        background-color: #f9f9f9;
+    }
+
+        .recent-products .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .recent-products h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .product-card {
+        background-color: #ffffff;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        max-width: 200px; /* Specify the maximum width */
+        max-height: 200px; /* Specify the maximum height */
+    }
+
+    .product-name {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .product-description {
+        font-size: 1rem;
+        color: #666666;
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #333333;
+        display: block;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #333333;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #555555;
+        }
+</style>

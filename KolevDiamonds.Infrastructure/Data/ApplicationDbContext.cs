@@ -1,6 +1,8 @@
 ﻿using KolevDiamonds.Infrastructure.Data.Models;
+using KolevDiamonds.Infrastructure.Data.SeedDb;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace KolevDiamonds.Data
 {
@@ -11,14 +13,16 @@ namespace KolevDiamonds.Data
         {
         }
 
-        public DbSet<Ring> Rings { get; set; }
-        public DbSet<Necklace> Necklaces { get; set; }
-        public DbSet<InvestmentDiamond> InvestmentDiamonds { get; set; }
-        public DbSet<InvestmentCoin> InvestmentCoins { get; set; }
-        public DbSet<MetalBar> MetalBars { get; set; }
+        public DbSet<Ring> Rings { get; set; } = null!;
+        public DbSet<Necklace> Necklaces { get; set; } = null!;
+        public DbSet<InvestmentDiamond> InvestmentDiamonds { get; set; } = null!;
+        public DbSet<InvestmentCoin> InvestmentCoins { get; set; } = null!;
+        public DbSet<MetalBar> MetalBars { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new RingConfiguration());
+
             base.OnModelCreating(builder);
         }
     }
