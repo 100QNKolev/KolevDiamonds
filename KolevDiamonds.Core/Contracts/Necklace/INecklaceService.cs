@@ -9,6 +9,6 @@ namespace KolevDiamonds.Core.Contracts.Necklace
 {
     public interface INecklaceService
     {
-        Task<IEnumerable<NecklaceIndexServiceModel>> AllNecklaces();
+        Task<IEnumerable<ProductIndexServiceModel>> AllNecklaces();
     }
 }

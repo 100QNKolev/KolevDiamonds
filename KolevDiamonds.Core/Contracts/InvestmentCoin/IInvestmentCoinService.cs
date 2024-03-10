@@ -9,6 +9,6 @@ namespace KolevDiamonds.Core.Contracts.InvestmentCoin
 {
     public interface IInvestmentCoinService
     {
-        Task<IEnumerable<RingIndexServiceModel>> AllInvestmentCoins();
+        Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentCoins();
     }
 }

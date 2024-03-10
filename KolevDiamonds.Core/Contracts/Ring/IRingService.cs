@@ -4,6 +4,6 @@ namespace KolevDiamonds.Core.Contracts.Ring
 {
     public interface IRingService
     {
-       Task<IEnumerable<RingIndexServiceModel>> AllRings();
+       Task<IEnumerable<ProductIndexServiceModel>> AllRings();
     }
 }

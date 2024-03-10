@@ -9,6 +9,6 @@ namespace KolevDiamonds.Core.Contracts.MetalBar
 {
     public interface IMetalBarService
     {
-        Task<IEnumerable<RingIndexServiceModel>> AllMetalBars();
+        Task<IEnumerable<ProductIndexServiceModel>> AllMetalBars();
     }
 }

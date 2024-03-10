@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KolevDiamonds.Core.Models
 {
-    public class NecklaceIndexServiceModel
+    public class ProductIndexServiceModel
     {
         public int Id { get; set; }
 

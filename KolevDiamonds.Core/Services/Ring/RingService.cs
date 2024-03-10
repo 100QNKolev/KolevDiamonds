@@ -15,12 +15,12 @@ namespace KolevDiamonds.Core.Services.Ring
             this._repository = repository;
         }
 
-        public async Task<IEnumerable<RingIndexServiceModel>> AllRings()
+        public async Task<IEnumerable<ProductIndexServiceModel>> AllRings()
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Ring>()
                 .OrderByDescending(r => r.RingId)
-                .Select(r => new RingIndexServiceModel()
+                .Select(r => new ProductIndexServiceModel()
                 {
                     Id = r.RingId,
                     Name = r.RingName,
