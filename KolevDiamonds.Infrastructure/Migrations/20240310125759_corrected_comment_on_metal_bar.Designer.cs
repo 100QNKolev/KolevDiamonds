@@ -4,6 +4,7 @@ using KolevDiamonds.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KolevDiamonds.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240310125759_corrected_comment_on_metal_bar")]
+    partial class corrected_comment_on_metal_bar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,56 +95,6 @@ namespace KolevDiamonds.Infrastructure.Migrations
                     b.ToTable("InvestmentCoins");
 
                     b.HasComment("Investment coin specifications");
-
-                    b.HasData(
-                        new
-                        {
-                            CoinId = 1,
-                            Circulation = 10000,
-                            CoinImagePath = "https://upload.wikimedia.org/wikipedia/commons/3/3a/1959_sovereign_Elizabeth_II_obverse.jpg",
-                            CoinName = "Gold Sovereign",
-                            Diameter = 22.050000000000001,
-                            LegalTender = "GBP 1",
-                            Manufacturer = "The Royal Mint",
-                            Metal = 2,
-                            Packaging = "Protective Capsule",
-                            Price = 1000.00m,
-                            Purity = 0.91669999999999996,
-                            Quality = 1,
-                            Weight = 7.9800000000000004
-                        },
-                        new
-                        {
-                            CoinId = 2,
-                            Circulation = 5000,
-                            CoinImagePath = "https://assets.goldeneaglecoin.com/resource/productimages/2020-SE-obv.jpg",
-                            CoinName = "Silver Eagle",
-                            Diameter = 40.600000000000001,
-                            LegalTender = "USD 1",
-                            Manufacturer = "United States Mint",
-                            Metal = 1,
-                            Packaging = "Plastic Tube",
-                            Price = 50.00m,
-                            Purity = 0.999,
-                            Quality = 1,
-                            Weight = 31.100000000000001
-                        },
-                        new
-                        {
-                            CoinId = 3,
-                            Circulation = 1000,
-                            CoinImagePath = "https://media.tavid.ee/v7/_product_catalog_/1-oz-canadian-maple-leaf-silver-coin/canadian_maple_leaf_1oz_silver_coin_reverse.jpg?height=960&width=960&func=cropfit",
-                            CoinName = "Silver Maple Leaf",
-                            Diameter = 30.0,
-                            LegalTender = "CAD 50",
-                            Manufacturer = "Royal Canadian Mint",
-                            Metal = 1,
-                            Packaging = "Assay Card",
-                            Price = 500.00m,
-                            Purity = 0.99950000000000006,
-                            Quality = 3,
-                            Weight = 31.100000000000001
-                        });
                 });
 
             modelBuilder.Entity("KolevDiamonds.Infrastructure.Data.Models.InvestmentDiamond", b =>
@@ -202,47 +154,6 @@ namespace KolevDiamonds.Infrastructure.Migrations
                     b.ToTable("InvestmentDiamonds");
 
                     b.HasComment("Investment diamond specifications");
-
-                    b.HasData(
-                        new
-                        {
-                            DiamondId = 1,
-                            Carats = 1.0,
-                            CertifyingLaboratory = "GIA",
-                            Clarity = 3,
-                            Colour = 2,
-                            Cut = 1,
-                            DiamondImagePath = "https://www.diamondbanc.com/wp-content/uploads/2019/01/shutterstock_32731492-1024x681.jpg",
-                            DiamondName = "Round Brilliant Diamond",
-                            Price = 5000.00m,
-                            Proportions = "Excellent"
-                        },
-                        new
-                        {
-                            DiamondId = 2,
-                            Carats = 1.5,
-                            CertifyingLaboratory = "IGI",
-                            Clarity = 6,
-                            Colour = 4,
-                            Cut = 2,
-                            DiamondImagePath = "https://www.qualitydiamonds.co.uk/media/1132/princess-diamond-top.png",
-                            DiamondName = "Princess Cut Diamond",
-                            Price = 7000.00m,
-                            Proportions = "Very Good"
-                        },
-                        new
-                        {
-                            DiamondId = 3,
-                            Carats = 2.0,
-                            CertifyingLaboratory = "HRD",
-                            Clarity = 7,
-                            Colour = 3,
-                            Cut = 3,
-                            DiamondImagePath = "https://www.capediamonds.co.za/wp-content/uploads/2020/09/Emerald-Cut-Diamonds-Cape-Diamonds-Cape-Town-South-Africa.jpg",
-                            DiamondName = "Emerald Cut Diamond",
-                            Price = 10000.00m,
-                            Proportions = "Good"
-                        });
                 });
 
             modelBuilder.Entity("KolevDiamonds.Infrastructure.Data.Models.MetalBar", b =>
@@ -294,41 +205,6 @@ namespace KolevDiamonds.Infrastructure.Migrations
                     b.ToTable("MetalBars");
 
                     b.HasComment("Metal bar specifications");
-
-                    b.HasData(
-                        new
-                        {
-                            BarId = 1,
-                            Dimensions = "27 x 47 mm",
-                            Metal = 2,
-                            MetalBarImagePath = "https://m.media-amazon.com/images/I/61ICiCEk3TL._AC_UF894,1000_QL80_.jpg",
-                            MetalBarName = "Gold Bar",
-                            Price = 15000.00m,
-                            Purity = "24 Karat",
-                            Weight = 1000.0
-                        },
-                        new
-                        {
-                            BarId = 2,
-                            Dimensions = "20 x 40 mm",
-                            Metal = 1,
-                            MetalBarImagePath = "https://www.monex.com/wp-content/uploads/2023/06/1-kilo-silver-bar-side.png",
-                            MetalBarName = "Silver Bar",
-                            Price = 500.00m,
-                            Purity = "999.9/1000",
-                            Weight = 1000.0
-                        },
-                        new
-                        {
-                            BarId = 3,
-                            Dimensions = "25 x 50 mm",
-                            Metal = 4,
-                            MetalBarImagePath = "https://images.squarespace-cdn.com/content/v1/5719f32620c64744b886bcd2/1612970177011-TLIGBQ4ZDOODFX0TOR42/rose-gold-bar.png",
-                            MetalBarName = "Rose Gold Bar",
-                            Price = 20000.00m,
-                            Purity = "24 Karat",
-                            Weight = 1000.0
-                        });
                 });
 
             modelBuilder.Entity("KolevDiamonds.Infrastructure.Data.Models.Necklace", b =>
@@ -390,50 +266,6 @@ namespace KolevDiamonds.Infrastructure.Migrations
                     b.ToTable("Necklaces");
 
                     b.HasComment("Necklace specifications");
-
-                    b.HasData(
-                        new
-                        {
-                            NecklaceId = 1,
-                            Carats = 2.5,
-                            Clarity = 5,
-                            Colour = 4,
-                            Cut = 1,
-                            Length = 450.0,
-                            Metal = 2,
-                            NecklaceImagePath = "https://i.etsystatic.com/6244698/r/il/8121e9/1697727663/il_570xN.1697727663_9elj.jpg",
-                            NecklaceName = "Diamond Solitaire Necklace",
-                            Price = 1500.00m,
-                            Purity = "18K"
-                        },
-                        new
-                        {
-                            NecklaceId = 2,
-                            Carats = 3.0,
-                            Clarity = 7,
-                            Colour = 14,
-                            Cut = 2,
-                            Length = 500.0,
-                            Metal = 1,
-                            NecklaceImagePath = "https://media.beaverbrooks.co.uk/i/beaverbrooks/G105854_0",
-                            NecklaceName = "Sapphire Halo Necklace",
-                            Price = 2000.00m,
-                            Purity = "925"
-                        },
-                        new
-                        {
-                            NecklaceId = 3,
-                            Carats = 2.7999999999999998,
-                            Clarity = 4,
-                            Colour = 1,
-                            Cut = 1,
-                            Length = 480.0,
-                            Metal = 1,
-                            NecklaceImagePath = "https://haverhill.com/cdn/shop/products/image_11085d78-83fb-429b-a153-15a90bc9ee30_1200x1200.jpg?v=1705428203",
-                            NecklaceName = "Emerald Pendant Necklace",
-                            Price = 1800.00m,
-                            Purity = "925"
-                        });
                 });
 
             modelBuilder.Entity("KolevDiamonds.Infrastructure.Data.Models.Ring", b =>

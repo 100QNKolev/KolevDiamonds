@@ -36,7 +36,7 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public MetalVariation Metal { get; set; }
 
         [Required]
-        [Comment("Weight of the metal bar")]
+        [Comment("Weight of the metal bar in grams")]
         public double Weight { get; set; }
 
         [Required]

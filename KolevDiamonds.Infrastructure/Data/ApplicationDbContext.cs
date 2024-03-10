@@ -2,7 +2,6 @@
 using KolevDiamonds.Infrastructure.Data.SeedDb;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace KolevDiamonds.Data
 {
@@ -21,7 +20,13 @@ namespace KolevDiamonds.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new RingConfiguration());
+            var data = new SeedData();
+
+            builder.Entity<Ring>().HasData(data.FirstRing, data.SecondRing, data.ThirdRing);
+            builder.Entity<Necklace>().HasData(data.FirstNecklace, data.SecondNecklace, data.ThirdNecklace);
+            builder.Entity<MetalBar>().HasData(data.FirstMetalBar, data.SecondMetalBar, data.ThirdMetalBar);
+            builder.Entity<InvestmentDiamond>().HasData(data.FirstInvestmentDiamond, data.SecondInvestmentDiamond, data.ThirdInvestmentDiamond);
+            builder.Entity<InvestmentCoin>().HasData(data.FirstInvestmentCoin, data.SecondInvestmentCoin, data.ThirdInvestmentCoin);
 
             base.OnModelCreating(builder);
         }
