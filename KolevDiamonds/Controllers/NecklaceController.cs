@@ -1,5 +1,6 @@
 ﻿using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Models.Necklace;
+using KolevDiamonds.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KolevDiamonds.Controllers
@@ -28,6 +29,11 @@ namespace KolevDiamonds.Controllers
         {
             var necklace = await _necklaceService.GetByIdAsync(id);
 
+            if (necklace == null)
+            {
+                return RedirectToAction(nameof(NotFoundError));
+            }
+
             var model = new NecklaceDetailsServiceModel
             {
                 Id = necklace.Id,
@@ -44,6 +50,20 @@ namespace KolevDiamonds.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult NotFoundError()
+        {
+            // Redirect to the custom error page for 500 Internal Server Error
+            return View("Error404");
+        }
+
+        [HttpGet]
+        public IActionResult InternalServerError()
+        {
+            // Redirect to the custom error page for 500 Internal Server Error
+            return View("Error500");
         }
     }
 }

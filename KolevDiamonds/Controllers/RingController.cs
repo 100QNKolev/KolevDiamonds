@@ -31,6 +31,11 @@ namespace KolevDiamonds.Controllers
         {
             var ring = await _ringService.GetByIdAsync(id);
 
+            if (ring == null) 
+            {
+                return RedirectToAction(nameof(NotFoundError));
+            }
+
             var model = new RingDetailsServiceModel
             {
                 Id = ring.Id,
@@ -46,6 +51,20 @@ namespace KolevDiamonds.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult NotFoundError()
+        {
+            // Redirect to the custom error page for 500 Internal Server Error
+            return View("Error404");
+        }
+
+        [HttpGet]
+        public IActionResult InternalServerError()
+        {
+            // Redirect to the custom error page for 500 Internal Server Error
+            return View("Error500");
         }
     }
 }

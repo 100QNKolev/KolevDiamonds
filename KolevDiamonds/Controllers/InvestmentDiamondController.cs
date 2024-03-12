@@ -1,5 +1,6 @@
 ﻿using KolevDiamonds.Core.Contracts.InvestmentDiamond;
 using KolevDiamonds.Core.Models.InvestmentDiamond;
+using KolevDiamonds.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KolevDiamonds.Controllers
@@ -28,6 +29,11 @@ namespace KolevDiamonds.Controllers
         {
             var investmentDiamond = await _investmentDiamondService.GetByIdAsync(id);
 
+            if (investmentDiamond == null)
+            {
+                return RedirectToAction(nameof(NotFoundError));
+            }
+
             var model = new InvestmentDiamondDetailsServiceModel
             {
                 Id = investmentDiamond.Id,
@@ -43,6 +49,20 @@ namespace KolevDiamonds.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult NotFoundError()
+        {
+            // Redirect to the custom error page for 500 Internal Server Error
+            return View("Error404");
+        }
+
+        [HttpGet]
+        public IActionResult InternalServerError()
+        {
+            // Redirect to the custom error page for 500 Internal Server Error
+            return View("Error500");
         }
 
     }
