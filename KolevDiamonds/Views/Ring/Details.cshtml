@@ -1,0 +1,80 @@
+﻿@using KolevDiamonds.Core.Models.Ring
+
+@model RingDetailsServiceModel
+
+<title>@Model.RingName Details</title>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="ring-image-container">
+                <img src="@Model.RingImagePath" alt="@Model.RingName" class="ring-image" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="ring-details">
+                <h1>@Model.RingName Details</h1>
+                <div class="ring-info">
+                    <div><strong>Price:</strong> @Model.Price</div>
+                    <div><strong>Metal:</strong> @Model.Metal</div>
+                    <div><strong>Carats:</strong> @Model.Carats</div>
+                    <div><strong>Colour:</strong> @Model.Colour</div>
+                    <div><strong>Clarity:</strong> @Model.Clarity</div>
+                    <div><strong>Cut:</strong> @Model.Cut</div>
+                    <div><strong>Purity:</strong> @Model.Purity</div>
+                </div>
+                <div class="buy-button">
+                    <form action="/Buy/Ring/@Model.RingId" method="post">
+                        <button type="submit">Buy Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .ring-image-container {
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .ring-image {
+        width: 100%;
+        height: 600px;
+        object-fit: cover;
+    }
+
+    .ring-details {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .ring-details h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+    .ring-info {
+        margin-bottom: 20px;
+    }
+
+    .buy-button button {
+        padding: 15px 30px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .buy-button button:hover {
+            background-color: #0056b3;
+        }
+</style>

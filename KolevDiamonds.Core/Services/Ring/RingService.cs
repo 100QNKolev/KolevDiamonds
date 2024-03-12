@@ -1,5 +1,6 @@
 using KolevDiamonds.Core.Contracts.Ring;
 using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.Ring;
 using KolevDiamonds.Infrastructure.Data;
 using KolevDiamonds.Infrastructure.Data.Common;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,7 @@ namespace KolevDiamonds.Core.Services.Ring
             this._repository = repository;
         }
 
-        public async Task<IEnumerable<ProductIndexServiceModel>> AllRings()
+        public async Task<IEnumerable<ProductIndexServiceModel>> AllRingsReadOnly()
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Ring>()
@@ -28,6 +29,28 @@ namespace KolevDiamonds.Core.Services.Ring
                     Price = r.Price
                 })
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ProductIndexServiceModel>> AllRings()
+        {
+            return await this._repository
+                .All<Infrastructure.Data.Models.Ring>()
+                .OrderByDescending(r => r.RingId)
+                .Select(r => new ProductIndexServiceModel()
+                {
+                    Id = r.RingId,
+                    Name = r.RingName,
+                    ImagePath = r.RingImagePath,
+                    Price = r.Price
+                })
+                .ToListAsync();
+        }
+
+        public async Task<Infrastructure.Data.Models.Ring> GetByIdAsync(int id)
+        {
+            return await this._repository
+                .AllReadOnly<Infrastructure.Data.Models.Ring>()
+                .FirstOrDefaultAsync(r => r.RingId == id);
         }
     }
 }
