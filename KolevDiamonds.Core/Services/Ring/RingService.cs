@@ -16,31 +16,16 @@ namespace KolevDiamonds.Core.Services.Ring
             this._repository = repository;
         }
 
-        public async Task<IEnumerable<ProductIndexServiceModel>> AllRingsReadOnly()
-        {
-            return await this._repository
-                .AllReadOnly<Infrastructure.Data.Models.Ring>()
-                .OrderByDescending(r => r.RingId)
-                .Select(r => new ProductIndexServiceModel()
-                {
-                    Id = r.RingId,
-                    Name = r.RingName,
-                    ImagePath = r.RingImagePath,
-                    Price = r.Price
-                })
-                .ToListAsync();
-        }
-
         public async Task<IEnumerable<ProductIndexServiceModel>> AllRings()
         {
             return await this._repository
-                .All<Infrastructure.Data.Models.Ring>()
-                .OrderByDescending(r => r.RingId)
+                .AllReadOnly<Infrastructure.Data.Models.Ring>()
+                .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
-                    Id = r.RingId,
-                    Name = r.RingName,
-                    ImagePath = r.RingImagePath,
+                    Id = r.Id,
+                    Name = r.Name,
+                    ImagePath = r.ImagePath,
                     Price = r.Price
                 })
                 .ToListAsync();
@@ -50,7 +35,7 @@ namespace KolevDiamonds.Core.Services.Ring
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Ring>()
-                .FirstOrDefaultAsync(r => r.RingId == id);
+                .FirstOrDefaultAsync(r => r.Id == id);
         }
     }
 }

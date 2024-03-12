@@ -23,15 +23,22 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.InvestmentCoin>()
-                .OrderByDescending(r => r.CoinId)
+                .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
-                    Id = r.CoinId,
-                    Name = r.CoinName,
-                    ImagePath = r.CoinImagePath,
+                    Id = r.Id,
+                    Name = r.Name,
+                    ImagePath = r.ImagePath,
                     Price = r.Price
                 })
                 .ToListAsync();
+        }
+
+        public async Task<Infrastructure.Data.Models.InvestmentCoin> GetByIdAsync(int id)
+        {
+            return await this._repository
+                .AllReadOnly<Infrastructure.Data.Models.InvestmentCoin>()
+                .FirstOrDefaultAsync(r => r.Id == id);
         }
     }
 }

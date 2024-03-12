@@ -23,20 +23,22 @@ namespace KolevDiamonds.Core.Services.Necklace
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Necklace>()
-                .OrderByDescending(r => r.NecklaceId)
+                .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
-                    Id = r.NecklaceId,
-                    Name = r.NecklaceName,
-                    ImagePath = r.NecklaceImagePath,
+                    Id = r.Id,
+                    Name = r.Name,
+                    ImagePath = r.ImagePath,
                     Price = r.Price
                 })
                 .ToListAsync();
         }
 
-        public Task<Infrastructure.Data.Models.Necklace> GetByIdAsync(int id)
+        public async Task<Infrastructure.Data.Models.Necklace> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await this._repository
+                .AllReadOnly<Infrastructure.Data.Models.Necklace>()
+                .FirstOrDefaultAsync(r => r.Id == id);
         }
     }
 }

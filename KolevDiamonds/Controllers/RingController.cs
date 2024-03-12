@@ -19,7 +19,7 @@ namespace KolevDiamonds.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await this._ringService
-                .AllRingsReadOnly();
+                .AllRings();
 
             ViewBag.PriceFilter = 0;
 
@@ -33,9 +33,9 @@ namespace KolevDiamonds.Controllers
 
             var model = new RingDetailsServiceModel
             {
-                RingId = ring.RingId,
-                RingName = ring.RingName,
-                RingImagePath = ring.RingImagePath,
+                RingId = ring.Id,
+                RingName = ring.Name,
+                RingImagePath = ring.ImagePath,
                 Price = ring.Price,
                 Metal = ring.Metal,
                 Carats = ring.Carats,

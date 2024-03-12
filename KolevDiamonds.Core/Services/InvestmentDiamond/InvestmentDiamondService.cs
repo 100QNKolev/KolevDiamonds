@@ -23,15 +23,22 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.InvestmentDiamond>()
-                .OrderByDescending(r => r.DiamondId)
+                .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
-                    Id = r.DiamondId,
-                    Name = r.DiamondName,
-                    ImagePath = r.DiamondImagePath,
+                    Id = r.Id,
+                    Name = r.Name,
+                    ImagePath = r.ImagePath,
                     Price = r.Price
                 })
                 .ToListAsync();
+        }
+
+        public async Task<Infrastructure.Data.Models.InvestmentDiamond> GetByIdAsync(int id)
+        {
+            return await this._repository
+                .AllReadOnly<Infrastructure.Data.Models.InvestmentDiamond>()
+                .FirstOrDefaultAsync(r => r.Id == id);
         }
     }
 }

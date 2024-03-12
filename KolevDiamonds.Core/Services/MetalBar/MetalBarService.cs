@@ -23,15 +23,22 @@ namespace KolevDiamonds.Core.Services.MetalBar
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
-                .OrderByDescending(r => r.BarId)
+                .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
-                    Id = r.BarId,
-                    Name = r.MetalBarName,
-                    ImagePath = r.MetalBarImagePath,
+                    Id = r.Id,
+                    Name = r.Name,
+                    ImagePath = r.ImagePath,
                     Price = r.Price
                 })
                 .ToListAsync();
+        }
+
+        public async Task<Infrastructure.Data.Models.MetalBar> GetByIdAsync(int id)
+        {
+            return await this._repository
+                .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
+                .FirstOrDefaultAsync(r => r.Id == id);
         }
     }
 }

@@ -7,8 +7,6 @@ namespace KolevDiamonds.Core.Contracts.Ring
     {
        Task<IEnumerable<ProductIndexServiceModel>> AllRings();
 
-       Task<IEnumerable<ProductIndexServiceModel>> AllRingsReadOnly();
-
        Task<Infrastructure.Data.Models.Ring> GetByIdAsync(int id);
     }
 }

@@ -53,9 +53,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
         {
             FirstRing = new Ring() 
             {
-                RingId = 1,
-                RingName = "Gold Diamond Ring",
-                RingImagePath = "https://www.tanishq.co.in/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw5721e8ec/images/hi-res/50D2FFFFRAA02_1.jpg",
+                Id = 1,
+                Name = "Gold Diamond Ring",
+                ImagePath = "https://www.tanishq.co.in/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw5721e8ec/images/hi-res/50D2FFFFRAA02_1.jpg",
                 Price = 1000.00m,
                 Metal = Enums.MetalVariation.Gold,
                 Carats = 1.5,
@@ -67,9 +67,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
 
             SecondRing = new Ring()
             {
-                RingId = 2,
-                RingName = "Gold Ring With Crown Diamond",
-                RingImagePath = "https://4.imimg.com/data4/QW/YU/FUSIONI-3520335/prod-image.jpg",
+                Id = 2,
+                Name = "Gold Ring With Crown Diamond",
+                ImagePath = "https://4.imimg.com/data4/QW/YU/FUSIONI-3520335/prod-image.jpg",
                 Price = 10020.00m,
                 Metal = Enums.MetalVariation.Gold,
                 Carats = 4,
@@ -81,9 +81,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
 
             ThirdRing = new Ring()
             {
-                RingId = 3,
-                RingName = "Rose Gold Diamond Ring",
-                RingImagePath = "https://love-and-co.com/cdn/shop/files/CR591-LGD_lifestyle.jpg?v=1697793277&width=2000",
+                Id = 3,
+                Name = "Rose Gold Diamond Ring",
+                ImagePath = "https://love-and-co.com/cdn/shop/files/CR591-LGD_lifestyle.jpg?v=1697793277&width=2000",
                 Price = 12000.00m,
                 Metal = Enums.MetalVariation.RoseGold,
                 Carats = 3,
@@ -98,9 +98,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
         {
             FirstNecklace = new Necklace()
             {
-                NecklaceId = 1,
-                NecklaceName = "Diamond Solitaire Necklace",
-                NecklaceImagePath = "https://i.etsystatic.com/6244698/r/il/8121e9/1697727663/il_570xN.1697727663_9elj.jpg",
+                Id = 1,
+                Name = "Diamond Solitaire Necklace",
+                ImagePath = "https://i.etsystatic.com/6244698/r/il/8121e9/1697727663/il_570xN.1697727663_9elj.jpg",
                 Price = 1500.00m,
                 Metal = MetalVariation.Gold,
                 Carats = 2.5,
@@ -113,9 +113,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
 
             SecondNecklace = new Necklace()
             {
-                NecklaceId = 2,
-                NecklaceName = "Sapphire Halo Necklace",
-                NecklaceImagePath = "https://media.beaverbrooks.co.uk/i/beaverbrooks/G105854_0",
+                Id = 2,
+                Name = "Sapphire Halo Necklace",
+                ImagePath = "https://media.beaverbrooks.co.uk/i/beaverbrooks/G105854_0",
                 Price = 2000.00m,
                 Metal = MetalVariation.Silver,
                 Carats = 3.0,
@@ -128,9 +128,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
 
             ThirdNecklace = new Necklace()
             {
-                NecklaceId = 3,
-                NecklaceName = "Emerald Pendant Necklace",
-                NecklaceImagePath = "https://haverhill.com/cdn/shop/products/image_11085d78-83fb-429b-a153-15a90bc9ee30_1200x1200.jpg?v=1705428203",
+                Id = 3,
+                Name = "Emerald Pendant Necklace",
+                ImagePath = "https://haverhill.com/cdn/shop/products/image_11085d78-83fb-429b-a153-15a90bc9ee30_1200x1200.jpg?v=1705428203",
                 Price = 1800.00m,
                 Metal = MetalVariation.Silver,
                 Carats = 2.8,
@@ -147,9 +147,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
         {
             FirstMetalBar = new MetalBar()
             {
-                BarId = 1,
-                MetalBarName = "Gold Bar",
-                MetalBarImagePath = "https://m.media-amazon.com/images/I/61ICiCEk3TL._AC_UF894,1000_QL80_.jpg",
+                Id = 1,
+                Name = "Gold Bar",
+                ImagePath = "https://m.media-amazon.com/images/I/61ICiCEk3TL._AC_UF894,1000_QL80_.jpg",
                 Price = 15000.00m,
                 Metal = MetalVariation.Gold,
                 Weight = 1000.0,
@@ -159,9 +159,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
 
             SecondMetalBar = new MetalBar()
             {
-                BarId = 2,
-                MetalBarName = "Silver Bar",
-                MetalBarImagePath = "https://www.monex.com/wp-content/uploads/2023/06/1-kilo-silver-bar-side.png",
+                Id = 2,
+                Name = "Silver Bar",
+                ImagePath = "https://www.monex.com/wp-content/uploads/2023/06/1-kilo-silver-bar-side.png",
                 Price = 500.00m,
                 Metal = MetalVariation.Silver,
                 Weight = 1000.0,
@@ -171,9 +171,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
 
             ThirdMetalBar = new MetalBar()
             {
-                BarId = 3,
-                MetalBarName = "Rose Gold Bar",
-                MetalBarImagePath = "https://images.squarespace-cdn.com/content/v1/5719f32620c64744b886bcd2/1612970177011-TLIGBQ4ZDOODFX0TOR42/rose-gold-bar.png",
+                Id = 3,
+                Name = "Rose Gold Bar",
+                ImagePath = "https://images.squarespace-cdn.com/content/v1/5719f32620c64744b886bcd2/1612970177011-TLIGBQ4ZDOODFX0TOR42/rose-gold-bar.png",
                 Price = 20000.00m,
                 Metal = MetalVariation.RoseGold,
                 Weight = 1000.0,
@@ -186,9 +186,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
         {
             FirstInvestmentDiamond = new InvestmentDiamond
             {
-                DiamondId = 1,
-                DiamondName = "Round Brilliant Diamond",
-                DiamondImagePath = "https://www.diamondbanc.com/wp-content/uploads/2019/01/shutterstock_32731492-1024x681.jpg",
+                Id = 1,
+                Name = "Round Brilliant Diamond",
+                ImagePath = "https://www.diamondbanc.com/wp-content/uploads/2019/01/shutterstock_32731492-1024x681.jpg",
                 Price = 5000.00m,
                 Carats = 1.0,
                 Colour = DiamondColor.E,
@@ -200,9 +200,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
 
             SecondInvestmentDiamond = new InvestmentDiamond
             {
-                DiamondId = 2,
-                DiamondName = "Princess Cut Diamond",
-                DiamondImagePath = "https://www.qualitydiamonds.co.uk/media/1132/princess-diamond-top.png",
+                Id = 2,
+                Name = "Princess Cut Diamond",
+                ImagePath = "https://www.qualitydiamonds.co.uk/media/1132/princess-diamond-top.png",
                 Price = 7000.00m,
                 Carats = 1.5,
                 Colour = DiamondColor.G,
@@ -214,9 +214,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
 
             ThirdInvestmentDiamond = new InvestmentDiamond
             {
-                DiamondId = 3,
-                DiamondName = "Emerald Cut Diamond",
-                DiamondImagePath = "https://www.capediamonds.co.za/wp-content/uploads/2020/09/Emerald-Cut-Diamonds-Cape-Diamonds-Cape-Town-South-Africa.jpg",
+                Id = 3,
+                Name = "Emerald Cut Diamond",
+                ImagePath = "https://www.capediamonds.co.za/wp-content/uploads/2020/09/Emerald-Cut-Diamonds-Cape-Diamonds-Cape-Town-South-Africa.jpg",
                 Price = 10000.00m,
                 Carats = 2.0,
                 Colour = DiamondColor.F,
@@ -231,9 +231,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
         {
             FirstInvestmentCoin = new InvestmentCoin()
             {
-                CoinId = 1,
-                CoinName = "Gold Sovereign",
-                CoinImagePath = "https://upload.wikimedia.org/wikipedia/commons/3/3a/1959_sovereign_Elizabeth_II_obverse.jpg",
+                Id = 1,
+                Name = "Gold Sovereign",
+                ImagePath = "https://upload.wikimedia.org/wikipedia/commons/3/3a/1959_sovereign_Elizabeth_II_obverse.jpg",
                 Price = 1000.00m,
                 Metal = MetalVariation.Gold,
                 Weight = 7.98,
@@ -248,9 +248,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
 
             SecondInvestmentCoin = new InvestmentCoin()
             {
-                CoinId = 2,
-                CoinName = "Silver Eagle",
-                CoinImagePath = "https://assets.goldeneaglecoin.com/resource/productimages/2020-SE-obv.jpg",
+                Id = 2,
+                Name = "Silver Eagle",
+                ImagePath = "https://assets.goldeneaglecoin.com/resource/productimages/2020-SE-obv.jpg",
                 Price = 50.00m,
                 Metal = MetalVariation.Silver,
                 Weight = 31.1,
@@ -265,9 +265,9 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
 
             ThirdInvestmentCoin = new InvestmentCoin()
             {
-                CoinId = 3,
-                CoinName = "Silver Maple Leaf",
-                CoinImagePath = "https://media.tavid.ee/v7/_product_catalog_/1-oz-canadian-maple-leaf-silver-coin/canadian_maple_leaf_1oz_silver_coin_reverse.jpg?height=960&width=960&func=cropfit",
+                Id = 3,
+                Name = "Silver Maple Leaf",
+                ImagePath = "https://media.tavid.ee/v7/_product_catalog_/1-oz-canadian-maple-leaf-silver-coin/canadian_maple_leaf_1oz_silver_coin_reverse.jpg?height=960&width=960&func=cropfit",
                 Price = 500.00m,
                 Metal = MetalVariation.Silver,
                 Weight = 31.1,
