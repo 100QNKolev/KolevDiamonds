@@ -33,5 +33,10 @@ namespace KolevDiamonds.Core.Services.Necklace
                 })
                 .ToListAsync();
         }
+
+        public Task<Infrastructure.Data.Models.Necklace> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

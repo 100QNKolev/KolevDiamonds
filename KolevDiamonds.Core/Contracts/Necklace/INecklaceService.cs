@@ -10,5 +10,7 @@ namespace KolevDiamonds.Core.Contracts.Necklace
     public interface INecklaceService
     {
         Task<IEnumerable<ProductIndexServiceModel>> AllNecklaces();
+
+        Task<Infrastructure.Data.Models.Necklace> GetByIdAsync(int id);
     }
 }

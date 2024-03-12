@@ -10,5 +10,7 @@ namespace KolevDiamonds.Core.Contracts.InvestmentDiamond
     public interface IInvestmentDiamondService
     {
         Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentDiamonds();
+
+        Task<Infrastructure.Data.Models.InvestmentDiamond> GetByIdAsync(int id);
     }
 }

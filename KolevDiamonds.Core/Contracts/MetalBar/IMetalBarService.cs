@@ -10,5 +10,7 @@ namespace KolevDiamonds.Core.Contracts.MetalBar
     public interface IMetalBarService
     {
         Task<IEnumerable<ProductIndexServiceModel>> AllMetalBars();
+
+        Task<Infrastructure.Data.Models.MetalBar> GetByIdAsync(int id);
     }
 }
