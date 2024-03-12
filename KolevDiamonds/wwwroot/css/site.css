@@ -20,7 +20,6 @@ body {
 .navbar {
     background-color: white;
     padding: 10px;
-    border-bottom: 1px solid #dee2e6;
 }
 
 .navbar-brand,
@@ -38,25 +37,25 @@ body {
 }
 
 .navbar-collapse {
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .navbar-nav {
     margin-left: auto;
+    justify-content: center;
 }
 
 .navbar-nav .nav-item {
     margin: 0 10px;
 }
 
-.navbar-nav .nav-link {
-   text-decoration: none;
-   font-weight: bold;
-}
+    .navbar-nav .nav-link {
+        transition: background-color 0.3s;
+    }
 
-.navbar-nav .nav-link:hover {
-   color: #555;
-}
+        .navbar-nav .nav-link:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
 
 .footer {
     padding: 20px 0;
