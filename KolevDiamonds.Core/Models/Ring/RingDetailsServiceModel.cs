@@ -11,11 +11,11 @@ namespace KolevDiamonds.Core.Models.Ring
 {
     public class RingDetailsServiceModel
     {
-        public int RingId { get; set; }
+        public int Id { get; set; }
 
-        public string RingName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
-        public string RingImagePath { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
 
         public decimal Price { get; set; }
 

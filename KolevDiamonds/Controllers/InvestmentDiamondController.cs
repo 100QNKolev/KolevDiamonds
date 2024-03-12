@@ -30,9 +30,9 @@ namespace KolevDiamonds.Controllers
 
             var model = new InvestmentDiamondDetailsServiceModel
             {
-                DiamondId = investmentDiamond.Id,
-                DiamondName = investmentDiamond.Name,
-                DiamondImagePath = investmentDiamond.ImagePath,
+                Id = investmentDiamond.Id,
+                Name = investmentDiamond.Name,
+                ImagePath = investmentDiamond.ImagePath,
                 Price = investmentDiamond.Price,
                 Carats = investmentDiamond.Carats,
                 Colour = investmentDiamond.Colour,

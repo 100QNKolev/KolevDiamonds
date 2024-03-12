@@ -33,9 +33,9 @@ namespace KolevDiamonds.Controllers
 
             var model = new RingDetailsServiceModel
             {
-                RingId = ring.Id,
-                RingName = ring.Name,
-                RingImagePath = ring.ImagePath,
+                Id = ring.Id,
+                Name = ring.Name,
+                ImagePath = ring.ImagePath,
                 Price = ring.Price,
                 Metal = ring.Metal,
                 Carats = ring.Carats,

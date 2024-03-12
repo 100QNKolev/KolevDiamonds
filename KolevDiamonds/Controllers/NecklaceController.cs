@@ -30,9 +30,9 @@ namespace KolevDiamonds.Controllers
 
             var model = new NecklaceDetailsServiceModel
             {
-                NecklaceId = necklace.Id,
-                NecklaceName = necklace.Name,
-                NecklaceImagePath = necklace.ImagePath,
+                Id = necklace.Id,
+                Name = necklace.Name,
+                ImagePath = necklace.ImagePath,
                 Price = necklace.Price,
                 Metal = necklace.Metal,
                 Carats = necklace.Carats,

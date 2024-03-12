@@ -30,9 +30,9 @@ namespace KolevDiamonds.Controllers
 
             var model = new MetalBarDetailsServiceModel
             {
-                BarId = metalBar.Id,
-                MetalBarName = metalBar.Name,
-                MetalBarImagePath = metalBar.ImagePath,
+                Id = metalBar.Id,
+                Name = metalBar.Name,
+                ImagePath = metalBar.ImagePath,
                 Price = metalBar.Price,
                 Metal = metalBar.Metal,
                 Weight = metalBar.Weight,

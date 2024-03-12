@@ -11,11 +11,11 @@ namespace KolevDiamonds.Core.Models.Necklace
 {
     public class NecklaceDetailsServiceModel
     {
-        public int NecklaceId { get; set; }
+        public int Id { get; set; }
 
-        public string NecklaceName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
-        public string NecklaceImagePath { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
 
         public decimal Price { get; set; }
 

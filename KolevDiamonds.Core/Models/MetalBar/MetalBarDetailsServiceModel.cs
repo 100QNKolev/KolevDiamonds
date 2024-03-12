@@ -9,11 +9,11 @@ namespace KolevDiamonds.Core.Models.MetalBar
 {
     public class MetalBarDetailsServiceModel
     {
-        public int BarId { get; set; }
+        public int Id { get; set; }
 
-        public string MetalBarName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
-        public string MetalBarImagePath { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
 
         public decimal Price { get; set; }
 

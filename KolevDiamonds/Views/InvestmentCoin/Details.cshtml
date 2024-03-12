@@ -1,4 +1,4 @@
-﻿@model RingDetailsServiceModel
+﻿@model InvestmentCoinDetailsServiceModel
 
 <title>@Model.Name Details</title>
 
@@ -17,11 +17,14 @@
                     <h2>Description:</h2>
                     <div><strong>Price:</strong> @Model.Price</div>
                     <div><strong>Metal:</strong> @Model.Metal</div>
-                    <div><strong>Carats:</strong> @Model.Carats</div>
-                    <div><strong>Colour:</strong> @Model.Colour</div>
-                    <div><strong>Clarity:</strong> @Model.Clarity</div>
-                    <div><strong>Cut:</strong> @Model.Cut</div>
+                    <div><strong>Diameter:</strong> @Model.Diameter</div>
+                    <div><strong>Weight:</strong> @Model.Weight</div>
+                    <div><strong>Quality:</strong> @Model.Quality</div>
                     <div><strong>Purity:</strong> @Model.Purity</div>
+                    <div><strong>Packaging:</strong> @Model.Packaging</div>
+                    <div><strong>Circulation:</strong> @Model.Circulation</div>
+                    <div><strong>LegalTender:</strong> @Model.LegalTender</div>
+
                 </div>
                 <div class="buy-button">
                     <form action="/Buy/Product/@Model.Id" method="post">

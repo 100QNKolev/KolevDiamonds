@@ -1,4 +1,4 @@
-﻿@model RingDetailsServiceModel
+﻿@model NecklaceDetailsServiceModel
 
 <title>@Model.Name Details</title>
 
@@ -22,6 +22,7 @@
                     <div><strong>Clarity:</strong> @Model.Clarity</div>
                     <div><strong>Cut:</strong> @Model.Cut</div>
                     <div><strong>Purity:</strong> @Model.Purity</div>
+                    <div><strong>Length:</strong> @Model.Length</div>
                 </div>
                 <div class="buy-button">
                     <form action="/Buy/Product/@Model.Id" method="post">

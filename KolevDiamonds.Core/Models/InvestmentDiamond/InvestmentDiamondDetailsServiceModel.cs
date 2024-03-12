@@ -11,11 +11,11 @@ namespace KolevDiamonds.Core.Models.InvestmentDiamond
 {
     public class InvestmentDiamondDetailsServiceModel
     {
-        public int DiamondId { get; set; }
+        public int Id { get; set; }
 
-        public string DiamondName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
-        public string DiamondImagePath { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
 
         public decimal Price { get; set; }
 
