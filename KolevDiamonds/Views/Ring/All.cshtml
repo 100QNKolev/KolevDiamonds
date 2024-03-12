@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ProductIndexServiceModel>
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<h1 style="text-align: center; font-weight: lighter; margin-bottom: 20px;">
+    <span style="background-color: white; padding: 0 10px;">All Products</span>
+</h1>
+<hr style="width: 80%; margin: 0 auto; border-top: 1px solid black;">
+
+<form id="filterForm">
+    <label for="priceFilter">Filter by Price:</label>
+    <input type="number" id="priceFilter" name="priceFilter" min="0" step="any" value="@ViewBag.PriceFilter" />
+    <button type="button" onclick="applyFilter()">Apply</button>
+</form>
+
+<div id="productList" class="product-container">
+    @foreach (var product in Model)
+    {
+        <div class="product-item" onclick="navigateToDetail(@product.Id)">
+            <img src="@Url.Content(product.ImagePath)" alt="@product.Name" class="product-image" />
+            <div class="product-details">
+                <div><strong>Name:</strong> @product.Name</div>
+                <div><strong>Price:</strong> @product.Price</div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .product-item {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+    }
+
+    .product-image {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .product-details {
+        padding: 10px;
+    }
+
+        .product-details div {
+            margin-bottom: 5px;
+        }
+
+        .product-details strong {
+            font-weight: bold;
+        }
+
+    #filterForm {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<script>
+    function applyFilter() {
+        var priceFilter = $('#priceFilter').val();
+        $.ajax({
+            url: '@Url.Action("FilterProducts", "Product")',
+            type: 'GET',
+            data: { priceFilter: priceFilter },
+            success: function (result) {
+                $('#productList').html(result);
+            }
+        });
+    }
+
+    function navigateToDetail(productId) {
+        window.location.href = '@Url.Action("Details", "Product")' + '?id=' + productId;
+    }
+</script>

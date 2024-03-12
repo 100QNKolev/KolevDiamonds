@@ -16,7 +16,7 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> All()
         {
             var model = await this._ringService
                 .AllRings();

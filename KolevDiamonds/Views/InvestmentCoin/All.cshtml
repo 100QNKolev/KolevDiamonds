@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<ProductIndexServiceModel>
 
 @{
-    ViewData["Title"] = "All Rings";
+    ViewData["Title"] = "All Products";
 }
 
 <h1 style="text-align: center; font-weight: lighter; margin-bottom: 20px;">
-    <span style="background-color: white; padding: 0 10px;">All Rings</span>
+    <span style="background-color: white; padding: 0 10px;">All Products</span>
 </h1>
 <hr style="width: 80%; margin: 0 auto; border-top: 1px solid black;">
 
@@ -15,27 +15,27 @@
     <button type="button" onclick="applyFilter()">Apply</button>
 </form>
 
-<div id="ringList" class="ring-container">
-    @foreach (var ring in Model)
+<div id="productList" class="product-container">
+    @foreach (var product in Model)
     {
-        <div class="ring-item" onclick="navigateToDetail(@ring.Id)">
-            <img src="@Url.Content(ring.ImagePath)" alt="@ring.Name" class="ring-image" />
-            <div class="ring-details">
-            <div><strong>Name:</strong> @ring.Name</div>
-            <div><strong>Price:</strong> @ring.Price</div>
+        <div class="product-item" onclick="navigateToDetail(@product.Id)">
+            <img src="@Url.Content(product.ImagePath)" alt="@product.Name" class="product-image" />
+            <div class="product-details">
+                <div><strong>Name:</strong> @product.Name</div>
+                <div><strong>Price:</strong> @product.Price</div>
             </div>
         </div>
     }
 </div>
 
 <style>
-    .ring-container {
+    .product-container {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
     }
 
-    .ring-item {
+    .product-item {
         background-color: #f9f9f9;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -44,7 +44,7 @@
         width: 300px;
     }
 
-    .ring-image {
+    .product-image {
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         height: 200px;
@@ -52,15 +52,15 @@
         width: 100%;
     }
 
-    .ring-details {
+    .product-details {
         padding: 10px;
     }
 
-        .ring-details div {
+        .product-details div {
             margin-bottom: 5px;
         }
 
-        .ring-details strong {
+        .product-details strong {
             font-weight: bold;
         }
 
@@ -74,16 +74,16 @@
     function applyFilter() {
         var priceFilter = $('#priceFilter').val();
         $.ajax({
-            url: '@Url.Action("FilterRings", "Ring")',
+            url: '@Url.Action("FilterProducts", "Product")',
             type: 'GET',
             data: { priceFilter: priceFilter },
             success: function (result) {
-                $('#ringList').html(result);
+                $('#productList').html(result);
             }
         });
     }
 
-    function navigateToDetail(ringId) {
-        window.location.href = '@Url.Action("Details", "Ring")' + '?id=' + ringId;
+    function navigateToDetail(productId) {
+        window.location.href = '@Url.Action("Details", "Product")' + '?id=' + productId;
     }
 </script>
