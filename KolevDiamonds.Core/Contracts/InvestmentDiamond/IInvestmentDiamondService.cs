@@ -11,7 +11,7 @@ namespace KolevDiamonds.Core.Contracts.InvestmentDiamond
     {
         Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentDiamonds();
 
-        Task<Infrastructure.Data.Models.InvestmentDiamond> GetByIdAsync(int id);
+        Task<Infrastructure.Data.Models.InvestmentDiamond?> GetByIdAsync(int id);
 
         Task<IEnumerable<ProductIndexServiceModel>> GetFilteredRingsAsync(decimal priceFilter);
     }

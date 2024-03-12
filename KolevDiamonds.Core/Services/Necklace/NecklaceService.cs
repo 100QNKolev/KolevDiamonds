@@ -34,7 +34,7 @@ namespace KolevDiamonds.Core.Services.Necklace
                 .ToListAsync();
         }
 
-        public async Task<Infrastructure.Data.Models.Necklace> GetByIdAsync(int id)
+        public async Task<Infrastructure.Data.Models.Necklace?> GetByIdAsync(int id)
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Necklace>()

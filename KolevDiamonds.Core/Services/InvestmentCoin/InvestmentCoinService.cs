@@ -34,7 +34,7 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
                 .ToListAsync();
         }
 
-        public async Task<Infrastructure.Data.Models.InvestmentCoin> GetByIdAsync(int id)
+        public async Task<Infrastructure.Data.Models.InvestmentCoin?> GetByIdAsync(int id)
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.InvestmentCoin>()

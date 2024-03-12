@@ -31,7 +31,7 @@ namespace KolevDiamonds.Core.Services.Ring
                 .ToListAsync();
         }
 
-        public async Task<Infrastructure.Data.Models.Ring> GetByIdAsync(int id)
+        public async Task<Infrastructure.Data.Models.Ring?> GetByIdAsync(int id)
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Ring>()

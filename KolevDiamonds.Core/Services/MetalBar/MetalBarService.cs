@@ -34,7 +34,7 @@ namespace KolevDiamonds.Core.Services.MetalBar
                 .ToListAsync();
         }
 
-        public async Task<Infrastructure.Data.Models.MetalBar> GetByIdAsync(int id)
+        public async Task<Infrastructure.Data.Models.MetalBar?> GetByIdAsync(int id)
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.MetalBar>()

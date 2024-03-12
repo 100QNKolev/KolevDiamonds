@@ -11,7 +11,7 @@ namespace KolevDiamonds.Core.Contracts.MetalBar
     {
         Task<IEnumerable<ProductIndexServiceModel>> AllMetalBars();
 
-        Task<Infrastructure.Data.Models.MetalBar> GetByIdAsync(int id);
+        Task<Infrastructure.Data.Models.MetalBar?> GetByIdAsync(int id);
 
         Task<IEnumerable<ProductIndexServiceModel>> GetFilteredRingsAsync(decimal priceFilter);
     }
