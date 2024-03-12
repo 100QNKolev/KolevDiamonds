@@ -2,6 +2,7 @@
 using KolevDiamonds.Core.Models.MetalBar;
 using KolevDiamonds.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace KolevDiamonds.Controllers
 {
@@ -15,8 +16,15 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(decimal? priceFilter)
         {
+            if (priceFilter != null)
+            {
+                var models = await this._metalBarService.GetFilteredRingsAsync((decimal)priceFilter);
+
+                return View(models);
+            }
+
             var model = await this._metalBarService.AllMetalBars();
 
             ViewBag.PriceFilter = 0;

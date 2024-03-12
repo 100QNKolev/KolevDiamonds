@@ -96,4 +96,8 @@
     function navigateToDetail(productId) {
         window.location.href = '@Url.Action("Details", "Necklace")' + '?id=' + productId;
     }
+    function redirectWithFilter() {
+        var priceFilter = $('#priceFilter').val();
+        window.location.href = '@Url.Action("All", "Necklace")' + '?priceFilter=' + priceFilter;
+    }
 </script>

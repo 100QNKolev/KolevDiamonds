@@ -12,5 +12,7 @@ namespace KolevDiamonds.Core.Contracts.InvestmentCoin
         Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentCoins();
 
         Task<Infrastructure.Data.Models.InvestmentCoin> GetByIdAsync(int id);
+
+        Task<IEnumerable<ProductIndexServiceModel>> GetFilteredRingsAsync(decimal priceFilter);
     }
 }

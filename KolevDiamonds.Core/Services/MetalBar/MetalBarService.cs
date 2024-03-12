@@ -40,5 +40,21 @@ namespace KolevDiamonds.Core.Services.MetalBar
                 .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
+
+        public async Task<IEnumerable<ProductIndexServiceModel>> GetFilteredRingsAsync(decimal priceFilter)
+        {
+            return await this._repository
+                .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
+                .Where(r => r.Price <= priceFilter)
+                .OrderByDescending(r => r.Id)
+                .Select(r => new ProductIndexServiceModel()
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    ImagePath = r.ImagePath,
+                    Price = r.Price
+                })
+                .ToListAsync();
+        }
     }
 }

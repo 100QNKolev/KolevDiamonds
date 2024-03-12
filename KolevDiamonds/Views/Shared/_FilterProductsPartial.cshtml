@@ -1,19 +1,5 @@
 ﻿<form id="filterForm">
     <label for="priceFilter">Filter by Price:</label>
     <input type="number" id="priceFilter" name="priceFilter" min="0" step="any" value="@ViewBag.PriceFilter" />
-    <button type="button" onclick="applyFilter()">Apply</button>
+    <button type="button" onclick="redirectWithFilter()">Apply</button>
 </form>
-
-<script>
-    function applyFilter() {
-        var priceFilter = $('#priceFilter').val();
-        $.ajax({
-            url: '@Url.Action("FilterProducts", "Product")',
-            type: 'GET',
-            data: { priceFilter: priceFilter },
-            success: function (result) {
-                $('#productList').html(result);
-            }
-        });
-    }
-</script>

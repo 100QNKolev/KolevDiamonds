@@ -23,7 +23,7 @@
         }
         else
         {
-            <h2>No rings available</h2>
+                <h2>No rings available</h2>
         }
     </div>
 </section>
@@ -95,5 +95,9 @@
 <script>
     function navigateToDetail(productId) {
         window.location.href = '@Url.Action("Details", "Ring")' + '?id=' + productId;
+    }
+    function redirectWithFilter() {
+        var priceFilter = $('#priceFilter').val();
+        window.location.href = '@Url.Action("All", "Ring")' + '?priceFilter=' + priceFilter;
     }
 </script>

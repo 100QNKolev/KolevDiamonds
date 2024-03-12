@@ -15,8 +15,15 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(decimal? priceFilter)
         {
+            if (priceFilter != null)
+            {
+                var models = await this._investmentDiamondService.GetFilteredRingsAsync((decimal)priceFilter);
+
+                return View(models);
+            }
+
             var model = await this._investmentDiamondService.AllInvestmentDiamonds();
 
             ViewBag.PriceFilter = 0;

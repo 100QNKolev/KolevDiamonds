@@ -95,4 +95,8 @@
     function navigateToDetail(productId) {
         window.location.href = '@Url.Action("Details", "MetalBar")' + '?id=' + productId;
     }
+    function redirectWithFilter() {
+        var priceFilter = $('#priceFilter').val();
+        window.location.href = '@Url.Action("All", "MetalBar")' + '?priceFilter=' + priceFilter;
+    }
 </script>

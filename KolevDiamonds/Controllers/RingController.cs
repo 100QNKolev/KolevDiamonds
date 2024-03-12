@@ -3,6 +3,7 @@ using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.Ring;
 using KolevDiamonds.Core.Services.Ring;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace KolevDiamonds.Controllers
 {
@@ -16,8 +17,15 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(decimal? priceFilter)
         {
+            if (priceFilter != null) 
+            {
+                var models = await this._ringService.GetFilteredRingsAsync((decimal)priceFilter);
+
+                return View(models);
+            }
+
             var model = await this._ringService
                 .AllRings();
 
