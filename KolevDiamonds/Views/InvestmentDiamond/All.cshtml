@@ -10,11 +10,7 @@
 <hr style="width: 80%; margin: 0 auto; border-top: 1px solid black;">
 
 <section class="recent-products">
-    <form id="filterForm">
-        <label for="priceFilter">Filter by Price:</label>
-        <input type="number" id="priceFilter" name="priceFilter" min="0" step="any" value="@ViewBag.PriceFilter" />
-        <button type="button" onclick="applyFilter()">Apply</button>
-    </form>
+    <partial name="FilterProductsPartial" />
     <div class="container">
         @if (Model.Any())
         {
@@ -101,18 +97,6 @@
 </style>
 
 <script>
-    function applyFilter() {
-        var priceFilter = $('#priceFilter').val();
-        $.ajax({
-            url: '@Url.Action("FilterProducts", "Product")',
-            type: 'GET',
-            data: { priceFilter: priceFilter },
-            success: function (result) {
-                $('#productList').html(result);
-            }
-        });
-    }
-
     function navigateToDetail(productId) {
         window.location.href = '@Url.Action("Details", "InvestmentDiamond")' + '?id=' + productId;
     }
