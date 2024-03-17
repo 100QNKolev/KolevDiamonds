@@ -54,9 +54,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".YourApp.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(30);
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set your desired timeout
                 options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true; // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+                options.Cookie.SameSite = SameSiteMode.Strict;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Use SecurePolicy as per your requirement
             });
 
             return services;
