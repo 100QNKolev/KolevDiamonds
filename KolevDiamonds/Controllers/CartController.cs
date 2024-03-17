@@ -32,7 +32,7 @@ namespace KolevDiamonds.Controllers
                 SaveCartItems(cartItems);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> RemoveFromCart(int Id, string name)
@@ -44,7 +44,7 @@ namespace KolevDiamonds.Controllers
                 cartItems.Remove(itemToRemove);
                 SaveCartItems(cartItems);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         private List<ProductIndexServiceModel> GetCartItems()
