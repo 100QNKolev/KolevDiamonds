@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using KolevDiamonds.Core.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace KolevDiamonds.Controllers
 {
@@ -12,41 +14,53 @@ namespace KolevDiamonds.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<string> cartItems = GetCartItems();
+            List<ProductIndexServiceModel> cartItems =  GetCartItems();
             return View(cartItems);
         }
 
-        public IActionResult AddToCart(int productId)
+        public async Task<IActionResult> AddToCart(ProductIndexServiceModel item)
         {
-            List<string> cartItems = GetCartItems();
-            cartItems.Add(productId.ToString());
-            SaveCartItems(cartItems);
-            return RedirectToAction("Index");
-        }
+            List<ProductIndexServiceModel> cartItems =  GetCartItems();
 
-        public IActionResult RemoveFromCart(int productId)
-        {
-            List<string> cartItems = GetCartItems();
-            cartItems.Remove(productId.ToString());
-            SaveCartItems(cartItems);
-            return RedirectToAction("Index");
-        }
+            bool itemExists = cartItems.Any(i => i.Id == item.Id && i.Name == item.Name);
 
-        private List<string> GetCartItems()
-        {
-            var cartItemsString = _httpContextAccessor.HttpContext?.Session.GetString("CartItems");
-            if (cartItemsString == null)
+            if (!itemExists)
             {
-                return new List<string>();
+                cartItems.Add(item);
+                SaveCartItems(cartItems);
             }
-            return cartItemsString.Split(',').ToList();
+
+            return RedirectToAction("Index");
         }
 
-        private void SaveCartItems(List<string> cartItems)
+        public async Task<IActionResult> RemoveFromCart(int Id, string name)
         {
-            _httpContextAccessor.HttpContext?.Session.SetString("CartItems", string.Join(",", cartItems));
+            List<ProductIndexServiceModel> cartItems =  GetCartItems();
+            var itemToRemove = cartItems.Find(item => item.Id == Id && item.Name == name);
+            if (itemToRemove != null)
+            {
+                cartItems.Remove(itemToRemove);
+                SaveCartItems(cartItems);
+            }
+            return RedirectToAction("Index");
+        }
+
+        private List<ProductIndexServiceModel> GetCartItems()
+        {
+            var cartItemsJson = _httpContextAccessor.HttpContext?.Session.GetString("CartItems");
+            if (cartItemsJson == null)
+            {
+                return new List<ProductIndexServiceModel>();
+            }
+            return JsonConvert.DeserializeObject<List<ProductIndexServiceModel>>(cartItemsJson);
+        }
+
+        private void SaveCartItems(List<ProductIndexServiceModel> cartItems)
+        {
+            var cartItemsJson = JsonConvert.SerializeObject(cartItems);
+            _httpContextAccessor.HttpContext?.Session.SetString("CartItems", cartItemsJson);
         }
     }
 }

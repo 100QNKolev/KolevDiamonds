@@ -25,7 +25,11 @@
                     <div><strong>Length:</strong> @Model.Length</div>
                 </div>
                 <div class="buy-button">
-                    <form asp-area="" asp-controller="Necklace" asp-action="Buy" asp-route-id="@Model.Id">
+                    <form asp-area="" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">
+                        <input type="hidden" name="Id" asp-for="@Model.Id" />
+                        <input type="hidden" name="ImagePath" asp-for="@Model.ImagePath" />
+                        <input type="hidden" name="Name" asp-for="@Model.Name" />
+                        <input type="hidden" name="Price" asp-for="@Model.Price" />
                         <button type="submit">Buy Now</button>
                     </form>
                 </div>

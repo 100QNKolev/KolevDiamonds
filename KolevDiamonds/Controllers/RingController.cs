@@ -61,12 +61,6 @@ namespace KolevDiamonds.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Buy(int id) 
-        //{
-            
-        //}
-
         [HttpGet]
         public IActionResult NotFoundError()
         {

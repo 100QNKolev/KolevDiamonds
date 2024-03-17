@@ -1,5 +1,4 @@
 using KolevDiamonds.Data;
-using KolevDiamonds.Middlewares;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
