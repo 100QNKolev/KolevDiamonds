@@ -48,5 +48,18 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return services;
         }
+
+        public static IServiceCollection AddApplicationSession(this IServiceCollection services) 
+        {
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".YourApp.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true; // Make the session cookie essential
+            });
+
+            return services;
+        }
     }
 }
