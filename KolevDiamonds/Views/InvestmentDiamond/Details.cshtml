@@ -24,7 +24,7 @@
                     <div><strong>Certifying Laboratory:</strong> @Model.CertifyingLaboratory</div>
                 </div>
                 <div class="buy-button">
-                    <form action="/Buy/Product/@Model.Id" method="post">
+                    <form asp-area="" asp-controller="InvestmentDiamond" asp-action="Buy" asp-route-id="@Model.Id">
                         <button type="submit">Buy Now</button>
                     </form>
                 </div>
