@@ -1,4 +1,5 @@
 ﻿using KolevDiamonds.Core.Contracts.InvestmentDiamond;
+using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.InvestmentDiamond;
 using KolevDiamonds.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -15,20 +16,18 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All(decimal? priceFilter)
+        public async Task<IActionResult> All([FromQuery] ProductQueryModel query)
         {
-            if (priceFilter != null)
-            {
-                var models = await this._investmentDiamondService.GetFilteredRingsAsync((decimal)priceFilter);
+            var model = await this._investmentDiamondService.GetFilteredInvestmentDiamondsAsync(
+                query.PriceFilter,
+                query.CurrentPage,
+                query.ProductsPerPage
+                );
 
-                return View(models);
-            }
+            query.TotalProductCount = model.TotalProductCount;
+            query.Products = model.Products;
 
-            var model = await this._investmentDiamondService.AllInvestmentDiamonds();
-
-            ViewBag.PriceFilter = 0;
-
-            return View(model);
+            return View(query);
         }
 
         [HttpGet]
