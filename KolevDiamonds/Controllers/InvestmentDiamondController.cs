@@ -26,6 +26,7 @@ namespace KolevDiamonds.Controllers
 
             query.TotalProductCount = model.TotalProductCount;
             query.Products = model.Products;
+            query.ProductType = model.ProductType;
 
             return View(query);
         }

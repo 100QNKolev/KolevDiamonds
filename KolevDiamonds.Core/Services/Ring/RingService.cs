@@ -65,7 +65,8 @@ namespace KolevDiamonds.Core.Services.Ring
             return new ProductQueryModel()
             {
                 Products = ringsToShow,
-                TotalProductCount = rings.Count()
+                TotalProductCount = rings.Count(),
+                ProductType = nameof(Ring)
             };
         }
     }

@@ -68,7 +68,8 @@ namespace KolevDiamonds.Core.Services.Necklace
             return new ProductQueryModel()
             {
                 Products = necklacesToShow,
-                TotalProductCount = necklaces.Count()
+                TotalProductCount = necklaces.Count(),
+                ProductType = nameof(Necklace)
             };
         }
     }

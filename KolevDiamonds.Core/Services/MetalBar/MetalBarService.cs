@@ -68,7 +68,8 @@ namespace KolevDiamonds.Core.Services.MetalBar
             return new ProductQueryModel()
             {
                 Products = metalBarsToShow,
-                TotalProductCount = metalBars.Count()
+                TotalProductCount = metalBars.Count(),
+                ProductType = nameof(MetalBar)
             };
         }
     }

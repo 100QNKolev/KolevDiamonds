@@ -68,7 +68,8 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
             return new ProductQueryModel()
             {
                 Products = InvestmentDiamondsToShow,
-                TotalProductCount = InvestmentDiamonds.Count()
+                TotalProductCount = InvestmentDiamonds.Count(),
+                ProductType = nameof(InvestmentDiamond)
             };
         }
     }

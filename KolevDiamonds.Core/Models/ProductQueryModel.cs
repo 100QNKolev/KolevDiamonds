@@ -10,6 +10,8 @@ namespace KolevDiamonds.Core.Models
     {
         public int ProductsPerPage { get; } = 2;
 
+        public string ProductType { get; set; } = null!;
+
         public decimal? PriceFilter { get; set; }
 
         public int CurrentPage { get; set; } = 1;
