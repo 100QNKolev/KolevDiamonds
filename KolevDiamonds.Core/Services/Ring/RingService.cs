@@ -38,7 +38,7 @@ namespace KolevDiamonds.Core.Services.Ring
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public async Task<ProductQueryModel> GetFilteredRingsAsync(decimal? priceFilter, int currentPage = 1, int ringsPerPage = 1) 
+        public async Task<ProductQueryModel> GetFilteredRingsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1) 
         {
             var rings = this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Ring>()
@@ -58,8 +58,8 @@ namespace KolevDiamonds.Core.Services.Ring
             }
 
             var ringsToShow = await rings
-                .Skip((currentPage - 1) * ringsPerPage)
-                .Take(ringsPerPage)
+                .Skip((currentPage - 1) * productsPerPage)
+                .Take(productsPerPage)
                 .ToListAsync();
                 
             return new ProductQueryModel()

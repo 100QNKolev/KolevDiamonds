@@ -41,11 +41,10 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public async Task<IEnumerable<ProductIndexServiceModel>> GetFilteredRingsAsync(decimal priceFilter)
+        public async Task<ProductQueryModel> GetFilteredRingsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1)
         {
-            return await this._repository
-                .AllReadOnly<Infrastructure.Data.Models.InvestmentCoin>()
-                .Where(r => r.Price <= priceFilter)
+            var InvestmentCoins = this._repository
+                .AllReadOnly<Infrastructure.Data.Models.Necklace>()
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -53,8 +52,24 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
                     Name = r.Name,
                     ImagePath = r.ImagePath,
                     Price = r.Price
-                })
+                });
+
+            if (priceFilter != null)
+            {
+                InvestmentCoins = InvestmentCoins
+                        .Where(r => r.Price <= priceFilter);
+            }
+
+            var InvestmentCoinsToShow = await InvestmentCoins
+                .Skip((currentPage - 1) * productsPerPage)
+                .Take(productsPerPage)
                 .ToListAsync();
+
+            return new ProductQueryModel()
+            {
+                Products = InvestmentCoinsToShow,
+                TotalProductCount = InvestmentCoins.Count()
+            };
         }
     }
 }

@@ -41,11 +41,10 @@ namespace KolevDiamonds.Core.Services.MetalBar
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public async Task<IEnumerable<ProductIndexServiceModel>> GetFilteredRingsAsync(decimal priceFilter)
+        public async Task<ProductQueryModel> GetFilteredMetalBarsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1)
         {
-            return await this._repository
+            var metalBars = this._repository
                 .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
-                .Where(r => r.Price <= priceFilter)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -53,8 +52,24 @@ namespace KolevDiamonds.Core.Services.MetalBar
                     Name = r.Name,
                     ImagePath = r.ImagePath,
                     Price = r.Price
-                })
+                });
+
+            if (priceFilter != null)
+            {
+                metalBars = metalBars
+                        .Where(r => r.Price <= priceFilter);
+            }
+
+            var metalBarsToShow = await metalBars
+                .Skip((currentPage - 1) * productsPerPage)
+                .Take(productsPerPage)
                 .ToListAsync();
+
+            return new ProductQueryModel()
+            {
+                Products = metalBarsToShow,
+                TotalProductCount = metalBars.Count()
+            };
         }
     }
 }
