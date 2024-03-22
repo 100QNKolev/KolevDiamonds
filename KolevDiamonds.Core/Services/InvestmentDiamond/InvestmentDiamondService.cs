@@ -44,7 +44,7 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
         public async Task<ProductQueryModel> GetFilteredInvestmentDiamondsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1)
         {
             var InvestmentDiamonds = this._repository
-                .AllReadOnly<Infrastructure.Data.Models.Necklace>()
+                .AllReadOnly<Infrastructure.Data.Models.InvestmentDiamond>()
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {

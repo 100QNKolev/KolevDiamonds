@@ -41,10 +41,10 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public async Task<ProductQueryModel> GetFilteredRingsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1)
+        public async Task<ProductQueryModel> GetFilteredInvestmentCoinsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1)
         {
             var InvestmentCoins = this._repository
-                .AllReadOnly<Infrastructure.Data.Models.Necklace>()
+                .AllReadOnly<Infrastructure.Data.Models.InvestmentCoin>()
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {

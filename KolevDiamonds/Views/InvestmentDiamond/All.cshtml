@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductIndexServiceModel>
+﻿@model ProductQueryModel
 
 @{
     ViewData["Title"] = "Investment Diamonds";
@@ -10,12 +10,12 @@
 <hr style="width: 80%; margin: 0 auto; border-top: 1px solid black;">
 
 <section class="recent-products">
-    <partial name="_FilterProductsPartial" />
+    <partial name="_FilterProductsPartial" model="@Model"/>
     <div class="container">
-        @if (Model.Any())
+        @if (Model.Products.Any())
         {
             <div class="product-grid">
-                @foreach (var product in Model)
+                @foreach (var product in Model.Products)
                 {
                     <partial name="_ProductCard" model="@product" />
                 }
@@ -28,6 +28,21 @@
     </div>
 </section>
 
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    { previousPage = 1; }
+    var maxPage = Math.Ceiling((double)Model.TotalProductCount / Model.ProductsPerPage);
+}
+
+<div class="row mb-5">
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start"> <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)" asp-controller="InvestmentDiamond" asp-action="All" asp-route-currentPage="@previousPage" asp-route-priceFilter="@Model.PriceFilter"><<</a> </div>
+
+    @{
+        var shouldButtonBeDisabled = Model.CurrentPage == maxPage || !Model.Products.Any();
+    }
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end"> <a class="btn btn-primary @(shouldButtonBeDisabled ? "disabled" : string.Empty)" asp-controller="InvestmentDiamond" asp-action="All" asp-route-currentPage="@(Model.CurrentPage + 1)" asp-route-priceFilter="@Model.PriceFilter">></a> </div>
+</div>
 
 <style>
     .recent-products {
