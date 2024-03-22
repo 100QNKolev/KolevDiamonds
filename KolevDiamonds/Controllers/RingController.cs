@@ -18,16 +18,16 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All([FromQuery] RingsQueryModel query)
+        public async Task<IActionResult> All([FromQuery] ProductQueryModel query)
         {
             var model = await this._ringService.GetFilteredRingsAsync(
                 query.PriceFilter,
                 query.CurrentPage,
-                query.RingsPerPage
+                query.ProductsPerPage
                 );
 
-            query.TotalRingsCount = model.TotalRingsCount;
-            query.Rings = model.Rings;
+            query.TotalProductCount = model.TotalProductCount;
+            query.Products = model.Products;
 
             return View(query);
         }

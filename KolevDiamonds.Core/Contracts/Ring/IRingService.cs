@@ -9,6 +9,6 @@ namespace KolevDiamonds.Core.Contracts.Ring
 
        Task<Infrastructure.Data.Models.Ring?> GetByIdAsync(int id);
 
-       Task<RingsQueryModel> GetFilteredRingsAsync(decimal? priceFilter, int currentPage, int ringsPerPage);
+       Task<ProductQueryModel> GetFilteredRingsAsync(decimal? priceFilter, int currentPage, int ringsPerPage);
     }
 }
