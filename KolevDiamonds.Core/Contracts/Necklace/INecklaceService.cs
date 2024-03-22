@@ -13,6 +13,6 @@ namespace KolevDiamonds.Core.Contracts.Necklace
 
         Task<Infrastructure.Data.Models.Necklace?> GetByIdAsync(int id);
 
-        Task<IEnumerable<ProductIndexServiceModel>> GetFilteredRingsAsync(decimal priceFilter);
+        Task<ProductQueryModel> GetFilteredNecklacesAsync(decimal? priceFilter, int currentPage, int ringsPerPage);
     }
 }

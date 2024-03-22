@@ -13,6 +13,6 @@ namespace KolevDiamonds.Core.Contracts.MetalBar
 
         Task<Infrastructure.Data.Models.MetalBar?> GetByIdAsync(int id);
 
-        Task<IEnumerable<ProductIndexServiceModel>> GetFilteredRingsAsync(decimal priceFilter);
+        Task<ProductQueryModel> GetFilteredMetalBarsAsync(decimal? priceFilter, int currentPage, int ringsPerPage);
     }
 }
