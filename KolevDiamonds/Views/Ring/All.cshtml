@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductIndexServiceModel>
+﻿@model RingsQueryModel
 
 @{
     ViewData["Title"] = "Rings";
@@ -10,12 +10,15 @@
 <hr style="width: 80%; margin: 0 auto; border-top: 1px solid black;">
 
 <section class="recent-products">
-    <partial name="_FilterProductsPartial" />
+    <div class="form-group col-md-3">
+        <label asp-for="PriceFilter"></label>
+        <input asp-for="PriceFilter" class="form-control" placeholder="Enter a price">
+    </div>
     <div class="container">
-        @if (Model.Any())
+        @if (Model.Rings.Any())
         {
             <div class="product-grid">
-                @foreach (var product in Model)
+                @foreach (var product in Model.Rings)
                 {
                     <partial name="_ProductCard" model="@product" />
                 }
@@ -28,6 +31,21 @@
     </div>
 </section>
 
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    { previousPage = 1; }
+    var maxPage = Math.Ceiling((double)Model.TotalRingsCount / Model.RingsPerPage);
+}
+
+<div class="row mb-5">
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start"> <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)" asp-controller="Ring" asp-action="All" asp-route-currentPage="@previousPage" asp-route-priceFilter="@Model.PriceFilter"><<</a> </div>
+
+    @{
+        var shouldButtonBeDisabled = Model.CurrentPage == maxPage || !Model.Rings.Any();
+    } 
+    <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end"> <a class="btn btn-primary @(shouldButtonBeDisabled ? "disabled" : string.Empty)" asp-controller="Ring" asp-action="All" asp-route-currentPage="@(Model.CurrentPage + 1)" asp-route-priceFilter="@Model.PriceFilter">></a> </div>
+</div>
 
 <style>
     .recent-products {
@@ -36,7 +54,7 @@
         justify-content: space-between;
     }
 
-    .filter-form {
+    .form-control {
         flex: 0 0 25%;
         margin-right: 20px;
     }
@@ -95,9 +113,5 @@
 <script>
     function navigateToDetail(productId) {
         window.location.href = '@Url.Action("Details", "Ring")' + '?id=' + productId;
-    }
-    function redirectWithFilter() {
-        var priceFilter = $('#priceFilter').val();
-        window.location.href = '@Url.Action("All", "Ring")' + '?priceFilter=' + priceFilter;
     }
 </script>

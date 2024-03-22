@@ -4,6 +4,7 @@ using KolevDiamonds.Core.Models.Ring;
 using KolevDiamonds.Core.Services.Ring;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using System.Diagnostics;
 
 namespace KolevDiamonds.Controllers
 {
@@ -17,21 +18,18 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All(decimal? priceFilter)
+        public async Task<IActionResult> All([FromQuery] RingsQueryModel query)
         {
-            if (priceFilter != null) 
-            {
-                var models = await this._ringService.GetFilteredRingsAsync((decimal)priceFilter);
+            var model = await this._ringService.GetFilteredRingsAsync(
+                query.PriceFilter,
+                query.CurrentPage,
+                query.RingsPerPage
+                );
 
-                return View(models);
-            }
+            query.TotalRingsCount = model.TotalRingsCount;
+            query.Rings = model.Rings;
 
-            var model = await this._ringService
-                .AllRings();
-
-            ViewBag.PriceFilter = 0;
-
-            return View(model);
+            return View(query);
         }
 
         [HttpGet]
