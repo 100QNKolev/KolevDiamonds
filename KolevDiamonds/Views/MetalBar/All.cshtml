@@ -35,11 +35,6 @@
         justify-content: space-between;
     }
 
-    .filter-form {
-        flex: 0 0 25%;
-        margin-right: 20px;
-    }
-
     .recent-products .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -94,9 +89,5 @@
 <script>
     function navigateToDetail(productId) {
         window.location.href = '@Url.Action("Details", "MetalBar")' + '?id=' + productId;
-    }
-    function redirectWithFilter() {
-        var priceFilter = $('#priceFilter').val();
-        window.location.href = '@Url.Action("All", "MetalBar")' + '?priceFilter=' + priceFilter;
     }
 </script>
