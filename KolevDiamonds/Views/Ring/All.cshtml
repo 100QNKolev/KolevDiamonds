@@ -9,11 +9,9 @@
 </h1>
 <hr style="width: 80%; margin: 0 auto; border-top: 1px solid black;">
 
+<partial name="_FilterProductsPartial" model="Model" />
+
 <section class="recent-products">
-    <div class="form-group col-md-3">
-        <label asp-for="PriceFilter"></label>
-        <input asp-for="PriceFilter" class="form-control" placeholder="Enter a price">
-    </div>
     <div class="container">
         @if (Model.Rings.Any())
         {
@@ -54,7 +52,7 @@
         justify-content: space-between;
     }
 
-    .form-control {
+    .filterForm {
         flex: 0 0 25%;
         margin-right: 20px;
     }

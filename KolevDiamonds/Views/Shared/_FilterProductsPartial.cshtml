@@ -1,5 +1,7 @@
-﻿<form id="filterForm">
-    <label for="priceFilter">Filter by Price:</label>
-    <input type="number" id="priceFilter" name="priceFilter" min="0" step="any" value="@ViewBag.PriceFilter" />
-    <button type="button" onclick="redirectWithFilter()">Apply</button>
+﻿@model RingsQueryModel
+
+<form id="filterForm" method="get">
+        <label asp-for="PriceFilter"></label>
+        <input asp-for="PriceFilter" placeholder="Enter a price">
+    <input type="submit" value="Apply" class="btn btn-primary" />
 </form>
