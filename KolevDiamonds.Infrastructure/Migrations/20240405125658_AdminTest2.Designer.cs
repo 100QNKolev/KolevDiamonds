@@ -4,6 +4,7 @@ using KolevDiamonds.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KolevDiamonds.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240405125658_AdminTest2")]
+    partial class AdminTest2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -655,15 +657,15 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         {
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "28be4f26-f7e4-4910-8e57-6971a7a08df0",
+                            ConcurrencyStamp = "adfda1e7-37e0-4dc4-9726-52e20032c1c7",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFMScpn8YzQ3w22rafzSKpg6yY2qbrmkbcyFnjZv9DmjR2CrkFhNYv2kCKelYr0hlg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH/n9KcG0rUdVigq06EVBBea/zVCFCoUuGMjDWyuJhqzp4DOXGqkvW0oD/LvTQUAAA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "de5c571a-1ee5-4ba3-bdc4-7d8e6da419c8",
+                            SecurityStamp = "0f70be1a-7497-4185-b7af-f004fbb3fce2",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });

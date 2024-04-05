@@ -6,14 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KolevDiamonds.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
-        public IdentityUser AdminUser { get; set; }
         public DbSet<Ring> Rings { get; set; } = null!;
         public DbSet<Necklace> Necklaces { get; set; } = null!;
         public DbSet<InvestmentDiamond> InvestmentDiamonds { get; set; } = null!;

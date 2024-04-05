@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace KolevDiamonds.Infrastructure.Data.Models
 {
     [Comment("Admin user details")]
-    public class AdminUser
+    public static class AdminUser
     {
         [Comment("Role name for administrator")]
         public const string AdminRoleName = "Administrator";
