@@ -38,7 +38,7 @@ namespace KolevDiamonds.Controllers
 
             if (investmentCoin == null)
             {
-                return RedirectToAction(nameof(NotFoundError));
+                return NotFound();
             }
 
             var model = new InvestmentCoinDetailsServiceModel
@@ -61,18 +61,5 @@ namespace KolevDiamonds.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult NotFoundError()
-        {
-            // Redirect to the custom error page for 500 Internal Server Error
-            return View("Error404");
-        }
-
-        [HttpGet]
-        public IActionResult InternalServerError()
-        {
-            // Redirect to the custom error page for 500 Internal Server Error
-            return View("Error500");
-        }
     }
 }

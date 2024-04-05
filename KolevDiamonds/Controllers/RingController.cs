@@ -1,5 +1,6 @@
 ﻿using KolevDiamonds.Core.Contracts.Ring;
 using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.Necklace;
 using KolevDiamonds.Core.Models.Ring;
 using KolevDiamonds.Core.Services.Ring;
 using Microsoft.AspNetCore.Mvc;
@@ -38,9 +39,9 @@ namespace KolevDiamonds.Controllers
         {
             var ring = await _ringService.GetByIdAsync(id);
 
-            if (ring == null) 
+            if (ring == null)
             {
-                return RedirectToAction(nameof(NotFoundError));
+                return NotFound();
             }
 
             var model = new RingDetailsServiceModel
@@ -54,17 +55,11 @@ namespace KolevDiamonds.Controllers
                 Colour = ring.Colour,
                 Clarity = ring.Clarity,
                 Cut = ring.Cut,
-                Purity = ring.Purity
+                Purity = ring.Purity,
             };
 
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult NotFoundError()
-        {
-            // Redirect to the custom error page for 500 Internal Server Error
-            return View("Error404");
-        }
     }
 }
