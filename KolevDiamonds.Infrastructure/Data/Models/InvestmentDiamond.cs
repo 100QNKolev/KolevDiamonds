@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,19 +17,20 @@ namespace KolevDiamonds.Infrastructure.Data.Models
     {
         [Key]
         [Comment("Diamond unique identifier")]
-        public int DiamondId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Comment("Name of the diamond")]
         [MaxLength(InvestmentDiamondNameMaximumLength)]
-        public string DiamondName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         [Required]
         [Comment("Server file system image path")]
-        public string DiamondImagePath { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
 
         [Required]
         [Comment("Price of the product")]
+        [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
 
         [Required]

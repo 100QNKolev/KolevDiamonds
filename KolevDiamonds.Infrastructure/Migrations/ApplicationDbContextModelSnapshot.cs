@@ -24,31 +24,25 @@ namespace KolevDiamonds.Infrastructure.Migrations
 
             modelBuilder.Entity("KolevDiamonds.Infrastructure.Data.Models.InvestmentCoin", b =>
                 {
-                    b.Property<int>("CoinId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasComment("Coin unique identifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CoinId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("Circulation")
                         .HasColumnType("int")
                         .HasComment("Number of pieces in circulation");
 
-                    b.Property<string>("CoinImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("Server file system image path");
-
-                    b.Property<string>("CoinName")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)")
-                        .HasComment("Name of the coin");
-
                     b.Property<double>("Diameter")
                         .HasColumnType("float")
                         .HasComment("Diameter of the coin in millimeters");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Server file system image path");
 
                     b.Property<string>("LegalTender")
                         .IsRequired()
@@ -65,6 +59,12 @@ namespace KolevDiamonds.Infrastructure.Migrations
                     b.Property<int>("Metal")
                         .HasColumnType("int")
                         .HasComment("Type of metal");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)")
+                        .HasComment("Name of the coin");
 
                     b.Property<string>("Packaging")
                         .IsRequired()
@@ -88,21 +88,71 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         .HasColumnType("float")
                         .HasComment("Weight of the metal in grams");
 
-                    b.HasKey("CoinId");
+                    b.HasKey("Id");
 
                     b.ToTable("InvestmentCoins");
 
                     b.HasComment("Investment coin specifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Circulation = 10000,
+                            Diameter = 22.050000000000001,
+                            ImagePath = "https://upload.wikimedia.org/wikipedia/commons/3/3a/1959_sovereign_Elizabeth_II_obverse.jpg",
+                            LegalTender = "GBP 1",
+                            Manufacturer = "The Royal Mint",
+                            Metal = 2,
+                            Name = "Gold Sovereign",
+                            Packaging = "Protective Capsule",
+                            Price = 1000.00m,
+                            Purity = 0.91669999999999996,
+                            Quality = 1,
+                            Weight = 7.9800000000000004
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Circulation = 5000,
+                            Diameter = 40.600000000000001,
+                            ImagePath = "https://assets.goldeneaglecoin.com/resource/productimages/2020-SE-obv.jpg",
+                            LegalTender = "USD 1",
+                            Manufacturer = "United States Mint",
+                            Metal = 1,
+                            Name = "Silver Eagle",
+                            Packaging = "Plastic Tube",
+                            Price = 50.00m,
+                            Purity = 0.999,
+                            Quality = 1,
+                            Weight = 31.100000000000001
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Circulation = 1000,
+                            Diameter = 30.0,
+                            ImagePath = "https://media.tavid.ee/v7/_product_catalog_/1-oz-canadian-maple-leaf-silver-coin/canadian_maple_leaf_1oz_silver_coin_reverse.jpg?height=960&width=960&func=cropfit",
+                            LegalTender = "CAD 50",
+                            Manufacturer = "Royal Canadian Mint",
+                            Metal = 1,
+                            Name = "Silver Maple Leaf",
+                            Packaging = "Assay Card",
+                            Price = 500.00m,
+                            Purity = 0.99950000000000006,
+                            Quality = 3,
+                            Weight = 31.100000000000001
+                        });
                 });
 
             modelBuilder.Entity("KolevDiamonds.Infrastructure.Data.Models.InvestmentDiamond", b =>
                 {
-                    b.Property<int>("DiamondId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasComment("Diamond unique identifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DiamondId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<double>("Carats")
                         .HasColumnType("float")
@@ -126,12 +176,12 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("How well the diamond is cut");
 
-                    b.Property<string>("DiamondImagePath")
+                    b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Server file system image path");
 
-                    b.Property<string>("DiamondName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(35)
                         .HasColumnType("nvarchar(35)")
@@ -147,21 +197,62 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasComment("The proportions of the diamond");
 
-                    b.HasKey("DiamondId");
+                    b.HasKey("Id");
 
                     b.ToTable("InvestmentDiamonds");
 
                     b.HasComment("Investment diamond specifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Carats = 1.0,
+                            CertifyingLaboratory = "GIA",
+                            Clarity = 3,
+                            Colour = 2,
+                            Cut = 1,
+                            ImagePath = "https://www.diamondbanc.com/wp-content/uploads/2019/01/shutterstock_32731492-1024x681.jpg",
+                            Name = "Round Brilliant Diamond",
+                            Price = 5000.00m,
+                            Proportions = "Excellent"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Carats = 1.5,
+                            CertifyingLaboratory = "IGI",
+                            Clarity = 6,
+                            Colour = 4,
+                            Cut = 2,
+                            ImagePath = "https://www.qualitydiamonds.co.uk/media/1132/princess-diamond-top.png",
+                            Name = "Princess Cut Diamond",
+                            Price = 7000.00m,
+                            Proportions = "Very Good"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Carats = 2.0,
+                            CertifyingLaboratory = "HRD",
+                            Clarity = 7,
+                            Colour = 3,
+                            Cut = 3,
+                            ImagePath = "https://www.capediamonds.co.za/wp-content/uploads/2020/09/Emerald-Cut-Diamonds-Cape-Diamonds-Cape-Town-South-Africa.jpg",
+                            Name = "Emerald Cut Diamond",
+                            Price = 10000.00m,
+                            Proportions = "Good"
+                        });
                 });
 
             modelBuilder.Entity("KolevDiamonds.Infrastructure.Data.Models.MetalBar", b =>
                 {
-                    b.Property<int>("BarId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasComment("Metal bar unique identifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BarId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Dimensions")
                         .IsRequired()
@@ -169,16 +260,16 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasComment("Dimensions of the metal bar (length x width)");
 
-                    b.Property<int>("Metal")
-                        .HasColumnType("int")
-                        .HasComment("Type of metal");
-
-                    b.Property<string>("MetalBarImagePath")
+                    b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Server file system image path");
 
-                    b.Property<string>("MetalBarName")
+                    b.Property<int>("Metal")
+                        .HasColumnType("int")
+                        .HasComment("Type of metal");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(35)
                         .HasColumnType("nvarchar(35)")
@@ -196,23 +287,58 @@ namespace KolevDiamonds.Infrastructure.Migrations
 
                     b.Property<double>("Weight")
                         .HasColumnType("float")
-                        .HasComment("Weight of the metal bar");
+                        .HasComment("Weight of the metal bar in grams");
 
-                    b.HasKey("BarId");
+                    b.HasKey("Id");
 
                     b.ToTable("MetalBars");
 
                     b.HasComment("Metal bar specifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Dimensions = "27 x 47 mm",
+                            ImagePath = "https://m.media-amazon.com/images/I/61ICiCEk3TL._AC_UF894,1000_QL80_.jpg",
+                            Metal = 2,
+                            Name = "Gold Bar",
+                            Price = 15000.00m,
+                            Purity = "24 Karat",
+                            Weight = 1000.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Dimensions = "20 x 40 mm",
+                            ImagePath = "https://www.monex.com/wp-content/uploads/2023/06/1-kilo-silver-bar-side.png",
+                            Metal = 1,
+                            Name = "Silver Bar",
+                            Price = 500.00m,
+                            Purity = "999.9/1000",
+                            Weight = 1000.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Dimensions = "25 x 50 mm",
+                            ImagePath = "https://images.squarespace-cdn.com/content/v1/5719f32620c64744b886bcd2/1612970177011-TLIGBQ4ZDOODFX0TOR42/rose-gold-bar.png",
+                            Metal = 4,
+                            Name = "Rose Gold Bar",
+                            Price = 20000.00m,
+                            Purity = "24 Karat",
+                            Weight = 1000.0
+                        });
                 });
 
             modelBuilder.Entity("KolevDiamonds.Infrastructure.Data.Models.Necklace", b =>
                 {
-                    b.Property<int>("NecklaceId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasComment("Necklace unique identifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NecklaceId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<double>("Carats")
                         .HasColumnType("float")
@@ -230,6 +356,11 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("How well the diamond is cut");
 
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Server file system image path");
+
                     b.Property<double>("Length")
                         .HasColumnType("float")
                         .HasComment("Length of the necklace in millimeters");
@@ -238,12 +369,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Metal, which necklace is made of");
 
-                    b.Property<string>("NecklaceImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("Server file system image path");
-
-                    b.Property<string>("NecklaceName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(35)
                         .HasColumnType("nvarchar(35)")
@@ -259,21 +385,65 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         .HasColumnType("nvarchar(25)")
                         .HasComment("Purity of the metal expressed in carat for gold or sample for silver");
 
-                    b.HasKey("NecklaceId");
+                    b.HasKey("Id");
 
                     b.ToTable("Necklaces");
 
                     b.HasComment("Necklace specifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Carats = 2.5,
+                            Clarity = 5,
+                            Colour = 4,
+                            Cut = 1,
+                            ImagePath = "https://i.etsystatic.com/6244698/r/il/8121e9/1697727663/il_570xN.1697727663_9elj.jpg",
+                            Length = 450.0,
+                            Metal = 2,
+                            Name = "Diamond Solitaire Necklace",
+                            Price = 1500.00m,
+                            Purity = "18K"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Carats = 3.0,
+                            Clarity = 7,
+                            Colour = 14,
+                            Cut = 2,
+                            ImagePath = "https://media.beaverbrooks.co.uk/i/beaverbrooks/G105854_0",
+                            Length = 500.0,
+                            Metal = 1,
+                            Name = "Sapphire Halo Necklace",
+                            Price = 2000.00m,
+                            Purity = "925"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Carats = 2.7999999999999998,
+                            Clarity = 4,
+                            Colour = 1,
+                            Cut = 1,
+                            ImagePath = "https://haverhill.com/cdn/shop/products/image_11085d78-83fb-429b-a153-15a90bc9ee30_1200x1200.jpg?v=1705428203",
+                            Length = 480.0,
+                            Metal = 1,
+                            Name = "Emerald Pendant Necklace",
+                            Price = 1800.00m,
+                            Purity = "925"
+                        });
                 });
 
             modelBuilder.Entity("KolevDiamonds.Infrastructure.Data.Models.Ring", b =>
                 {
-                    b.Property<int>("RingId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasComment("Ring unique identifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RingId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<double>("Carats")
                         .HasColumnType("float")
@@ -291,9 +461,20 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("How well the diamond is cut");
 
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Server file system image path");
+
                     b.Property<int>("Metal")
                         .HasColumnType("int")
                         .HasComment("Metal, which ring is made of");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)")
+                        .HasComment("Name of the ring");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)")
@@ -305,22 +486,52 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         .HasColumnType("nvarchar(25)")
                         .HasComment("Purity of the metal expressed in carat for gold or sample for silver");
 
-                    b.Property<string>("RingImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasComment("Server file system image path");
-
-                    b.Property<string>("RingName")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)")
-                        .HasComment("Name of the ring");
-
-                    b.HasKey("RingId");
+                    b.HasKey("Id");
 
                     b.ToTable("Rings");
 
                     b.HasComment("Ring specifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Carats = 1.5,
+                            Clarity = 5,
+                            Colour = 4,
+                            Cut = 2,
+                            ImagePath = "https://www.tanishq.co.in/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw5721e8ec/images/hi-res/50D2FFFFRAA02_1.jpg",
+                            Metal = 2,
+                            Name = "Gold Diamond Ring",
+                            Price = 1000.00m,
+                            Purity = "18K"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Carats = 4.0,
+                            Clarity = 3,
+                            Colour = 4,
+                            Cut = 1,
+                            ImagePath = "https://4.imimg.com/data4/QW/YU/FUSIONI-3520335/prod-image.jpg",
+                            Metal = 2,
+                            Name = "Gold Ring With Crown Diamond",
+                            Price = 10020.00m,
+                            Purity = "18K"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Carats = 3.0,
+                            Clarity = 5,
+                            Colour = 4,
+                            Cut = 1,
+                            ImagePath = "https://love-and-co.com/cdn/shop/files/CR591-LGD_lifestyle.jpg?v=1697793277&width=2000",
+                            Metal = 4,
+                            Name = "Rose Gold Diamond Ring",
+                            Price = 12000.00m,
+                            Purity = "18K"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

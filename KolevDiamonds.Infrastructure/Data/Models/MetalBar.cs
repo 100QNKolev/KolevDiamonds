@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,19 +17,20 @@ namespace KolevDiamonds.Infrastructure.Data.Models
     {
         [Key]
         [Comment("Metal bar unique identifier")]
-        public int BarId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Comment("Name of the metal bar")]
         [MaxLength(MetalBarNameMaximumLength)]
-        public string MetalBarName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         [Required]
         [Comment("Server file system image path")]
-        public string MetalBarImagePath { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
 
         [Required]
         [Comment("Price of the product")]
+        [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
 
         [Required]
@@ -36,7 +38,7 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         public MetalVariation Metal { get; set; }
 
         [Required]
-        [Comment("Weight of the metal bar")]
+        [Comment("Weight of the metal bar in grams")]
         public double Weight { get; set; }
 
         [Required]

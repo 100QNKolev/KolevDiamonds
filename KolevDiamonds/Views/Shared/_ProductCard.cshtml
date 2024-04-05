@@ -1,0 +1,7 @@
+﻿@model ProductIndexServiceModel
+
+<div class="product-card" onclick="navigateToDetail(@Model.Id)">
+    <img src="@Model.ImagePath" alt="@Model.Name" class="product-image">
+    <h3 class="product-name">@Model.Name</h3>
+    <span class="product-price">@Model.Price.ToString("C")</span>
+</div>
