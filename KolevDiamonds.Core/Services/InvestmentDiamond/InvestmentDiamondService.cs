@@ -29,7 +29,8 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
                     Id = r.Id,
                     Name = r.Name,
                     ImagePath = r.ImagePath,
-                    Price = r.Price
+                    Price = r.Price,
+                    ProductType = nameof(InvestmentDiamond)
                 })
                 .ToListAsync();
         }
@@ -47,11 +48,11 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
                 .All<Infrastructure.Data.Models.InvestmentDiamond>()
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
-        public async Task<ProductQueryModel> GetFilteredInvestmentDiamondsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1)
+        public async Task<ProductQueryModel> GetFilteredInvestmentDiamondsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1, bool isForSale = true)
         {
             var InvestmentDiamonds = this._repository
                 .AllReadOnly<Infrastructure.Data.Models.InvestmentDiamond>()
-                .Where(r => r.IsForSale == true)
+                .Where(r => r.IsForSale == isForSale)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -59,7 +60,8 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
                     Name = r.Name,
                     ImagePath = r.ImagePath,
                     Price = r.Price,
-                    ProductType = nameof(InvestmentDiamond)
+                    ProductType = nameof(InvestmentDiamond),
+                    IsForSale = r.IsForSale
                 });
 
             if (priceFilter != null)

@@ -4,6 +4,7 @@ using KolevDiamonds.Core.Contracts.MetalBar;
 using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Contracts.Ring;
 using KolevDiamonds.Core.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using static KolevDiamonds.Areas.Admin.Constants.JewelryConstants;
@@ -85,31 +86,36 @@ namespace KolevDiamonds.Areas.Admin.Controllers
             var rings = await this._ringService.GetFilteredRingsAsync(
                     query.PriceFilter,
                     query.CurrentPage,
-                    JewelryTypeItemPerPage
+                    JewelryTypeItemPerPage,
+                    query.IsForSale
             );
 
             var necklaces = await this._necklaceService.GetFilteredNecklacesAsync(
                 query.PriceFilter,
                 query.CurrentPage,
-                JewelryTypeItemPerPage
+                JewelryTypeItemPerPage,
+                query.IsForSale
             );
 
             var metalBars = await this._metalBarService.GetFilteredMetalBarsAsync(
                 query.PriceFilter,
                 query.CurrentPage,
-                JewelryTypeItemPerPage
+                JewelryTypeItemPerPage,
+                query.IsForSale
             );
 
             var investmentCoins = await this._investmentCoinService.GetFilteredInvestmentCoinsAsync(
                 query.PriceFilter,
                 query.CurrentPage,
-                JewelryTypeItemPerPage
+                JewelryTypeItemPerPage,
+                query.IsForSale
             );
 
             var investmentDiamonds = await this._investmentDiamondService.GetFilteredInvestmentDiamondsAsync(
                 query.PriceFilter,
                 query.CurrentPage,
-                JewelryTypeItemPerPage
+                JewelryTypeItemPerPage,
+                query.IsForSale
             );
 
             var allProducts = rings.Products

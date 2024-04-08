@@ -7,6 +7,8 @@
 <h1>All Jewelry</h1>
 
 <div class="container">
+    <partial name="_FilterProductsByPricePartial" model="Model" />
+    <partial name="_FilterProductsByAvailabilityPartial" model="Model" />
     @if (Model.Products.Count() > 0)
     {
         <table>
@@ -29,7 +31,10 @@
                         <td>
                             <div class="card-body">
                                 <a href="#" class="btn btn-primary">Edit</a>
-                                <a class="btn btn-primary" asp-area="Admin" asp-controller="Jewelry" asp-action="Delete" asp-route-id="@item.Id" asp-route-productType="@item.ProductType">Delete</a>
+                                @if(item.IsForSale == true) 
+                                {
+                                    <a class="btn btn-primary" asp-area="Admin" asp-controller="Jewelry" asp-action="Delete" asp-route-id="@item.Id" asp-route-productType="@item.ProductType">Delete</a>
+                                }
                             </div>
                         </td>
                     </tr>

@@ -30,7 +30,7 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
                     Name = r.Name,
                     ImagePath = r.ImagePath,
                     Price = r.Price,
-                    ProductType = nameof(InvestmentCoin)
+                    ProductType = nameof(InvestmentCoin),
                 })
                 .ToListAsync();
         }
@@ -49,18 +49,20 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public async Task<ProductQueryModel> GetFilteredInvestmentCoinsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1)
+        public async Task<ProductQueryModel> GetFilteredInvestmentCoinsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1, bool isForSale = true)
         {
             var InvestmentCoins = this._repository
                 .AllReadOnly<Infrastructure.Data.Models.InvestmentCoin>()
-                .Where(r => r.IsForSale == true)
+                .Where(r => r.IsForSale == isForSale)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
                     Id = r.Id,
                     Name = r.Name,
                     ImagePath = r.ImagePath,
-                    Price = r.Price
+                    Price = r.Price,
+                    ProductType = nameof(InvestmentCoin),
+                    IsForSale = r.IsForSale
                 });
 
             if (priceFilter != null)

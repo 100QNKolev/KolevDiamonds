@@ -29,7 +29,8 @@ namespace KolevDiamonds.Core.Services.Necklace
                     Id = r.Id,
                     Name = r.Name,
                     ImagePath = r.ImagePath,
-                    Price = r.Price
+                    Price = r.Price,
+                    ProductType = nameof(Necklace)
                 })
                 .ToListAsync();
         }
@@ -49,11 +50,11 @@ namespace KolevDiamonds.Core.Services.Necklace
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public async Task<ProductQueryModel> GetFilteredNecklacesAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1)
+        public async Task<ProductQueryModel> GetFilteredNecklacesAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1, bool isForSale = true)
         {
             var necklaces = this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Necklace>()
-                .Where(r => r.IsForSale == true)
+                .Where(r => r.IsForSale == isForSale)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -61,7 +62,8 @@ namespace KolevDiamonds.Core.Services.Necklace
                     Name = r.Name,
                     ImagePath = r.ImagePath,
                     Price = r.Price,
-                    ProductType = nameof(Necklace)
+                    ProductType = nameof(Necklace),
+                    IsForSale = r.IsForSale
                 });
 
             if (priceFilter != null)

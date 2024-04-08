@@ -26,7 +26,8 @@ namespace KolevDiamonds.Core.Services.Ring
                     Id = r.Id,
                     Name = r.Name,
                     ImagePath = r.ImagePath,
-                    Price = r.Price
+                    Price = r.Price,
+                    ProductType = nameof(Ring)
                 })
                 .ToListAsync();
         }
@@ -45,11 +46,11 @@ namespace KolevDiamonds.Core.Services.Ring
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public async Task<ProductQueryModel> GetFilteredRingsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1) 
+        public async Task<ProductQueryModel> GetFilteredRingsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1, bool isForSale = true) 
         {
             var rings = this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Ring>()
-                .Where(r => r.IsForSale == true)
+                .Where(r => r.IsForSale == isForSale)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -57,7 +58,8 @@ namespace KolevDiamonds.Core.Services.Ring
                     Name = r.Name,
                     ImagePath = r.ImagePath,
                     Price = r.Price,
-                    ProductType = nameof(Ring)
+                    ProductType = nameof(Ring),
+                    IsForSale = r.IsForSale
                 });
 
             if (priceFilter != null)
