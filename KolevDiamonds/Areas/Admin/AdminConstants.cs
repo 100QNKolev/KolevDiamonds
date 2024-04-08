@@ -17,6 +17,6 @@ namespace KolevDiamonds.Web.Areas.Admin
         public const string AdminEmail = "admin@gmail.com";
 
         [Comment("Administrator's area name")]
-        public const string AreaName = "Admin";
+        public const string AdminAreaName = "Admin";
     }
 }
