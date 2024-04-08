@@ -51,7 +51,8 @@ namespace KolevDiamonds.Core.Services.MetalBar
                     Id = r.Id,
                     Name = r.Name,
                     ImagePath = r.ImagePath,
-                    Price = r.Price
+                    Price = r.Price,
+                    ProductType = nameof(MetalBar)
                 });
 
             if (priceFilter != null)

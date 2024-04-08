@@ -29,7 +29,8 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
                     Id = r.Id,
                     Name = r.Name,
                     ImagePath = r.ImagePath,
-                    Price = r.Price
+                    Price = r.Price,
+                    ProductType = nameof(InvestmentCoin)
                 })
                 .ToListAsync();
         }

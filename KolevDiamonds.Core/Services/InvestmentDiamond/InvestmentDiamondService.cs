@@ -51,7 +51,8 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
                     Id = r.Id,
                     Name = r.Name,
                     ImagePath = r.ImagePath,
-                    Price = r.Price
+                    Price = r.Price,
+                    ProductType = nameof(InvestmentDiamond)
                 });
 
             if (priceFilter != null)
