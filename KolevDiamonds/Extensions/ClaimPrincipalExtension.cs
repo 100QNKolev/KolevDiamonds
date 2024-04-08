@@ -1,4 +1,4 @@
-﻿using static KolevDiamonds.Infrastructure.Data.Models.AdminUser;
+﻿using static KolevDiamonds.Web.Areas.Admin.AdminConstants;
 
 namespace System.Security.Claims
 {
