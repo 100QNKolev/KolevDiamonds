@@ -4,6 +4,7 @@ using KolevDiamonds.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KolevDiamonds.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240408122823_Added_IsForSale_column")]
+    partial class Added_IsForSale_column
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Circulation = 10000,
                             Diameter = 22.050000000000001,
                             ImagePath = "https://upload.wikimedia.org/wikipedia/commons/3/3a/1959_sovereign_Elizabeth_II_obverse.jpg",
-                            IsForSale = true,
+                            IsForSale = false,
                             LegalTender = "GBP 1",
                             Manufacturer = "The Royal Mint",
                             Metal = 2,
@@ -122,7 +124,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Circulation = 5000,
                             Diameter = 40.600000000000001,
                             ImagePath = "https://assets.goldeneaglecoin.com/resource/productimages/2020-SE-obv.jpg",
-                            IsForSale = true,
+                            IsForSale = false,
                             LegalTender = "USD 1",
                             Manufacturer = "United States Mint",
                             Metal = 1,
@@ -139,7 +141,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Circulation = 1000,
                             Diameter = 30.0,
                             ImagePath = "https://media.tavid.ee/v7/_product_catalog_/1-oz-canadian-maple-leaf-silver-coin/canadian_maple_leaf_1oz_silver_coin_reverse.jpg?height=960&width=960&func=cropfit",
-                            IsForSale = true,
+                            IsForSale = false,
                             LegalTender = "CAD 50",
                             Manufacturer = "Royal Canadian Mint",
                             Metal = 1,
@@ -224,7 +226,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Colour = 2,
                             Cut = 1,
                             ImagePath = "https://www.diamondbanc.com/wp-content/uploads/2019/01/shutterstock_32731492-1024x681.jpg",
-                            IsForSale = true,
+                            IsForSale = false,
                             Name = "Round Brilliant Diamond",
                             Price = 5000.00m,
                             Proportions = "Excellent"
@@ -238,7 +240,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Colour = 4,
                             Cut = 2,
                             ImagePath = "https://www.qualitydiamonds.co.uk/media/1132/princess-diamond-top.png",
-                            IsForSale = true,
+                            IsForSale = false,
                             Name = "Princess Cut Diamond",
                             Price = 7000.00m,
                             Proportions = "Very Good"
@@ -252,7 +254,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Colour = 3,
                             Cut = 3,
                             ImagePath = "https://www.capediamonds.co.za/wp-content/uploads/2020/09/Emerald-Cut-Diamonds-Cape-Diamonds-Cape-Town-South-Africa.jpg",
-                            IsForSale = true,
+                            IsForSale = false,
                             Name = "Emerald Cut Diamond",
                             Price = 10000.00m,
                             Proportions = "Good"
@@ -319,7 +321,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Id = 1,
                             Dimensions = "27 x 47 mm",
                             ImagePath = "https://m.media-amazon.com/images/I/61ICiCEk3TL._AC_UF894,1000_QL80_.jpg",
-                            IsForSale = true,
+                            IsForSale = false,
                             Metal = 2,
                             Name = "Gold Bar",
                             Price = 15000.00m,
@@ -331,7 +333,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Id = 2,
                             Dimensions = "20 x 40 mm",
                             ImagePath = "https://www.monex.com/wp-content/uploads/2023/06/1-kilo-silver-bar-side.png",
-                            IsForSale = true,
+                            IsForSale = false,
                             Metal = 1,
                             Name = "Silver Bar",
                             Price = 500.00m,
@@ -343,7 +345,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Id = 3,
                             Dimensions = "25 x 50 mm",
                             ImagePath = "https://images.squarespace-cdn.com/content/v1/5719f32620c64744b886bcd2/1612970177011-TLIGBQ4ZDOODFX0TOR42/rose-gold-bar.png",
-                            IsForSale = true,
+                            IsForSale = false,
                             Metal = 4,
                             Name = "Rose Gold Bar",
                             Price = 20000.00m,
@@ -425,7 +427,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Colour = 4,
                             Cut = 1,
                             ImagePath = "https://i.etsystatic.com/6244698/r/il/8121e9/1697727663/il_570xN.1697727663_9elj.jpg",
-                            IsForSale = true,
+                            IsForSale = false,
                             Length = 450.0,
                             Metal = 2,
                             Name = "Diamond Solitaire Necklace",
@@ -440,7 +442,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Colour = 14,
                             Cut = 2,
                             ImagePath = "https://media.beaverbrooks.co.uk/i/beaverbrooks/G105854_0",
-                            IsForSale = true,
+                            IsForSale = false,
                             Length = 500.0,
                             Metal = 1,
                             Name = "Sapphire Halo Necklace",
@@ -455,7 +457,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Colour = 1,
                             Cut = 1,
                             ImagePath = "https://haverhill.com/cdn/shop/products/image_11085d78-83fb-429b-a153-15a90bc9ee30_1200x1200.jpg?v=1705428203",
-                            IsForSale = true,
+                            IsForSale = false,
                             Length = 480.0,
                             Metal = 1,
                             Name = "Emerald Pendant Necklace",
@@ -533,7 +535,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Colour = 4,
                             Cut = 2,
                             ImagePath = "https://www.tanishq.co.in/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw5721e8ec/images/hi-res/50D2FFFFRAA02_1.jpg",
-                            IsForSale = true,
+                            IsForSale = false,
                             Metal = 2,
                             Name = "Gold Diamond Ring",
                             Price = 1000.00m,
@@ -547,7 +549,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Colour = 4,
                             Cut = 1,
                             ImagePath = "https://4.imimg.com/data4/QW/YU/FUSIONI-3520335/prod-image.jpg",
-                            IsForSale = true,
+                            IsForSale = false,
                             Metal = 2,
                             Name = "Gold Ring With Crown Diamond",
                             Price = 10020.00m,
@@ -561,7 +563,7 @@ namespace KolevDiamonds.Infrastructure.Migrations
                             Colour = 4,
                             Cut = 1,
                             ImagePath = "https://love-and-co.com/cdn/shop/files/CR591-LGD_lifestyle.jpg?v=1697793277&width=2000",
-                            IsForSale = true,
+                            IsForSale = false,
                             Metal = 4,
                             Name = "Rose Gold Diamond Ring",
                             Price = 12000.00m,
@@ -690,15 +692,15 @@ namespace KolevDiamonds.Infrastructure.Migrations
                         {
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "579a726f-c323-444b-96d3-38f50f4a1d12",
+                            ConcurrencyStamp = "b092b9aa-0fe6-4dba-b887-e62fd111266c",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAENYrsaT1djg198+3ncL0Yy5FYXIqDPln1TtchznbyX0B0zu2ci8WvTfjoP4p51ALFw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHcGwGUFUxgWCulgaSOSYFCnfnNCjiIoFi0PVUq4KujjOPdrAReKYLN+k+dsEQq8zQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "20ad91b7-5525-4543-864c-75cbb4456e17",
+                            SecurityStamp = "df36812e-1754-49cc-9850-a648c2451a6d",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });

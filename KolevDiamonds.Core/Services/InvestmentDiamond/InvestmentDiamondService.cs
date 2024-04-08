@@ -23,6 +23,7 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.InvestmentDiamond>()
+                .Where(r => r.IsForSale == true)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -41,6 +42,12 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
+        public async Task<Infrastructure.Data.Models.InvestmentDiamond?> GetByIdAsyncAsTracking(int id)
+        {
+            return await this._repository
+                .All<Infrastructure.Data.Models.InvestmentDiamond>()
+                .FirstOrDefaultAsync(r => r.Id == id);
+        }
         public async Task<ProductQueryModel> GetFilteredInvestmentDiamondsAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1)
         {
             var InvestmentDiamonds = this._repository
@@ -72,6 +79,18 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
                 TotalProductCount = InvestmentDiamonds.Count(),
                 ProductType = nameof(InvestmentDiamond)
             };
+        }
+
+        public async Task Delete(int investmentDiamondId)
+        {
+            var InvestmentDiamond = await GetByIdAsyncAsTracking(investmentDiamondId);
+
+            if (InvestmentDiamond != null)
+            {
+                InvestmentDiamond.IsForSale = false;
+
+                await _repository.SaveChangesAsync();
+            }
         }
     }
 }

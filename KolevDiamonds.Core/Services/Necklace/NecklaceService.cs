@@ -23,6 +23,7 @@ namespace KolevDiamonds.Core.Services.Necklace
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Necklace>()
+                .Where(r => r.IsForSale == true)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -34,10 +35,18 @@ namespace KolevDiamonds.Core.Services.Necklace
                 .ToListAsync();
         }
 
+
         public async Task<Infrastructure.Data.Models.Necklace?> GetByIdAsync(int id)
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Necklace>()
+                .FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<Infrastructure.Data.Models.Necklace?> GetByIdAsyncAsTracking(int id)
+        {
+            return await this._repository
+                .All<Infrastructure.Data.Models.Necklace>()
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
@@ -72,6 +81,18 @@ namespace KolevDiamonds.Core.Services.Necklace
                 TotalProductCount = necklaces.Count(),
                 ProductType = nameof(Necklace)
             };
+        }
+
+        public async Task Delete(int necklaceId)
+        {
+            var necklace = await GetByIdAsyncAsTracking(necklaceId);
+
+            if (necklace != null)
+            {
+                necklace.IsForSale = false;
+
+                await _repository.SaveChangesAsync();
+            }
         }
     }
 }

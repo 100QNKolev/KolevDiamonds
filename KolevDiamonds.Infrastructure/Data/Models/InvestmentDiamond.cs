@@ -58,5 +58,9 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         [Comment("The proportions of the diamond")]
         [MaxLength(InvestmentDiamondProportionsMaximumLength)]
         public string Proportions { get; set; } = string.Empty;
+
+        [Required]
+        [Comment("Is the item for sale")]
+        public bool IsForSale { get; set; } = true;
     }
 }

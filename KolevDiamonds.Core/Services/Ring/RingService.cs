@@ -20,6 +20,7 @@ namespace KolevDiamonds.Core.Services.Ring
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Ring>()
+                .Where(r => r.IsForSale == true)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -35,6 +36,13 @@ namespace KolevDiamonds.Core.Services.Ring
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Ring>()
+                .FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<Infrastructure.Data.Models.Ring?> GetByIdAsyncAsTracking(int id)
+        {
+            return await this._repository
+                .All<Infrastructure.Data.Models.Ring>()
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
@@ -70,5 +78,18 @@ namespace KolevDiamonds.Core.Services.Ring
                 ProductType = nameof(Ring)
             };
         }
+
+        public async Task Delete(int ringId)
+        {
+            var ring = await GetByIdAsyncAsTracking(ringId);
+
+            if (ring != null) 
+            {
+                ring.IsForSale = false;
+
+                await _repository.SaveChangesAsync();
+            }
+        }
     }
+
 }

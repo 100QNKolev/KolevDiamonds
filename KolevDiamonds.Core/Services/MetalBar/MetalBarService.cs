@@ -23,6 +23,7 @@ namespace KolevDiamonds.Core.Services.MetalBar
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
+                .Where(r => r.IsForSale == true)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -38,6 +39,13 @@ namespace KolevDiamonds.Core.Services.MetalBar
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
+                .FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<Infrastructure.Data.Models.MetalBar?> GetByIdAsyncAsTracking(int id)
+        {
+            return await this._repository
+                .All<Infrastructure.Data.Models.MetalBar>()
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
@@ -72,6 +80,18 @@ namespace KolevDiamonds.Core.Services.MetalBar
                 TotalProductCount = metalBars.Count(),
                 ProductType = nameof(MetalBar)
             };
+        }
+
+        public async Task Delete(int metalBarId)
+        {
+            var metalBar = await GetByIdAsyncAsTracking(metalBarId);
+
+            if (metalBar != null)
+            {
+                metalBar.IsForSale = false;
+
+                await _repository.SaveChangesAsync();
+            }
         }
     }
 }

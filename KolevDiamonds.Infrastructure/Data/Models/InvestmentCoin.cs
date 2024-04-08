@@ -72,5 +72,9 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         [Comment("Packaging for the coin")]
         [MaxLength(InvestmentCoinPackagingMaximumLength)]
         public string Packaging { get; set; } = string.Empty;
+
+        [Required]
+        [Comment("Is the item for sale")]
+        public bool IsForSale { get; set; } = true;
     }
 }

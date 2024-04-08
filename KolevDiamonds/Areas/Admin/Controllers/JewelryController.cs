@@ -5,6 +5,7 @@ using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Contracts.Ring;
 using KolevDiamonds.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using static KolevDiamonds.Areas.Admin.Constants.JewelryConstants;
 
 namespace KolevDiamonds.Areas.Admin.Controllers
@@ -42,6 +43,22 @@ namespace KolevDiamonds.Areas.Admin.Controllers
             query.ProductType = JewelryQueryProductType;
 
             return View(query);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id, string productType)
+        {
+            if (User.isAdmin())
+            {
+                switch (productType)
+                {
+                    case "Ring":
+
+                        break;
+                }
+            }
+
+            return RedirectToAction(nameof(All));
         }
 
         [NonAction]
