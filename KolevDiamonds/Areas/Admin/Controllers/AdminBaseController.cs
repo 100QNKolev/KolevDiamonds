@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static KolevDiamonds.Web.Areas.Admin.AdminConstants;
+using static KolevDiamonds.Areas.Admin.Constants.AdminConstants;
 
 namespace KolevDiamonds.Areas.Admin.Controllers
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KolevDiamonds.Web.Areas.Admin
+namespace KolevDiamonds.Areas.Admin.Constants
 {
     [Comment("Admin constants")]
     public static class AdminConstants
