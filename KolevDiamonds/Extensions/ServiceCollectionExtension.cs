@@ -25,7 +25,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IInvestmentDiamondService, InvestmentDiamondService>();
             services.AddScoped<IInvestmentCoinService, InvestmentCoinService>();
 
-
             return services;
         }
 
