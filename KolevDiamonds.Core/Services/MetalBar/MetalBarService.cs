@@ -23,7 +23,6 @@ namespace KolevDiamonds.Core.Services.MetalBar
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
-                .Where(r => r.IsForSale == true)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -53,6 +52,7 @@ namespace KolevDiamonds.Core.Services.MetalBar
         {
             var metalBars = this._repository
                 .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
+                .Where(r => r.IsForSale == true)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {

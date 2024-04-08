@@ -23,7 +23,6 @@ namespace KolevDiamonds.Core.Services.Necklace
         {
             return await this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Necklace>()
-                .Where(r => r.IsForSale == true)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
@@ -54,6 +53,7 @@ namespace KolevDiamonds.Core.Services.Necklace
         {
             var necklaces = this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Necklace>()
+                .Where(r => r.IsForSale == true)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {

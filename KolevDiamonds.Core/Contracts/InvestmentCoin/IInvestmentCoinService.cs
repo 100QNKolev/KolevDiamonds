@@ -13,6 +13,10 @@ namespace KolevDiamonds.Core.Contracts.InvestmentCoin
 
         Task<Infrastructure.Data.Models.InvestmentCoin?> GetByIdAsync(int id);
 
+        Task<Infrastructure.Data.Models.InvestmentCoin?> GetByIdAsyncAsTracking(int id);
+
         Task<ProductQueryModel> GetFilteredInvestmentCoinsAsync(decimal? priceFilter, int currentPage, int productsPerPage);
+
+        Task Delete(int ringId);
     }
 }

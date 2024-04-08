@@ -53,8 +53,26 @@ namespace KolevDiamonds.Areas.Admin.Controllers
                 switch (productType)
                 {
                     case "Ring":
-
+                        await this._ringService.Delete(id);
                         break;
+
+                    case "Necklace":
+                        await this._necklaceService.Delete(id);
+                        break;
+
+                    case "MetalBar":
+                        await this._metalBarService.Delete(id);
+                        break;
+
+                    case "InvestmentDiamond":
+                        await this._investmentDiamondService.Delete(id);
+                        break;
+
+                    case "InvestmentCoin":
+                        await this._investmentCoinService.Delete(id);
+                        break;
+                    default:
+                        return BadRequest();
                 }
             }
 
