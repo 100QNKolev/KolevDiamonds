@@ -6,6 +6,31 @@
 <main>
     <div class="container">
         <partial name="_SelectCategoryPartial" model="@Model" />
+
+        @if (Model.Category != string.Empty)
+        {
+            switch (Model.Category)
+            {
+                case "Ring":
+                    break;
+
+                case "Necklace":
+                    break;
+
+                case "MetalBar":
+                    break;
+
+                case "InvestmentDiamond":
+                    <partial name="_InvestmentDiamondPartial" model="@Model" />
+                    break;
+
+                case "InvestmentCoin":
+                    break;
+                default:
+                    <p class="text-danger">Invalid category selected.</p>
+                    break;
+            }
+        }
     </div>
 </main>
 
