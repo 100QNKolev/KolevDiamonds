@@ -32,5 +32,10 @@ namespace KolevDiamonds.Infrastructure.Data.Common
         {
             return await this._context.SaveChangesAsync();
         }
+
+        public async Task AddAsync<T>(T entity) where T : class
+        {
+            await DbSet<T>().AddAsync(entity);
+        }
     }
 }

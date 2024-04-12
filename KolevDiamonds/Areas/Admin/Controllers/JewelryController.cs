@@ -5,8 +5,9 @@ using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Contracts.Ring;
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.Admin;
-using Microsoft.AspNetCore.Identity;
+using KolevDiamonds.Core.Models.InvestmentDiamond;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using static KolevDiamonds.Areas.Admin.Constants.JewelryConstants;
 
@@ -86,6 +87,28 @@ namespace KolevDiamonds.Areas.Admin.Controllers
         public async Task<IActionResult> Add([FromQuery] AdminQueryModel query)
         {
             return View(query);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitForm(InvestmentDiamondModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Model validation failed, return validation errors
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+
+                return Json(new { success = false, errors });
+            }
+
+
+            // If both standard and custom validation pass, proceed with further processing
+            // For example, save the model to the database
+            // Return success response if successful
+            await this._investmentDiamondService.Create(model);
+            return Json(new { success = true, message = "Operation completed successfully" });
         }
 
         [NonAction]

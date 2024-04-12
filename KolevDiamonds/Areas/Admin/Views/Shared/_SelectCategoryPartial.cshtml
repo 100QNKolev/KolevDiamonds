@@ -2,8 +2,8 @@
 
 <form asp-area="Admin" asp-controller="Jewelry" asp-action="Add" method="get">
     <div class="mb-3">
-        <label for="type" class="form-label">Select a type:</label>
-        <select class="form-select" id="type" name="type">
+        <label asp-for="Category" class="form-label">Select a type:</label>
+        <select class="form-select" asp-for="Category" name="Category">
             <option value="Ring">Ring</option>
             <option value="Necklace">Necklace</option>
             <option value="MetalBar">Metal Bar</option>

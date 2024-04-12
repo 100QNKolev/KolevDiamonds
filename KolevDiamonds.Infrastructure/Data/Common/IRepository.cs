@@ -23,5 +23,12 @@ namespace KolevDiamonds.Infrastructure.Data.Common
         /// </summary>
         /// <returns>Error code</returns>
         Task<int> SaveChangesAsync();
+
+
+        /// <summary>
+        /// Adds entity to the database
+        /// </summary>
+        /// <param>Entity to add</param>
+        Task AddAsync<T>(T entity) where T : class;
     }
 }

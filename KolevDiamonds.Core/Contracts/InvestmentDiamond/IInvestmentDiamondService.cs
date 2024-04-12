@@ -1,4 +1,5 @@
 ﻿using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.InvestmentDiamond;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,7 @@ namespace KolevDiamonds.Core.Contracts.InvestmentDiamond
         Task<ProductQueryModel> GetFilteredInvestmentDiamondsAsync(decimal? priceFilter, int currentPage, int productsPerPage, bool isForSale = true);
 
         Task Delete(int ringId);
+
+        Task Create(InvestmentDiamondModel model);
     }
 }

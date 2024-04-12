@@ -1,7 +1,9 @@
 ﻿@model InvestmentDiamondModel
 
+<div id="errorMessages"></div>
+
 <div class="investment-diamond-form">
-    <form method="post">
+    <form id="myForm" asp-area="Admin" asp-controller="Jewelry" asp-action="Add" method="post">
 
         <div class="form-group">
             <label asp-for="Name">Name:</label>
@@ -88,3 +90,49 @@
 
     </form>
 </div>
+
+<div id="errorMessages"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myForm').submit(function (event) {
+            // Prevent default form submission
+            event.preventDefault();
+
+            // Serialize form data
+            var formData = $(this).serialize();
+
+            // Send AJAX request
+            $.ajax({
+                url: '@Url.Action("SubmitForm", "Jewelry")', // Replace with your controller and action
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    // Clear any previous error messages
+                    $('#errorMessages').empty();
+
+                    // Check if the response contains validation errors
+                    if (response.success === false && response.errors) {
+                        // Display validation errors
+                        var errorsHtml = '<ul class="text-danger">';
+                        $.each(response.errors, function (index, error) {
+                            errorsHtml += '<li>' + error + '</li>';
+                        });
+                        errorsHtml += '</ul>';
+                        $('#errorMessages').html(errorsHtml);
+                    } else {
+                        // Handle other types of response (e.g., success)
+                        // Display success message
+                        alert('Operation completed successfully');
+                        // You may update the page or perform other actions here
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>

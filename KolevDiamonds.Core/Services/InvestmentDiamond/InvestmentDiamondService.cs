@@ -1,22 +1,21 @@
 ﻿using KolevDiamonds.Core.Contracts.InvestmentDiamond;
 using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.InvestmentDiamond;
 using KolevDiamonds.Infrastructure.Data.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace KolevDiamonds.Core.Services.InvestmentDiamond
 {
     public class InvestmentDiamondService : IInvestmentDiamondService
     {
         private readonly IRepository _repository;
+        private readonly ILogger logger;
 
-        public InvestmentDiamondService(IRepository repository)
+        public InvestmentDiamondService(IRepository repository, ILogger<InvestmentDiamondService> _logger)
         {
             this._repository = repository;
+            this.logger = _logger;
         }
 
         public async Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentDiamonds()
@@ -93,6 +92,35 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
 
                 await _repository.SaveChangesAsync();
             }
+        }
+
+        public async Task Create(InvestmentDiamondModel model)
+        {
+            var diamond = new Infrastructure.Data.Models.InvestmentDiamond
+            {
+                Name = model.Name,
+                ImagePath = model.ImagePath,
+                Price = model.Price,
+                Carats = model.Carats,
+                Colour = model.Colour,
+                Clarity = model.Clarity,
+                Cut = model.Cut,
+                CertifyingLaboratory = model.CertifyingLaboratory,
+                Proportions = model.Proportions,
+                IsForSale = model.IsForSale
+            };
+
+            try
+            {
+                await _repository.AddAsync(diamond);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
+
         }
     }
 }
