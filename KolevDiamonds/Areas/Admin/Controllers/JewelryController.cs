@@ -4,6 +4,7 @@ using KolevDiamonds.Core.Contracts.MetalBar;
 using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Contracts.Ring;
 using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.Admin;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -78,6 +79,13 @@ namespace KolevDiamonds.Areas.Admin.Controllers
             }
 
             return RedirectToAction(nameof(All));
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Add([FromQuery] AdminQueryModel query)
+        {
+            return View(query);
         }
 
         [NonAction]
