@@ -17,6 +17,6 @@ namespace KolevDiamonds.Core.Contracts.MetalBar
 
         Task<ProductQueryModel> GetFilteredMetalBarsAsync(decimal? priceFilter, int currentPage, int productsPerPage, bool isForSale = true);
 
-        Task Delete(int ringId);
+        Task Delete(int metalBarId);
     }
 }

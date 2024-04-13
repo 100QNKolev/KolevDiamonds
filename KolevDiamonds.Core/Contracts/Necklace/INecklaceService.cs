@@ -17,6 +17,6 @@ namespace KolevDiamonds.Core.Contracts.Necklace
 
         Task<ProductQueryModel> GetFilteredNecklacesAsync(decimal? priceFilter, int currentPage, int productsPerPage, bool isForSale = true);
 
-        Task Delete(int ringId);
+        Task Delete(int necklaceId);
     }
 }
