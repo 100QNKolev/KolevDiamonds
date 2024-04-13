@@ -1,19 +1,21 @@
 using KolevDiamonds.Core.Contracts.Ring;
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.Ring;
-using KolevDiamonds.Infrastructure.Data;
 using KolevDiamonds.Infrastructure.Data.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace KolevDiamonds.Core.Services.Ring
 {
     public class RingService : IRingService
     {
         private readonly IRepository _repository;
+        private readonly ILogger logger;
 
-        public RingService(IRepository repository)
+        public RingService(IRepository repository, ILogger<RingService> _logger)
         {
             this._repository = repository;
+            this.logger = _logger;
         }
 
         public async Task<IEnumerable<ProductIndexServiceModel>> AllRings()
@@ -90,6 +92,34 @@ namespace KolevDiamonds.Core.Services.Ring
                 ring.IsForSale = false;
 
                 await _repository.SaveChangesAsync();
+            }
+        }
+
+        public async Task Create(RingModel model)
+        {
+            var ring = new Infrastructure.Data.Models.Ring
+            {
+                Name = model.Name,
+                ImagePath = model.ImagePath,
+                Price = model.Price,
+                Carats = model.Carats,
+                Colour = model.Colour,
+                Clarity = model.Clarity,
+                Cut = model.Cut,
+                Metal = model.Metal,
+                Purity = model.Purity,
+                IsForSale = model.IsForSale
+            };
+
+            try
+            {
+                await _repository.AddAsync(ring);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
             }
         }
     }

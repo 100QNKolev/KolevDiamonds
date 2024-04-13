@@ -1,7 +1,11 @@
 ﻿using KolevDiamonds.Core.Contracts.InvestmentCoin;
 using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.InvestmentCoin;
+using KolevDiamonds.Core.Models.Necklace;
+using KolevDiamonds.Core.Services.Ring;
 using KolevDiamonds.Infrastructure.Data.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +17,12 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
     public class InvestmentCoinService : IInvestmentCoinService
     {
         private readonly IRepository _repository;
+        private readonly ILogger logger;
 
-        public InvestmentCoinService(IRepository repository)
+        public InvestmentCoinService(IRepository repository, ILogger<RingService> _logger)
         {
             this._repository = repository;
+            this.logger = _logger;
         }
 
         public async Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentCoins()
@@ -94,6 +100,37 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
                 InvestmentCoin.IsForSale = false;
 
                 await _repository.SaveChangesAsync();
+            }
+        }
+
+        public async Task Create(InvestmentCoinModel model)
+        {
+            var investmentCoin = new Infrastructure.Data.Models.InvestmentCoin
+            {
+                Name = model.Name,
+                ImagePath = model.ImagePath,
+                Price = model.Price,
+                Metal = model.Metal,
+                Purity = model.Purity,
+                Weight = model.Weight,
+                Quality = model.Quality,
+                Circulation = model.Circulation,
+                Diameter = model.Diameter,
+                LegalTender = model.LegalTender,
+                Manufacturer = model.Manufacturer,
+                Packaging = model.Packaging,
+                IsForSale = model.IsForSale,
+            };
+
+            try
+            {
+                await _repository.AddAsync(investmentCoin);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
             }
         }
     }

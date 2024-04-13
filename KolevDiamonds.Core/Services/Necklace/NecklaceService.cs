@@ -1,22 +1,22 @@
 ﻿using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.Necklace;
+using KolevDiamonds.Core.Services.Ring;
 using KolevDiamonds.Infrastructure.Data.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace KolevDiamonds.Core.Services.Necklace
 {
     public class NecklaceService : INecklaceService
     {
         private readonly IRepository _repository;
+        private readonly ILogger logger;
 
-        public NecklaceService(IRepository repository)
+        public NecklaceService(IRepository repository, ILogger<RingService> _logger)
         {
             this._repository = repository;
+            this.logger = _logger;
         }
 
         public async Task<IEnumerable<ProductIndexServiceModel>> AllNecklaces()
@@ -94,6 +94,35 @@ namespace KolevDiamonds.Core.Services.Necklace
                 necklace.IsForSale = false;
 
                 await _repository.SaveChangesAsync();
+            }
+        }
+
+        public async Task Create(NecklaceModel model)
+        {
+            var necklace = new Infrastructure.Data.Models.Necklace
+            {
+                Name = model.Name,
+                ImagePath = model.ImagePath,
+                Price = model.Price,
+                Carats = model.Carats,
+                Colour = model.Colour,
+                Clarity = model.Clarity,
+                Cut = model.Cut,
+                Metal = model.Metal,
+                Purity = model.Purity,
+                IsForSale = model.IsForSale,
+                Length = model.Length,
+            };
+
+            try
+            {
+                await _repository.AddAsync(necklace);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
             }
         }
     }

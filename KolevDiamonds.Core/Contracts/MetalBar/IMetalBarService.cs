@@ -1,4 +1,6 @@
 ﻿using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.MetalBar;
+using KolevDiamonds.Core.Models.Ring;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KolevDiamonds.Core.Contracts.MetalBar
 {
-    public interface IMetalBarService
+    public interface IMetalBarService : IService<MetalBarModel>
     {
         Task<IEnumerable<ProductIndexServiceModel>> AllMetalBars();
 

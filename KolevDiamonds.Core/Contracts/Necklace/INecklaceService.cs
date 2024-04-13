@@ -1,4 +1,6 @@
 ﻿using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.Necklace;
+using KolevDiamonds.Core.Models.Ring;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KolevDiamonds.Core.Contracts.Necklace
 {
-    public interface INecklaceService
+    public interface INecklaceService : IService<NecklaceModel>
     {
         Task<IEnumerable<ProductIndexServiceModel>> AllNecklaces();
 
