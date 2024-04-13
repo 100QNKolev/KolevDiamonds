@@ -7,39 +7,39 @@ namespace KolevDiamonds.Core.Models.InvestmentDiamond
 {
     public class InvestmentDiamondModel
     {
-        [Required(ErrorMessage = InvestmentDiamondValidationMessagesConstants.NameRequired)]
-        [StringLength(InvestmentDiamondNameMaximumLength, MinimumLength = InvestmentDiamondNameMinimumLength, ErrorMessage = InvestmentDiamondValidationMessagesConstants.NameLength)]
+        [Required(ErrorMessage = ValidationMessagesConstants.NameRequired)]
+        [StringLength(InvestmentDiamondNameMaximumLength, MinimumLength = InvestmentDiamondNameMinimumLength, ErrorMessage = ValidationMessagesConstants.NameLength)]
         public string Name { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = InvestmentDiamondValidationMessagesConstants.ImagePathRequired)]
+        [Required(ErrorMessage = ValidationMessagesConstants.ImagePathRequired)]
         public string ImagePath { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = InvestmentDiamondValidationMessagesConstants.PriceRequired)]
-        [Range(0, double.MaxValue, ErrorMessage = InvestmentDiamondValidationMessagesConstants.PriceRange)]
+        [Required(ErrorMessage = ValidationMessagesConstants.PriceRequired)]
+        [Range(0, double.MaxValue, ErrorMessage = ValidationMessagesConstants.PriceRange)]
         public decimal Price { get; set; }
 
-        [Required(ErrorMessage = InvestmentDiamondValidationMessagesConstants.CaratsRequired)]
-        [Range(0, double.MaxValue, ErrorMessage = InvestmentDiamondValidationMessagesConstants.CaratsRange)]
+        [Required(ErrorMessage = ValidationMessagesConstants.CaratsRequired)]
+        [Range(0, double.MaxValue, ErrorMessage = ValidationMessagesConstants.CaratsRange)]
         public double Carats { get; set; }
 
-        [Required(ErrorMessage = InvestmentDiamondValidationMessagesConstants.ColourRequired)]
+        [Required(ErrorMessage = ValidationMessagesConstants.ColourRequired)]
         public DiamondColor Colour { get; set; }
         
-        [Required(ErrorMessage = InvestmentDiamondValidationMessagesConstants.ClarityRequired)]
+        [Required(ErrorMessage = ValidationMessagesConstants.ClarityRequired)]
         public DiamondClarity Clarity { get; set; }
 
-        [Required(ErrorMessage = InvestmentDiamondValidationMessagesConstants.CutRequired)]
+        [Required(ErrorMessage = ValidationMessagesConstants.CutRequired)]
         public DiamondCut Cut { get; set; }
 
-        [Required(ErrorMessage = InvestmentDiamondValidationMessagesConstants.CertifyingLaboratoryRequired)]
-        [StringLength(InvestmentDiamondCertifyingLaboratoryMaximumLength, MinimumLength = InvestmentDiamondCertifyingLaboratoryMinumumLength, ErrorMessage = InvestmentDiamondValidationMessagesConstants.CertifyingLaboratoryLength)]
+        [Required(ErrorMessage = ValidationMessagesConstants.CertifyingLaboratoryRequired)]
+        [StringLength(InvestmentDiamondCertifyingLaboratoryMaximumLength, MinimumLength = InvestmentDiamondCertifyingLaboratoryMinumumLength, ErrorMessage = ValidationMessagesConstants.CertifyingLaboratoryLength)]
         public string CertifyingLaboratory { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = InvestmentDiamondValidationMessagesConstants.ProportionsRequired)]
-        [StringLength(InvestmentDiamondProportionsMaximumLength, MinimumLength = InvestmentDiamondProportionsMinumumLength, ErrorMessage = InvestmentDiamondValidationMessagesConstants.ProportionsLength)]
+        [Required(ErrorMessage = ValidationMessagesConstants.ProportionsRequired)]
+        [StringLength(InvestmentDiamondProportionsMaximumLength, MinimumLength = InvestmentDiamondProportionsMinumumLength, ErrorMessage = ValidationMessagesConstants.ProportionsLength)]
         public string Proportions { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = InvestmentDiamondValidationMessagesConstants.IsForSaleRequired)]
+        [Required(ErrorMessage = ValidationMessagesConstants.IsForSaleRequired)]
         public bool IsForSale { get; set; } = true;
     }
 }

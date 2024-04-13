@@ -1,4 +1,5 @@
-﻿using KolevDiamonds.Infrastructure.Enums;
+﻿using KolevDiamonds.Core.Constants;
+using KolevDiamonds.Infrastructure.Enums;
 using System.ComponentModel.DataAnnotations;
 using static KolevDiamonds.Infrastructure.Constants.DataConstants;
 
@@ -6,47 +7,51 @@ namespace KolevDiamonds.Core.Models.InvestmentCoin
 {
     public class InvestmentCoinModel
     {
-        [Required]
-        [StringLength(InvestmentCoinNameMaximumLength, MinimumLength = InvestmentCoinNameMinimumLength)]
+        [Required(ErrorMessage = ValidationMessagesConstants.NameRequired)]
+        [StringLength(InvestmentCoinNameMaximumLength, MinimumLength = InvestmentCoinNameMinimumLength, ErrorMessage = ValidationMessagesConstants.NameLength)]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.ImagePathRequired)]
         public string ImagePath { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.PriceRequired)]
+        [Range(0, double.MaxValue, ErrorMessage = ValidationMessagesConstants.PriceRange)]
         public decimal Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.MetalRequired)]
         public MetalVariation Metal { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.WeightRequired)]
+        [Range(0, double.MaxValue, ErrorMessage = ValidationMessagesConstants.WeightRange)]
         public double Weight { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.PurityRequired)]
+        [Range(0, double.MaxValue, ErrorMessage = ValidationMessagesConstants.PurityRange)]
         public double Purity { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.QualityRequired)]
         public GoldQuality Quality { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.CirculationRequired)]
         public int Circulation { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.DiameterRequired)]
+        [Range(0, double.MaxValue, ErrorMessage = ValidationMessagesConstants.DiameterRange)]
         public double Diameter { get; set; }
 
-        [Required]
-        [StringLength(InvestmentCoinLegalTenderMaximumLength, MinimumLength = InvestmentCoinLegalTenderMinimumLength)]
+        [Required(ErrorMessage = ValidationMessagesConstants.LegalTenderRequired)]
+        [StringLength(InvestmentCoinLegalTenderMaximumLength, MinimumLength = InvestmentCoinLegalTenderMinimumLength, ErrorMessage = ValidationMessagesConstants.LegalTenderLength)]
         public string LegalTender { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(InvestmentCoinManufacturerMaximumLength, MinimumLength = InvestmentCoinManufacturerMinimumLength)]
+        [Required(ErrorMessage = ValidationMessagesConstants.ManufacturerRequired)]
+        [StringLength(InvestmentCoinManufacturerMaximumLength, MinimumLength = InvestmentCoinManufacturerMinimumLength, ErrorMessage = ValidationMessagesConstants.ManufacturerLength)]
         public string Manufacturer { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(InvestmentCoinPackagingMaximumLength, MinimumLength = InvestmentCoinPackagingMinimumLength)]
+        [Required(ErrorMessage = ValidationMessagesConstants.PackagingRequired)]
+        [StringLength(InvestmentCoinPackagingMaximumLength, MinimumLength = InvestmentCoinPackagingMinimumLength, ErrorMessage = ValidationMessagesConstants.PackagingLength)]
         public string Packaging { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.IsForSaleRequired)]
         public bool IsForSale { get; set; } = true;
     }
 }

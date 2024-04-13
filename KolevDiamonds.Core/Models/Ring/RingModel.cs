@@ -1,4 +1,5 @@
-﻿using KolevDiamonds.Infrastructure.Enums;
+﻿using KolevDiamonds.Core.Constants;
+using KolevDiamonds.Infrastructure.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static KolevDiamonds.Infrastructure.Constants.DataConstants;
@@ -7,36 +8,38 @@ namespace KolevDiamonds.Core.Models.Ring
 {
     public class RingModel
     {
-        [Required]
-        [StringLength(RingNameMaximumLength, MinimumLength = RingNameMinimumLength)]
+        [Required(ErrorMessage = ValidationMessagesConstants.NameRequired)]
+        [StringLength(RingNameMaximumLength, MinimumLength = RingNameMinimumLength, ErrorMessage = ValidationMessagesConstants.NameLength)]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.ImagePathRequired)]
         public string ImagePath { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.PriceRequired)]
+        [Range(0, double.MaxValue, ErrorMessage = ValidationMessagesConstants.PriceRange)]
         public decimal Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.MetalRequired)]
         public MetalVariation Metal { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.CaratsRequired)]
+        [Range(0, double.MaxValue, ErrorMessage = ValidationMessagesConstants.CaratsRange)]
         public double Carats { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.ColourRequired)]
         public DiamondColor Colour { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.ClarityRequired)]
         public DiamondClarity Clarity { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.CutRequired)]
         public DiamondCut Cut { get; set; }
 
-        [Required]
-        [StringLength(RingPurityMaximumLength, MinimumLength = RingPurityMinumumLength)]
+        [Required(ErrorMessage = ValidationMessagesConstants.PurityRequired)]
+        [StringLength(RingPurityMaximumLength, MinimumLength = RingPurityMinumumLength, ErrorMessage = ValidationMessagesConstants.PurityLength)]
         public string Purity { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessagesConstants.IsForSaleRequired)]
         public bool IsForSale { get; set; } = true;
     }
 }
