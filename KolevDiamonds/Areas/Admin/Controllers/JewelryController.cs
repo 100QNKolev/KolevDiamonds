@@ -1,12 +1,18 @@
-﻿using KolevDiamonds.Core.Contracts.InvestmentCoin;
+﻿using KolevDiamonds.Core.Contracts;
+using KolevDiamonds.Core.Contracts.InvestmentCoin;
 using KolevDiamonds.Core.Contracts.InvestmentDiamond;
 using KolevDiamonds.Core.Contracts.MetalBar;
 using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Contracts.Ring;
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.Admin;
+using KolevDiamonds.Core.Models.InvestmentCoin;
 using KolevDiamonds.Core.Models.InvestmentDiamond;
+using KolevDiamonds.Core.Models.MetalBar;
+using KolevDiamonds.Core.Models.Necklace;
+using KolevDiamonds.Core.Models.Ring;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using static KolevDiamonds.Areas.Admin.Constants.JewelryConstants;
@@ -90,28 +96,56 @@ namespace KolevDiamonds.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SubmitForm(InvestmentDiamondModel model)
+        public async Task<IActionResult> SubmitRingForm(RingModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                // Model validation failed, return validation errors
-                var errors = ModelState.Values
-                    .SelectMany(v => v.Errors)
-                    .Select(e => e.ErrorMessage)
-                    .ToList();
-
-                return Json(new { success = false, errors });
-            }
-
-
-            // If both standard and custom validation pass, proceed with further processing
-            // For example, save the model to the database
-            // Return success response if successful
-            await this._investmentDiamondService.Create(model);
-            return Json(new { success = true, message = "Operation completed successfully" });
+            return await ProcessForm(model, _ringService);
         }
 
-        [NonAction]
+        [HttpPost]
+        public async Task<IActionResult> SubmitNecklaceForm(NecklaceModel model)
+        {
+            return await ProcessForm(model, _necklaceService);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitMetalBarForm(MetalBarModel model)
+        {
+            return await ProcessForm(model, _metalBarService);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitInvestmentDiamondForm(InvestmentDiamondModel model)
+        {
+            return await ProcessForm(model, _investmentDiamondService);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitInvestmentCoinForm(InvestmentCoinModel model)
+        {
+            return await ProcessForm(model, _investmentCoinService);
+        }
+
+        private async Task<IActionResult> ProcessForm<T>(T model, IService<T> service)
+        {
+            var modelErrors = GetModelErrors(model);
+            if (modelErrors.Any())
+            {
+                // Model validation failed, return validation errors
+                return Json(new { success = false, errors = modelErrors });
+            }
+
+            try
+            {
+                await service.Create(model);
+                return Json(new { success = true, message = "Operation completed successfully" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "An error occurred while processing the request: " + ex.Message });
+            }
+        }
+
+    [NonAction]
         public async Task<IEnumerable<ProductIndexServiceModel>> GetAllJewelry(ProductQueryModel query)
         {
             var rings = await this._ringService.GetFilteredRingsAsync(
@@ -156,6 +190,27 @@ namespace KolevDiamonds.Areas.Admin.Controllers
              .Concat(investmentDiamonds.Products);
 
             return allProducts;
+        }
+
+        [NonAction]
+        private List<string> GetModelErrors<T>(T model)
+        {
+            var modelState = new ModelStateDictionary();
+
+            // Validate the model
+            TryValidateModel(model);
+
+            // Check if the model is valid
+            if (!ModelState.IsValid)
+            {
+                // Model validation failed, collect validation errors
+                return ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+            }
+
+            return new List<string>(); // No errors
         }
     }
 }
