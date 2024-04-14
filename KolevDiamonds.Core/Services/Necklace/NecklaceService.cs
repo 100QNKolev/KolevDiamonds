@@ -19,23 +19,6 @@ namespace KolevDiamonds.Core.Services.Necklace
             this.logger = _logger;
         }
 
-        public async Task<IEnumerable<ProductIndexServiceModel>> AllNecklaces()
-        {
-            return await this._repository
-                .AllReadOnly<Infrastructure.Data.Models.Necklace>()
-                .OrderByDescending(r => r.Id)
-                .Select(r => new ProductIndexServiceModel()
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    ImagePath = r.ImagePath,
-                    Price = r.Price,
-                    ProductType = nameof(Necklace)
-                })
-                .ToListAsync();
-        }
-
-
         public async Task<Infrastructure.Data.Models.Necklace?> GetByIdAsync(int id)
         {
             return await this._repository

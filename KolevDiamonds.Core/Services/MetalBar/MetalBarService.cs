@@ -25,22 +25,6 @@ namespace KolevDiamonds.Core.Services.MetalBar
             this.logger = _logger;
         }
 
-        public async Task<IEnumerable<ProductIndexServiceModel>> AllMetalBars()
-        {
-            return await this._repository
-                .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
-                .OrderByDescending(r => r.Id)
-                .Select(r => new ProductIndexServiceModel()
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    ImagePath = r.ImagePath,
-                    Price = r.Price,
-                    ProductType = nameof(MetalBar)
-                })
-                .ToListAsync();
-        }
-
         public async Task<Infrastructure.Data.Models.MetalBar?> GetByIdAsync(int id)
         {
             return await this._repository

@@ -13,7 +13,6 @@ using KolevDiamonds.Core.Models.Necklace;
 using KolevDiamonds.Core.Models.Ring;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using static KolevDiamonds.Areas.Admin.Constants.JewelryConstants;
 

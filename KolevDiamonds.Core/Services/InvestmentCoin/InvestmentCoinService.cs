@@ -25,22 +25,6 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
             this.logger = _logger;
         }
 
-        public async Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentCoins()
-        {
-            return await this._repository
-                .AllReadOnly<Infrastructure.Data.Models.InvestmentCoin>()
-                .OrderByDescending(r => r.Id)
-                .Select(r => new ProductIndexServiceModel()
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    ImagePath = r.ImagePath,
-                    Price = r.Price,
-                    ProductType = nameof(InvestmentCoin),
-                })
-                .ToListAsync();
-        }
-
         public async Task<Infrastructure.Data.Models.InvestmentCoin?> GetByIdAsync(int id)
         {
             return await this._repository

@@ -5,8 +5,6 @@ namespace KolevDiamonds.Core.Contracts.Ring
 {
     public interface IRingService : IService<RingModel>
     {
-        Task<IEnumerable<ProductIndexServiceModel>> AllRings();
-
         Task<Infrastructure.Data.Models.Ring?> GetByIdAsync(int id);
 
         Task<Infrastructure.Data.Models.Ring?> GetByIdAsyncAsTracking(int id);

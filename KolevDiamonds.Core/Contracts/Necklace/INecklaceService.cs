@@ -11,8 +11,6 @@ namespace KolevDiamonds.Core.Contracts.Necklace
 {
     public interface INecklaceService : IService<NecklaceModel>
     {
-        Task<IEnumerable<ProductIndexServiceModel>> AllNecklaces();
-
         Task<Infrastructure.Data.Models.Necklace?> GetByIdAsync(int id);
 
         Task<Infrastructure.Data.Models.Necklace?> GetByIdAsyncAsTracking(int id);

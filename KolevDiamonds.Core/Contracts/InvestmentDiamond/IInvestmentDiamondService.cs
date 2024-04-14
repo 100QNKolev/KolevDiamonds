@@ -11,8 +11,6 @@ namespace KolevDiamonds.Core.Contracts.InvestmentDiamond
 {
     public interface IInvestmentDiamondService : IService<InvestmentDiamondModel>
     {
-        Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentDiamonds();
-
         Task<Infrastructure.Data.Models.InvestmentDiamond?> GetByIdAsync(int id);
 
         Task<Infrastructure.Data.Models.InvestmentDiamond?> GetByIdAsyncAsTracking(int id);
