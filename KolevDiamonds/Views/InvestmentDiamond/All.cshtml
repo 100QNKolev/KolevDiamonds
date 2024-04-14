@@ -89,7 +89,8 @@
 </style>
 
 <script>
-    function navigateToDetail(productId) {
-        window.location.href = '@Url.Action("Details", "InvestmentDiamond")' + '?id=' + productId;
+    function navigateToDetail(productId, information) {
+
+        window.location.href = '@Url.Action("Details", "InvestmentDiamond")' + '?id=' + productId + '&information=' + information;
     }
 </script>

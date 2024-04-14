@@ -1,4 +1,5 @@
-﻿using KolevDiamonds.Infrastructure.Enums;
+﻿using KolevDiamonds.Core.Contracts;
+using KolevDiamonds.Infrastructure.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KolevDiamonds.Core.Models.MetalBar
 {
-    public class MetalBarDetailsServiceModel
+    public class MetalBarDetailsServiceModel : IProductModel
     {
         public int Id { get; set; }
 
