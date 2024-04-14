@@ -1,4 +1,5 @@
 ﻿using KolevDiamonds.Core.Contracts.Ring;
+using KolevDiamonds.Core.Extensions;
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.Necklace;
 using KolevDiamonds.Core.Models.Ring;
@@ -35,7 +36,7 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             var ring = await _ringService.GetByIdAsync(id);
 
@@ -57,6 +58,11 @@ namespace KolevDiamonds.Controllers
                 Cut = ring.Cut,
                 Purity = ring.Purity,
             };
+
+            if (model.GetInformation() != information) 
+            {
+                return NotFound();
+            }
 
             return View(model);
         }

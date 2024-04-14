@@ -1,4 +1,5 @@
-﻿using KolevDiamonds.Infrastructure.Enums;
+﻿using KolevDiamonds.Core.Contracts;
+using KolevDiamonds.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KolevDiamonds.Core.Models.Ring
 {
-    public class RingDetailsServiceModel
+    public class RingDetailsServiceModel : IProductModel
     {
         public int Id { get; set; }
 

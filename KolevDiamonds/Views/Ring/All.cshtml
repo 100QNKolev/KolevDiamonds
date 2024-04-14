@@ -90,7 +90,8 @@
 </style>
 
 <script>
-    function navigateToDetail(productId) {
-        window.location.href = '@Url.Action("Details", "Ring")' + '?id=' + productId;
+    function navigateToDetail(productId, information) {
+        
+        window.location.href = '@Url.Action("Details", "Ring")' + '?id=' + productId + '&information=' + information;
     }
 </script>

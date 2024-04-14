@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KolevDiamonds.Core.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KolevDiamonds.Core.Models
 {
-    public class ProductIndexServiceModel
+    public class ProductIndexServiceModel : IProductModel
     {
         public int Id { get; set; }
 
