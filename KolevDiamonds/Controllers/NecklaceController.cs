@@ -1,5 +1,6 @@
 ﻿using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Extensions;
 using KolevDiamonds.Core.Models.Necklace;
 using KolevDiamonds.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             var necklace = await _necklaceService.GetByIdAsync(id);
 
@@ -56,6 +57,11 @@ namespace KolevDiamonds.Controllers
                 Purity = necklace.Purity,
                 Length = necklace.Length
             };
+
+            if (model.GetInformation() != information)
+            {
+                return NotFound();
+            }
 
             return View(model);
         }

@@ -1,6 +1,7 @@
 ﻿using KolevDiamonds.Core.Contracts.InvestmentDiamond;
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.InvestmentDiamond;
+using KolevDiamonds.Core.Extensions;
 using KolevDiamonds.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             var investmentDiamond = await _investmentDiamondService.GetByIdAsync(id);
 
@@ -54,6 +55,11 @@ namespace KolevDiamonds.Controllers
                 CertifyingLaboratory = investmentDiamond.CertifyingLaboratory,
                 Proportions = investmentDiamond.Proportions
             };
+
+            if (model.GetInformation() != information)
+            {
+                return NotFound();
+            }
 
             return View(model);
         }

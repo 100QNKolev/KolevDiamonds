@@ -2,6 +2,7 @@
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.MetalBar;
 using KolevDiamonds.Infrastructure.Data.Models;
+using KolevDiamonds.Core.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -33,7 +34,7 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             var metalBar = await _metalBarService.GetByIdAsync(id);
 
@@ -53,6 +54,11 @@ namespace KolevDiamonds.Controllers
                 Dimensions = metalBar.Dimensions,
                 Purity = metalBar.Purity
             };
+
+            if (model.GetInformation() != information)
+            {
+                return NotFound();
+            }
 
             return View(model);
         }

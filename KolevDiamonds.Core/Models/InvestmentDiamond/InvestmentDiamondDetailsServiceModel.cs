@@ -1,4 +1,5 @@
-﻿using KolevDiamonds.Infrastructure.Enums;
+﻿using KolevDiamonds.Core.Contracts;
+using KolevDiamonds.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KolevDiamonds.Core.Models.InvestmentDiamond
 {
-    public class InvestmentDiamondDetailsServiceModel
+    public class InvestmentDiamondDetailsServiceModel : IProductModel
     {
         public int Id { get; set; }
 

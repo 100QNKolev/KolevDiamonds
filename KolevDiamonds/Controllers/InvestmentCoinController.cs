@@ -1,6 +1,8 @@
 ﻿using KolevDiamonds.Core.Contracts.InvestmentCoin;
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.InvestmentCoin;
+using KolevDiamonds.Core.Extensions;
+using KolevDiamonds.Core.Extensions;
 using KolevDiamonds.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +34,7 @@ namespace KolevDiamonds.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             var investmentCoin = await _investmentCoinService.GetByIdAsync(id);
 
@@ -57,6 +59,11 @@ namespace KolevDiamonds.Controllers
                 Manufacturer = investmentCoin.Manufacturer,
                 Packaging = investmentCoin.Packaging
             };
+
+            if (model.GetInformation() != information)
+            {
+                return NotFound();
+            }
 
             return View(model);
         }
