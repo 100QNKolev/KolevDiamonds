@@ -19,7 +19,7 @@ namespace KolevDiamonds.Core.Services.MetalBar
         private readonly IRepository _repository;
         private readonly ILogger logger;
 
-        public MetalBarService(IRepository repository, ILogger<RingService> _logger)
+        public MetalBarService(IRepository repository, ILogger<MetalBarService> _logger)
         {
             this._repository = repository;
             this.logger = _logger;

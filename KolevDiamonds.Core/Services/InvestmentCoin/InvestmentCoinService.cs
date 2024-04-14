@@ -19,7 +19,7 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
         private readonly IRepository _repository;
         private readonly ILogger logger;
 
-        public InvestmentCoinService(IRepository repository, ILogger<RingService> _logger)
+        public InvestmentCoinService(IRepository repository, ILogger<InvestmentCoinService> _logger)
         {
             this._repository = repository;
             this.logger = _logger;

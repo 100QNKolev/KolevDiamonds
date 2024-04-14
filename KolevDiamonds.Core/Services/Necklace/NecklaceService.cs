@@ -13,7 +13,7 @@ namespace KolevDiamonds.Core.Services.Necklace
         private readonly IRepository _repository;
         private readonly ILogger logger;
 
-        public NecklaceService(IRepository repository, ILogger<RingService> _logger)
+        public NecklaceService(IRepository repository, ILogger<NecklaceService> _logger)
         {
             this._repository = repository;
             this.logger = _logger;

@@ -78,6 +78,26 @@ namespace KolevDiamondsUnitTests
         }
 
         [Test]
+        public async Task GetByIdAsyncAsTracking_ReturnsCorrectNecklace()
+        {
+            // Arrange
+            int id = 1;
+            var ring = new Ring { Id = id, Name = "Ring 1", Price = 100 };
+            var data = new List<Ring> { ring }.AsQueryable().BuildMock();
+            _mockRepository.Setup(r => r.All<Ring>())
+                           .Returns(data);
+
+            // Act
+            var result = await _ringService.GetByIdAsyncAsTracking(id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.That(result.Id, Is.EqualTo(id));
+            Assert.That(result.Name, Is.EqualTo("Ring 1"));
+            Assert.That(result.Price, Is.EqualTo(100));
+        }
+
+        [Test]
         public async Task Delete_SetsRingNotForSale()
         {
             // Arrange
