@@ -1,13 +1,7 @@
 ﻿using KolevDiamonds.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using static KolevDiamonds.Infrastructure.Constants.DataConstants;
 
@@ -72,5 +66,9 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         [Comment("Packaging for the coin")]
         [MaxLength(InvestmentCoinPackagingMaximumLength)]
         public string Packaging { get; set; } = string.Empty;
+
+        [Required]
+        [Comment("Is the item for sale")]
+        public bool IsForSale { get; set; } = true;
     }
 }

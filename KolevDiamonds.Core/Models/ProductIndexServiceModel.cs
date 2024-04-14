@@ -15,5 +15,9 @@ namespace KolevDiamonds.Core.Models
         public string Name { get; set; } = string.Empty;
 
         public decimal Price { get; set; }
+
+        public string ProductType { get; set; } = string.Empty;
+
+        public bool IsForSale { get; set; }
     }
 }

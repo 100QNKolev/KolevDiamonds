@@ -18,6 +18,8 @@ namespace KolevDiamonds.Core.Models
 
         public int TotalProductCount { get; set; }
 
+        public bool IsForSale { get; set; } = true;
+
         public IEnumerable<ProductIndexServiceModel> Products { get; set; } = new List<ProductIndexServiceModel>();
     }
 }

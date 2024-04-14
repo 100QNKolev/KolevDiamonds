@@ -61,5 +61,9 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         [Required]
         [Comment("Length of the necklace in millimeters")]
         public double Length { get; set; }
+
+        [Required]
+        [Comment("Is the item for sale")]
+        public bool IsForSale { get; set; } = true;
     }
 }

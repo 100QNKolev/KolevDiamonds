@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KolevDiamonds.Core.Constants
+namespace KolevDiamonds.Core.Models.Admin
 {
-    public static class MessageConstants
+    public class AdminQueryModel
     {
+        public string Category { get; set; } = string.Empty;
     }
 }

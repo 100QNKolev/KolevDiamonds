@@ -1,0 +1,40 @@
+﻿@model AdminQueryModel
+
+<header>
+    <h1>Choose a Type</h1>
+</header>
+<main>
+    <div class="container">
+        <partial name="_SelectCategoryPartial" model="@Model" />
+
+        @if (Model.Category != string.Empty)
+        {
+            switch (Model.Category)
+            {
+                case "Ring":
+                    <partial name="_RingPartial" model="new RingModel()" />
+                    break;
+
+                case "Necklace":
+                    <partial name="_NecklacePartial" model="new NecklaceModel()" />
+                    break;
+
+                case "MetalBar":
+                    <partial name="_MetalBarPartial" model="new MetalBarModel()" />
+                    break;
+
+                case "InvestmentDiamond":
+                    <partial name="_InvestmentDiamondPartial" model="new InvestmentDiamondModel()" />
+                    break;
+
+                case "InvestmentCoin":
+                    <partial name="_InvestmentCoinPartial" model="new InvestmentCoinModel()" />
+                    break;
+                default:
+                    <p class="text-danger">Invalid category selected.</p>
+                    break;
+            }
+        }
+    </div>
+</main>
+

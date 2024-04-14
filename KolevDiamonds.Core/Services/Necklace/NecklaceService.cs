@@ -1,22 +1,22 @@
 ﻿using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.Necklace;
+using KolevDiamonds.Core.Services.Ring;
 using KolevDiamonds.Infrastructure.Data.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace KolevDiamonds.Core.Services.Necklace
 {
     public class NecklaceService : INecklaceService
     {
         private readonly IRepository _repository;
+        private readonly ILogger logger;
 
-        public NecklaceService(IRepository repository)
+        public NecklaceService(IRepository repository, ILogger<RingService> _logger)
         {
             this._repository = repository;
+            this.logger = _logger;
         }
 
         public async Task<IEnumerable<ProductIndexServiceModel>> AllNecklaces()
@@ -29,10 +29,12 @@ namespace KolevDiamonds.Core.Services.Necklace
                     Id = r.Id,
                     Name = r.Name,
                     ImagePath = r.ImagePath,
-                    Price = r.Price
+                    Price = r.Price,
+                    ProductType = nameof(Necklace)
                 })
                 .ToListAsync();
         }
+
 
         public async Task<Infrastructure.Data.Models.Necklace?> GetByIdAsync(int id)
         {
@@ -41,17 +43,27 @@ namespace KolevDiamonds.Core.Services.Necklace
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public async Task<ProductQueryModel> GetFilteredNecklacesAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1)
+        public async Task<Infrastructure.Data.Models.Necklace?> GetByIdAsyncAsTracking(int id)
+        {
+            return await this._repository
+                .All<Infrastructure.Data.Models.Necklace>()
+                .FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<ProductQueryModel> GetFilteredNecklacesAsync(decimal? priceFilter, int currentPage = 1, int productsPerPage = 1, bool isForSale = true)
         {
             var necklaces = this._repository
                 .AllReadOnly<Infrastructure.Data.Models.Necklace>()
+                .Where(r => r.IsForSale == isForSale)
                 .OrderByDescending(r => r.Id)
                 .Select(r => new ProductIndexServiceModel()
                 {
                     Id = r.Id,
                     Name = r.Name,
                     ImagePath = r.ImagePath,
-                    Price = r.Price
+                    Price = r.Price,
+                    ProductType = nameof(Necklace),
+                    IsForSale = r.IsForSale
                 });
 
             if (priceFilter != null)
@@ -71,6 +83,47 @@ namespace KolevDiamonds.Core.Services.Necklace
                 TotalProductCount = necklaces.Count(),
                 ProductType = nameof(Necklace)
             };
+        }
+
+        public async Task Delete(int necklaceId)
+        {
+            var necklace = await GetByIdAsyncAsTracking(necklaceId);
+
+            if (necklace != null)
+            {
+                necklace.IsForSale = false;
+
+                await _repository.SaveChangesAsync();
+            }
+        }
+
+        public async Task Create(NecklaceModel model)
+        {
+            var necklace = new Infrastructure.Data.Models.Necklace
+            {
+                Name = model.Name,
+                ImagePath = model.ImagePath,
+                Price = model.Price,
+                Carats = model.Carats,
+                Colour = model.Colour,
+                Clarity = model.Clarity,
+                Cut = model.Cut,
+                Metal = model.Metal,
+                Purity = model.Purity,
+                IsForSale = model.IsForSale,
+                Length = model.Length,
+            };
+
+            try
+            {
+                await _repository.AddAsync(necklace);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
         }
     }
 }

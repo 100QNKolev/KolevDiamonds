@@ -1,15 +1,14 @@
 ﻿using KolevDiamonds.Infrastructure.Data.Models;
 using KolevDiamonds.Infrastructure.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using static KolevDiamonds.Infrastructure.Data.Models.AdminUser;
 
 namespace KolevDiamonds.Infrastructure.Data.SeedDb
 {
     internal class SeedData
     {
+        public IdentityUser AdminUser { get; set; }
+
         public Ring FirstRing { get; set; }
 
         public Ring SecondRing { get; set; }
@@ -47,6 +46,22 @@ namespace KolevDiamonds.Infrastructure.Data.SeedDb
             SeedMetalBars();
             SeedInvestmentDiamond();
             SeedInvestmentCoin();
+            SeedUsers();
+        }
+
+        private void SeedUsers() 
+        {
+            var hasher = new PasswordHasher<IdentityUser>();
+
+            AdminUser = new IdentityUser()
+            {
+                Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
+                Email = AdminEmail,
+                NormalizedEmail = AdminEmail,
+                UserName = AdminEmail,
+                NormalizedUserName = AdminEmail,
+            }; 
+            AdminUser.PasswordHash = hasher.HashPassword(AdminUser, "admin123");
         }
 
         private void SeedRings() 

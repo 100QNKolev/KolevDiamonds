@@ -57,5 +57,9 @@ namespace KolevDiamonds.Infrastructure.Data.Models
         [Comment("Purity of the metal expressed in carat for gold or sample for silver")]
         [MaxLength(RingPurityMaximumLength)]
         public string Purity { get; set; } = string.Empty;
+
+        [Required]
+        [Comment("Is the item for sale")]
+        public bool IsForSale { get; set; } = true;
     }
 }

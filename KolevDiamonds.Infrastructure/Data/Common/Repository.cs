@@ -1,8 +1,5 @@
 using KolevDiamonds.Data;
-using KolevDiamonds.Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Principal;
 
 namespace KolevDiamonds.Infrastructure.Data.Common
 {
@@ -29,6 +26,16 @@ namespace KolevDiamonds.Infrastructure.Data.Common
         {
             return DbSet<T>()
                 .AsNoTracking();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await this._context.SaveChangesAsync();
+        }
+
+        public async Task AddAsync<T>(T entity) where T : class
+        {
+            await DbSet<T>().AddAsync(entity);
         }
     }
 }

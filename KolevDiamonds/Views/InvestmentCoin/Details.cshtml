@@ -27,13 +27,7 @@
 
                 </div>
                 <div class="buy-button">
-                    <form asp-area="" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id">
-                        <input type="hidden" name="Id" asp-for="@Model.Id" />
-                        <input type="hidden" name="ImagePath" asp-for="@Model.ImagePath" />
-                        <input type="hidden" name="Name" asp-for="@Model.Name" />
-                        <input type="hidden" name="Price" asp-for="@Model.Price" />
-                        <button type="submit">Buy Now</button>
-                    </form>
+                    <button type="button" onclick="addToCart()">Buy Now</button>
                 </div>
             </div>
         </div>
@@ -90,3 +84,37 @@
             background-color: darkgray;
         }
 </style>
+
+<script>
+    function addToCart() {
+        // Create a new FormData object
+        var formData = new FormData();
+
+        // Append data to the FormData object
+        formData.append('Id', '@Model.Id');
+        formData.append('ImagePath', '@Model.ImagePath');
+        formData.append('Name', '@Model.Name');
+        formData.append('Price', '@Model.Price');
+
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Configure the XMLHttpRequest object
+        xhr.open('POST', '@Url.Action("AddToCart", "Cart")'); // Replace with your controller and action
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); // Add X-Requested-With header to identify AJAX request
+
+        // Handle the response
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // Request was successful
+                alert('Item added to cart successfully');
+            } else {
+                // Request failed
+                alert('Failed to add item to cart');
+            }
+        };
+
+        // Send the request with the FormData object as the data
+        xhr.send(formData);
+    }
+</script>
