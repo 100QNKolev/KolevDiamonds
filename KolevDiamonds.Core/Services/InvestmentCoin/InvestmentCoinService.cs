@@ -1,6 +1,7 @@
 ﻿using KolevDiamonds.Core.Contracts.InvestmentCoin;
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.InvestmentCoin;
+using KolevDiamonds.Core.Models.MetalBar;
 using KolevDiamonds.Core.Models.Necklace;
 using KolevDiamonds.Core.Services.Ring;
 using KolevDiamonds.Infrastructure.Data.Common;
@@ -8,9 +9,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace KolevDiamonds.Core.Services.InvestmentCoin
 {
@@ -109,6 +113,40 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
             try
             {
                 await _repository.AddAsync(investmentCoin);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
+        }
+
+        public async Task Update(int id, InvestmentCoinModel model)
+        {
+            var investmentCoin = await GetByIdAsyncAsTracking(id);
+
+            if (investmentCoin == null)
+            {
+                throw new ApplicationException("Database failed to find investment coin info");
+            }
+
+            investmentCoin.Name = model.Name;
+            investmentCoin.ImagePath = model.ImagePath;
+            investmentCoin.Price = model.Price;
+            investmentCoin.Metal = model.Metal;
+            investmentCoin.Purity = model.Purity;
+            investmentCoin.Weight = model.Weight;
+            investmentCoin.Quality = model.Quality;
+            investmentCoin.Circulation = model.Circulation;
+            investmentCoin.Diameter = model.Diameter;
+            investmentCoin.LegalTender = model.LegalTender;
+            investmentCoin.Manufacturer = model.Manufacturer;
+            investmentCoin.Packaging = model.Packaging;
+            investmentCoin.IsForSale = model.IsForSale;
+
+            try
+            {
                 await _repository.SaveChangesAsync();
             }
             catch (Exception ex)

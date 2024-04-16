@@ -11,6 +11,6 @@ namespace KolevDiamonds.Core.Contracts
     {
         Task Create(T model);
         Task Delete(int id);
-        Task Edit(int id, T model);
+        Task Update(int id, T model);
     }
 }

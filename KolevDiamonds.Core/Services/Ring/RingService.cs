@@ -4,6 +4,10 @@ using KolevDiamonds.Core.Models.Ring;
 using KolevDiamonds.Infrastructure.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Linq;
 
 namespace KolevDiamonds.Core.Services.Ring
 {
@@ -98,6 +102,37 @@ namespace KolevDiamonds.Core.Services.Ring
             try
             {
                 await _repository.AddAsync(ring);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
+        }
+
+        public async Task Update(int id, RingModel model)
+        {
+            var ring = await GetByIdAsyncAsTracking(id);
+
+            if (ring == null)
+            {
+                throw new ApplicationException("Database failed to find ring info");
+            }
+
+            ring.Name = model.Name;
+            ring.ImagePath = model.ImagePath;
+            ring.Price = model.Price;
+            ring.Carats = model.Carats;
+            ring.Colour = model.Colour;
+            ring.Clarity = model.Clarity;
+            ring.Cut = model.Cut;
+            ring.Metal = model.Metal;
+            ring.Purity = model.Purity;
+            ring.IsForSale = model.IsForSale;
+
+            try
+            {
                 await _repository.SaveChangesAsync();
             }
             catch (Exception ex)

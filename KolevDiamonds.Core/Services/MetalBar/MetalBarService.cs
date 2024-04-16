@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace KolevDiamonds.Core.Services.MetalBar
 {
@@ -103,6 +106,35 @@ namespace KolevDiamonds.Core.Services.MetalBar
             try
             {
                 await _repository.AddAsync(metalBar);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
+        }
+
+        public async Task Update(int id, MetalBarModel model)
+        {
+            var metalBar = await GetByIdAsyncAsTracking(id);
+
+            if (metalBar == null)
+            {
+                throw new ApplicationException("Database failed to find metal bar info");
+            }
+
+            metalBar.Name = model.Name;
+            metalBar.ImagePath = model.ImagePath;
+            metalBar.Price = model.Price;
+            metalBar.Metal = model.Metal;
+            metalBar.Purity = model.Purity;
+            metalBar.IsForSale = model.IsForSale;
+            metalBar.Weight = model.Weight;
+            metalBar.Dimensions = model.Dimensions;
+
+            try
+            {
                 await _repository.SaveChangesAsync();
             }
             catch (Exception ex)
