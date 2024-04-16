@@ -79,5 +79,7 @@ namespace KolevDiamonds.Areas.Admin.Services
 
             return allProducts;
         }
+
+
     }
 }

@@ -66,9 +66,9 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
             };
         }
 
-        public async Task Delete(int investmentDiamondId)
+        public async Task Delete(int Id)
         {
-            var InvestmentDiamond = await GetByIdAsyncAsTracking(investmentDiamondId);
+            var InvestmentDiamond = await GetByIdAsyncAsTracking(Id);
 
             if (InvestmentDiamond != null)
             {

@@ -14,5 +14,11 @@ namespace KolevDiamonds.Areas.Admin.Constants
 
         [Comment("The product type used in the query model")]
         public const string JewelryQueryProductType = "Jewelry";
+
+        [Comment("The method type used to process jewelry creation forms")]
+        public const string JewelryFormCreationType = "Create";
+
+        [Comment("The method type used to process jewelry edit forms")]
+        public const string JewelryFormEditType = "Edit";
     }
 }

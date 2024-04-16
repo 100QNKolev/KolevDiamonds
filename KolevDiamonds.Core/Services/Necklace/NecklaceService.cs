@@ -68,9 +68,9 @@ namespace KolevDiamonds.Core.Services.Necklace
             };
         }
 
-        public async Task Delete(int necklaceId)
+        public async Task Delete(int Id)
         {
-            var necklace = await GetByIdAsyncAsTracking(necklaceId);
+            var necklace = await GetByIdAsyncAsTracking(Id);
 
             if (necklace != null)
             {

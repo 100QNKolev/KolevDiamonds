@@ -102,34 +102,65 @@ namespace KolevDiamonds.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitRingForm(RingModel model)
         {
-            return await ProcessForm(model, _ringService);
+            return await ProcessForm(model, _ringService, JewelryFormCreationType);
         }
 
         [HttpPost]
         public async Task<IActionResult> SubmitNecklaceForm(NecklaceModel model)
         {
-            return await ProcessForm(model, _necklaceService);
+            return await ProcessForm(model, _necklaceService, JewelryFormCreationType);
         }
 
         [HttpPost]
         public async Task<IActionResult> SubmitMetalBarForm(MetalBarModel model)
         {
-            return await ProcessForm(model, _metalBarService);
+            return await ProcessForm(model, _metalBarService, JewelryFormCreationType);
         }
 
         [HttpPost]
         public async Task<IActionResult> SubmitInvestmentDiamondForm(InvestmentDiamondModel model)
         {
-            return await ProcessForm(model, _investmentDiamondService);
+            return await ProcessForm(model, _investmentDiamondService, JewelryFormCreationType);
         }
 
         [HttpPost]
         public async Task<IActionResult> SubmitInvestmentCoinForm(InvestmentCoinModel model)
         {
-            return await ProcessForm(model, _investmentCoinService);
+            return await ProcessForm(model, _investmentCoinService, JewelryFormCreationType);
         }
 
-        private async Task<IActionResult> ProcessForm<T>(T model, IService<T> service)
+        [HttpPost]
+        public async Task<IActionResult> SubmitEditRingForm(RingModel model)
+        {
+            return await ProcessForm(model, _ringService, JewelryFormEditType);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitEditNecklaceForm(NecklaceModel model)
+        {
+            return await ProcessForm(model, _necklaceService, JewelryFormEditType);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitEditMetalBarForm(MetalBarModel model)
+        {
+            return await ProcessForm(model, _metalBarService, JewelryFormEditType);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitEditInvestmentDiamondForm(InvestmentDiamondModel model)
+        {
+            return await ProcessForm(model, _investmentDiamondService, JewelryFormEditType);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitEditInvestmentCoinForm(InvestmentCoinModel model)
+        {
+            return await ProcessForm(model, _investmentCoinService, JewelryFormEditType);
+        }
+
+        [NonAction]
+        private async Task<IActionResult> ProcessForm<T>(T model, IService<T> service, string method)
         {
             var modelErrors = GetModelErrors(model);
             if (modelErrors.Any())
@@ -138,15 +169,35 @@ namespace KolevDiamonds.Areas.Admin.Controllers
                 return Json(new { success = false, errors = modelErrors });
             }
 
-            try
+            if (method == "Create")
             {
-                await service.Create(model);
-                return Json(new { success = true, message = "Operation completed successfully" });
+                try
+                {
+                    await service.Create(model);
+                    return Json(new { success = true, message = "Operation completed successfully" });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { success = false, message = "An error occurred while processing the request: " + ex.Message });
+                }
             }
-            catch (Exception ex)
+            else if (method == "Edit")
             {
-                return Json(new { success = false, message = "An error occurred while processing the request: " + ex.Message });
+                try
+                {
+                    await service.Edit(model);
+                    return Json(new { success = true, message = "Operation completed successfully" });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { success = false, message = "An error occurred while processing the request: " + ex.Message });
+                }
             }
+            else 
+            {
+                return Json(new { success = false, message = "An error occurred while processing the request: Invalid Request"});
+            }
+            
         }
 
         [NonAction]

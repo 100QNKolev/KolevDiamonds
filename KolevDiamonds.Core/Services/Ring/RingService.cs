@@ -67,9 +67,9 @@ namespace KolevDiamonds.Core.Services.Ring
             };
         }
 
-        public async Task Delete(int ringId)
+        public async Task Delete(int Id)
         {
-            var ring = await GetByIdAsyncAsTracking(ringId);
+            var ring = await GetByIdAsyncAsTracking(Id);
 
             if (ring != null) 
             {

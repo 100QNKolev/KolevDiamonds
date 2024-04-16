@@ -16,7 +16,5 @@ namespace KolevDiamonds.Core.Contracts.InvestmentDiamond
         Task<Infrastructure.Data.Models.InvestmentDiamond?> GetByIdAsyncAsTracking(int id);
 
         Task<ProductQueryModel> GetFilteredInvestmentDiamondsAsync(decimal? priceFilter, int currentPage, int productsPerPage, bool isForSale = true);
-
-        Task Delete(int investmentDiamondId);
     }
 }

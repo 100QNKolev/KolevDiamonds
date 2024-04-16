@@ -37,5 +37,10 @@ namespace KolevDiamonds.Infrastructure.Data.Common
         {
             await DbSet<T>().AddAsync(entity);
         }
+
+        public void Update<T>(T entity) where T : class
+        {
+            this.DbSet<T>().Update(entity);
+        }
     }
 }

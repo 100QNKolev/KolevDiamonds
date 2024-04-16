@@ -74,9 +74,9 @@ namespace KolevDiamonds.Core.Services.MetalBar
             };
         }
 
-        public async Task Delete(int metalBarId)
+        public async Task Delete(int Id)
         {
-            var metalBar = await GetByIdAsyncAsTracking(metalBarId);
+            var metalBar = await GetByIdAsyncAsTracking(Id);
 
             if (metalBar != null)
             {
