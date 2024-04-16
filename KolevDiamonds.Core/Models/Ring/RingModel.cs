@@ -1,13 +1,14 @@
 ﻿using KolevDiamonds.Core.Constants;
 using KolevDiamonds.Infrastructure.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using static KolevDiamonds.Infrastructure.Constants.DataConstants;
 
 namespace KolevDiamonds.Core.Models.Ring
 {
     public class RingModel
     {
+        public int? Id { get; set; }
+
         [Required(ErrorMessage = ValidationMessagesConstants.NameRequired)]
         [StringLength(RingNameMaximumLength, MinimumLength = RingNameMinimumLength, ErrorMessage = ValidationMessagesConstants.NameLength)]
         public string Name { get; set; } = string.Empty;

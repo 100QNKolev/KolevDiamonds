@@ -1,13 +1,11 @@
-﻿using KolevDiamonds.Core.Models;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc;
-using static KolevDiamonds.Areas.Admin.Constants.JewelryConstants;
+﻿using KolevDiamonds.Core.Contracts;
 using KolevDiamonds.Core.Contracts.InvestmentCoin;
 using KolevDiamonds.Core.Contracts.InvestmentDiamond;
 using KolevDiamonds.Core.Contracts.MetalBar;
 using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Contracts.Ring;
-using KolevDiamonds.Areas.Admin.Contracts;
+using KolevDiamonds.Core.Models;
+using static KolevDiamonds.Core.Constants.JewelryConstants;
 
 namespace KolevDiamonds.Areas.Admin.Services
 {

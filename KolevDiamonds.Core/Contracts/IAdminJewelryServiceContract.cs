@@ -1,6 +1,6 @@
 ﻿using KolevDiamonds.Core.Models;
 
-namespace KolevDiamonds.Areas.Admin.Contracts
+namespace KolevDiamonds.Core.Contracts
 {
     public interface IAdminJewelryServiceContract
     {

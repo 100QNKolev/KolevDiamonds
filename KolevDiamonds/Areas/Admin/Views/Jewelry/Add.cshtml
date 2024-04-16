@@ -12,23 +12,23 @@
             switch (Model.Category)
             {
                 case "Ring":
-                    <partial name="_RingPartial" model="new RingModel()" />
+                    <partial name="_AddRingPartial" model="new RingModel()" />
                     break;
 
                 case "Necklace":
-                    <partial name="_NecklacePartial" model="new NecklaceModel()" />
+                    <partial name="_AddNecklacePartial" model="new NecklaceModel()" />
                     break;
 
                 case "MetalBar":
-                    <partial name="_MetalBarPartial" model="new MetalBarModel()" />
+                    <partial name="_AddMetalBarPartial" model="new MetalBarModel()" />
                     break;
 
                 case "InvestmentDiamond":
-                    <partial name="_InvestmentDiamondPartial" model="new InvestmentDiamondModel()" />
+                    <partial name="_AddInvestmentDiamondPartial" model="new InvestmentDiamondModel()" />
                     break;
 
                 case "InvestmentCoin":
-                    <partial name="_InvestmentCoinPartial" model="new InvestmentCoinModel()" />
+                    <partial name="_AddInvestmentCoinPartial" model="new InvestmentCoinModel()" />
                     break;
                 default:
                     <p class="text-danger">Invalid category selected.</p>

@@ -11,12 +11,12 @@ using KolevDiamonds.Core.Models.InvestmentDiamond;
 using KolevDiamonds.Core.Models.MetalBar;
 using KolevDiamonds.Core.Models.Necklace;
 using KolevDiamonds.Core.Models.Ring;
+using KolevDiamonds.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
-using KolevDiamonds.Areas.Admin.Services;
-using static KolevDiamonds.Areas.Admin.Constants.JewelryConstants;
-using KolevDiamonds.Areas.Admin.Contracts;
+using static KolevDiamonds.Core.Constants.JewelryConstants;
+
 
 namespace KolevDiamonds.Areas.Admin.Controllers
 {
@@ -105,41 +105,293 @@ namespace KolevDiamonds.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id, string productType)
         {
-            var model = new object();
-            if (User.isAdmin())
+            object model;
+            object query;
+
+            if (!User.isAdmin())
             {
-                switch (productType)
+                return BadRequest("User is not authorized.");
+            }
+
+            switch (productType)
+            {
+                case "Ring":
+                    model = await this._ringService.GetByIdAsync(id);
+                    var ringModel = model as Ring;
+                    if (ringModel == null)
+                    {
+                        return BadRequest("Invalid model type for Ring.");
+                    }
+                    query = new RingModel
+                    {
+                        Id = id,
+                        Name = ringModel.Name,
+                        ImagePath = ringModel.ImagePath,
+                        Price = ringModel.Price,
+                        Carats = ringModel.Carats,
+                        Colour = ringModel.Colour,
+                        Clarity = ringModel.Clarity,
+                        Cut = ringModel.Cut,
+                        Metal = ringModel.Metal,
+                        Purity = ringModel.Purity,
+                        IsForSale = ringModel.IsForSale
+                    };
+                    ViewBag.Category = "Ring";
+                    break;
+
+                case "Necklace":
+                    model = await this._necklaceService.GetByIdAsync(id);
+                    var necklaceModel = model as Necklace;
+                    if (necklaceModel == null)
+                    {
+                        return BadRequest("Invalid model type for Necklace.");
+                    }
+                    query = new NecklaceModel
+                    {
+                        Id = id,
+                        Name = necklaceModel.Name,
+                        ImagePath = necklaceModel.ImagePath,
+                        Price = necklaceModel.Price,
+                        Carats = necklaceModel.Carats,
+                        Colour = necklaceModel.Colour,
+                        Clarity = necklaceModel.Clarity,
+                        Cut = necklaceModel.Cut,
+                        Metal = necklaceModel.Metal,
+                        Purity = necklaceModel.Purity,
+                        IsForSale = necklaceModel.IsForSale,
+                        Length = necklaceModel.Length
+                    };
+                    ViewBag.Category = "Necklace";
+                    break;
+
+                case "MetalBar":
+                    model = await this._metalBarService.GetByIdAsync(id);
+                    var metalBarModel = model as MetalBar;
+                    if (metalBarModel == null)
+                    {
+                        return BadRequest("Invalid model type for MetalBar.");
+                    }
+                    query = new MetalBarModel
+                    {
+                        Id = id,
+                        Name = metalBarModel.Name,
+                        ImagePath = metalBarModel.ImagePath,
+                        Price = metalBarModel.Price,
+                        Metal = metalBarModel.Metal,
+                        Purity = metalBarModel.Purity,
+                        IsForSale = metalBarModel.IsForSale,
+                        Weight = metalBarModel.Weight,
+                        Dimensions = metalBarModel.Dimensions
+                    };
+                    ViewBag.Category = "MetalBar";
+                    break;
+
+                case "InvestmentDiamond":
+                    model = await this._investmentDiamondService.GetByIdAsync(id);
+                    var investmentDiamondModel = model as InvestmentDiamond;
+                    if (investmentDiamondModel == null)
+                    {
+                        return BadRequest("Invalid model type for InvestmentDiamond.");
+                    }
+                    query = new InvestmentDiamondModel
+                    {
+                        Id = id,
+                        Name = investmentDiamondModel.Name,
+                        ImagePath = investmentDiamondModel.ImagePath,
+                        Price = investmentDiamondModel.Price,
+                        Carats = investmentDiamondModel.Carats,
+                        Colour = investmentDiamondModel.Colour,
+                        Clarity = investmentDiamondModel.Clarity,
+                        Cut = investmentDiamondModel.Cut,
+                        CertifyingLaboratory = investmentDiamondModel.CertifyingLaboratory,
+                        Proportions = investmentDiamondModel.Proportions,
+                        IsForSale = investmentDiamondModel.IsForSale
+                    };
+                    ViewBag.Category = "InvestmentDiamond";
+                    break;
+
+                case "InvestmentCoin":
+                    model = await this._investmentCoinService.GetByIdAsync(id);
+                    var investmentCoinModel = model as InvestmentCoin;
+                    if (investmentCoinModel == null)
+                    {
+                        return BadRequest("Invalid model type for InvestmentCoin.");
+                    }
+                    query = new InvestmentCoinModel
+                    {
+                        Id = id,
+                        Name = investmentCoinModel.Name,
+                        ImagePath = investmentCoinModel.ImagePath,
+                        Price = investmentCoinModel.Price,
+                        Metal = investmentCoinModel.Metal,
+                        Purity = investmentCoinModel.Purity,
+                        Weight = investmentCoinModel.Weight,
+                        Quality = investmentCoinModel.Quality,
+                        Circulation = investmentCoinModel.Circulation,
+                        Diameter = investmentCoinModel.Diameter,
+                        LegalTender = investmentCoinModel.LegalTender,
+                        Manufacturer = investmentCoinModel.Manufacturer,
+                        Packaging = investmentCoinModel.Packaging,
+                        IsForSale = investmentCoinModel.IsForSale
+                    };
+                    ViewBag.Category = "InvestmentCoin";
+                    break;
+
+                default:
+                    return BadRequest("Invalid product type.");
+            }
+
+            return View(query);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRing(RingModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var modelErrors = GetModelErrors(model);
+                if (modelErrors.Count > 0)
                 {
-                    case "Ring":
-                        model = await this._ringService.GetByIdAsync(id);
-                        break;
+                    // Pass model errors to the view
+                    ViewBag.ModelErrors = modelErrors;
+                    return View(model);
+                }
 
-                    case "Necklace":
-                        model = await this._necklaceService.GetByIdAsync(id);
-                        break;
-
-                    case "MetalBar":
-                        model = await this._metalBarService.GetByIdAsync(id);
-                        break;
-
-                    case "InvestmentDiamond":
-                        model = await this._investmentDiamondService.GetByIdAsync(id);
-                        break;
-
-                    case "InvestmentCoin":
-                        model = await this._investmentCoinService.GetByIdAsync(id);
-                        break;
-
-                    default:
-                        return BadRequest();
+                if (model != null)
+                {
+                    await ProcessForm(model, this._ringService, (int)model.Id!);
+                    return RedirectToAction(nameof(All));
+                }
+                else
+                {
+                    return BadRequest("Invalid model");
                 }
             }
             else
             {
-                return BadRequest();
+                // ModelState is not valid, return the form with errors
+                return View("_RingDetailsProductCardPartial", model);
             }
+        }
 
-            return RedirectToAction(nameof(All));
+        [HttpPost]
+        public async Task<IActionResult> EditNecklace(NecklaceModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var modelErrors = GetModelErrors(model);
+                if (modelErrors.Count > 0)
+                {
+                    // Pass model errors to the view
+                    ViewBag.ModelErrors = modelErrors;
+                    return View(model);
+                }
+
+                if (model != null)
+                {
+                    await ProcessForm(model, this._necklaceService, (int)model.Id!);
+                    return RedirectToAction(nameof(All));
+                }
+                else
+                {
+                    return BadRequest("Invalid model");
+                }
+            }
+            else
+            {
+                // ModelState is not valid, return the form with errors
+                return View("_NecklaceDetailsProductCardPartial", model);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditMetalBar(MetalBarModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var modelErrors = GetModelErrors(model);
+                if (modelErrors.Count > 0)
+                {
+                    // Pass model errors to the view
+                    ViewBag.ModelErrors = modelErrors;
+                    return View(model);
+                }
+
+                if (model != null)
+                {
+                    await ProcessForm(model, this._metalBarService, (int)model.Id!);
+                    return RedirectToAction(nameof(All));
+                }
+                else
+                {
+                    return BadRequest("Invalid model");
+                }
+            }
+            else
+            {
+                // ModelState is not valid, return the form with errors
+                return View("_MetalBarDetailsProductCardPartial", model);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditInvestmentDiamond(InvestmentDiamondModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var modelErrors = GetModelErrors(model);
+                if (modelErrors.Count > 0)
+                {
+                    // Pass model errors to the view
+                    ViewBag.ModelErrors = modelErrors;
+                    return View(model);
+                }
+
+                if (model != null)
+                {
+                    await ProcessForm(model, this._investmentDiamondService, (int)model.Id!);
+                    return RedirectToAction(nameof(All));
+                }
+                else
+                {
+                    return BadRequest("Invalid model");
+                }
+            }
+            else
+            {
+                // ModelState is not valid, return the form with errors
+                return View("_InvestmentDiamondDetailsProductCardPartial", model);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditInvestmentCoin(InvestmentCoinModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var modelErrors = GetModelErrors(model);
+                if (modelErrors.Count > 0)
+                {
+                    // Pass model errors to the view
+                    ViewBag.ModelErrors = modelErrors;
+                    return View(model);
+                }
+
+                if (model != null)
+                {
+                    await ProcessForm(model, this._investmentCoinService, (int)model.Id!);
+                    return RedirectToAction(nameof(All));
+                }
+                else
+                {
+                    return BadRequest("Invalid model");
+                }
+            }
+            else
+            {
+                // ModelState is not valid, return the form with errors
+                return View("_InvestmentCoinDetailsProductCardPartial", model);
+            }
         }
 
         [HttpPost]
@@ -170,36 +422,6 @@ namespace KolevDiamonds.Areas.Admin.Controllers
         public async Task<IActionResult> SubmitInvestmentCoinForm(InvestmentCoinModel model)
         {
             return await ProcessForm(model, _investmentCoinService);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SubmitEditRingForm(int id, RingModel model)
-        {
-            return await ProcessForm(model, _ringService, id);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SubmitEditNecklaceForm(int id, NecklaceModel model)
-        {
-            return await ProcessForm(model, _necklaceService, id);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SubmitEditMetalBarForm(int id, MetalBarModel model)
-        {
-            return await ProcessForm(model, _metalBarService, id);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SubmitEditInvestmentDiamondForm(int id, InvestmentDiamondModel model)
-        {
-            return await ProcessForm(model, _investmentDiamondService, id);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SubmitEditInvestmentCoinForm(int id, InvestmentCoinModel model)
-        {
-            return await ProcessForm(model, _investmentCoinService, id);
         }
 
         [NonAction]

@@ -107,7 +107,7 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
                 LegalTender = model.LegalTender,
                 Manufacturer = model.Manufacturer,
                 Packaging = model.Packaging,
-                IsForSale = model.IsForSale,
+                IsForSale = model.IsForSale
             };
 
             try

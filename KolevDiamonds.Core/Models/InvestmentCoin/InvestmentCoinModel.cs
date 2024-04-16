@@ -7,6 +7,8 @@ namespace KolevDiamonds.Core.Models.InvestmentCoin
 {
     public class InvestmentCoinModel
     {
+        public int? Id { get; set; }
+
         [Required(ErrorMessage = ValidationMessagesConstants.NameRequired)]
         [StringLength(InvestmentCoinNameMaximumLength, MinimumLength = InvestmentCoinNameMinimumLength, ErrorMessage = ValidationMessagesConstants.NameLength)]
         public string Name { get; set; } = string.Empty;

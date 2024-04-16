@@ -1,5 +1,5 @@
-﻿using KolevDiamonds.Areas.Admin.Contracts;
-using KolevDiamonds.Areas.Admin.Services;
+﻿using KolevDiamonds.Areas.Admin.Services;
+using KolevDiamonds.Core.Contracts;
 using KolevDiamonds.Core.Contracts.InvestmentCoin;
 using KolevDiamonds.Core.Contracts.InvestmentDiamond;
 using KolevDiamonds.Core.Contracts.MetalBar;
