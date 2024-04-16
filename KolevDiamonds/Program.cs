@@ -44,12 +44,6 @@ app.UseEndpoints(endpoints =>
         pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 
-    endpoints.MapControllerRoute(
-       name: "/Ring/Details/{id}/{information}",
-       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}",
-       defaults: new {Controller = "Ring", Action = "Details" }
-   );
-
     endpoints.MapDefaultControllerRoute();
     endpoints.MapRazorPages();
 });

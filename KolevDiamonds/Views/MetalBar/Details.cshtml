@@ -91,6 +91,12 @@
         formData.append('Name', '@Model.Name');
         formData.append('Price', '@Model.Price');
 
+        // Get the anti-forgery token value
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
+        // Append the anti-forgery token to the FormData object
+        formData.append('__RequestVerificationToken', token);
+
         // Create a new XMLHttpRequest object
         var xhr = new XMLHttpRequest();
 
