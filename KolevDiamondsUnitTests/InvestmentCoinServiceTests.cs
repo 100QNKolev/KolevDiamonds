@@ -143,5 +143,69 @@ namespace KolevDiamondsUnitTests
             _mockRepository.Verify(r => r.AddAsync(It.IsAny<InvestmentCoin>()), Times.Once);
             _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
         }
+
+        [Test]
+        public async Task Update_UpdatesInvestmentCoinInRepository()
+        {
+            // Arrange
+            int id = 1;
+            var model = new InvestmentCoinModel
+            {
+                Name = "Updated Coin",
+                ImagePath = "path/to/updated/image",
+                Price = 300,
+                Metal = MetalVariation.Silver,
+                Purity = 24.0,
+                Weight = 2,
+                Quality = GoldQuality.BrilliantUncirculated,
+                Circulation = 2000,
+                Diameter = 35,
+                LegalTender = "EUR",
+                Manufacturer = "Mint Updated",
+                Packaging = "Capsule",
+                IsForSale = true
+            };
+
+            var existingCoin = new InvestmentCoin
+            {
+                Id = id,
+                Name = "Existing Coin",
+                ImagePath = "path/to/image",
+                Price = 200,
+                Metal = MetalVariation.Gold,
+                Purity = 22.0,
+                Weight = 1,
+                Quality = GoldQuality.Fine,
+                Circulation = 1000,
+                Diameter = 30,
+                LegalTender = "USD",
+                Manufacturer = "Mint",
+                Packaging = "Box",
+                IsForSale = true
+            };
+
+            var data = new List<InvestmentCoin> { existingCoin }.AsQueryable().BuildMock();
+            _mockRepository.Setup(r => r.All<InvestmentCoin>())
+                           .Returns(data);
+
+            // Act
+            await _investmentCoinService.Update(id, model);
+
+            // Assert
+            _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
+            Assert.That(existingCoin.Name, Is.EqualTo(model.Name));
+            Assert.That(existingCoin.ImagePath, Is.EqualTo(model.ImagePath));
+            Assert.That(existingCoin.Price, Is.EqualTo(model.Price));
+            Assert.That(existingCoin.Metal, Is.EqualTo(model.Metal));
+            Assert.That(existingCoin.Purity, Is.EqualTo(model.Purity));
+            Assert.That(existingCoin.Weight, Is.EqualTo(model.Weight));
+            Assert.That(existingCoin.Quality, Is.EqualTo(model.Quality));
+            Assert.That(existingCoin.Circulation, Is.EqualTo(model.Circulation));
+            Assert.That(existingCoin.Diameter, Is.EqualTo(model.Diameter));
+            Assert.That(existingCoin.LegalTender, Is.EqualTo(model.LegalTender));
+            Assert.That(existingCoin.Manufacturer, Is.EqualTo(model.Manufacturer));
+            Assert.That(existingCoin.Packaging, Is.EqualTo(model.Packaging));
+            Assert.That(existingCoin.IsForSale, Is.EqualTo(model.IsForSale));
+        }
     }
 }

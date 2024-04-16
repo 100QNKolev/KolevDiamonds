@@ -140,5 +140,60 @@ namespace KolevDiamondsUnitTests
             _mockRepository.Verify(r => r.AddAsync(It.IsAny<InvestmentDiamond>()), Times.Once);
             _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
         }
+
+        [Test]
+        public async Task Update_UpdatesInvestmentDiamondInRepository()
+        {
+            // Arrange
+            int id = 1;
+            var model = new InvestmentDiamondModel
+            {
+                Name = "Updated Diamond",
+                ImagePath = "path/to/updated/image",
+                Price = 300,
+                Carats = 2.0,
+                Colour = DiamondColor.D,
+                Clarity = DiamondClarity.VVS1,
+                Cut = DiamondCut.Excellent,
+                CertifyingLaboratory = "AGS",
+                Proportions = "Ideal",
+                IsForSale = true
+            };
+
+            var existingDiamond = new InvestmentDiamond
+            {
+                Id = id,
+                Name = "Existing Diamond",
+                ImagePath = "path/to/image",
+                Price = 200,
+                Carats = 1.5,
+                Colour = DiamondColor.F,
+                Clarity = DiamondClarity.VS1,
+                Cut = DiamondCut.VeryGood,
+                CertifyingLaboratory = "GIA",
+                Proportions = "Very Good",
+                IsForSale = true
+            };
+
+            var data = new List<InvestmentDiamond> { existingDiamond }.AsQueryable().BuildMock();
+            _mockRepository.Setup(r => r.All<InvestmentDiamond>())
+                           .Returns(data);
+
+            // Act
+            await _investmentDiamondService.Update(id, model);
+
+            // Assert
+            _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
+            Assert.That(existingDiamond.Name, Is.EqualTo(model.Name));
+            Assert.That(existingDiamond.ImagePath, Is.EqualTo(model.ImagePath));
+            Assert.That(existingDiamond.Price, Is.EqualTo(model.Price));
+            Assert.That(existingDiamond.Carats, Is.EqualTo(model.Carats));
+            Assert.That(existingDiamond.Colour, Is.EqualTo(model.Colour));
+            Assert.That(existingDiamond.Clarity, Is.EqualTo(model.Clarity));
+            Assert.That(existingDiamond.Cut, Is.EqualTo(model.Cut));
+            Assert.That(existingDiamond.CertifyingLaboratory, Is.EqualTo(model.CertifyingLaboratory));
+            Assert.That(existingDiamond.Proportions, Is.EqualTo(model.Proportions));
+            Assert.That(existingDiamond.IsForSale, Is.EqualTo(model.IsForSale));
+        }
     }
 }

@@ -132,5 +132,54 @@ namespace KolevDiamondsUnitTests
             _mockRepository.Verify(r => r.AddAsync(It.IsAny<MetalBar>()), Times.Once);
             _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
         }
+
+        [Test]
+        public async Task Update_UpdatesMetalBarInRepository()
+        {
+            // Arrange
+            int id = 1;
+            var model = new MetalBarModel
+            {
+                Name = "Updated MetalBar",
+                ImagePath = "path/to/updated/image",
+                Price = 300,
+                Metal = MetalVariation.Gold,
+                Purity = "24K",
+                IsForSale = true,
+                Weight = 60,
+                Dimensions = "12x12x12"
+            };
+
+            var existingMetalBar = new MetalBar
+            {
+                Id = id,
+                Name = "Existing MetalBar",
+                ImagePath = "path/to/image",
+                Price = 200,
+                Metal = MetalVariation.Silver,
+                Purity = "18K",
+                IsForSale = true,
+                Weight = 50,
+                Dimensions = "10x10x10"
+            };
+
+            var data = new List<MetalBar> { existingMetalBar }.AsQueryable().BuildMock();
+            _mockRepository.Setup(r => r.All<MetalBar>())
+                           .Returns(data);
+
+            // Act
+            await _metalBarService.Update(id, model);
+
+            // Assert
+            _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
+            Assert.That(existingMetalBar.Name, Is.EqualTo(model.Name));
+            Assert.That(existingMetalBar.ImagePath, Is.EqualTo(model.ImagePath));
+            Assert.That(existingMetalBar.Price, Is.EqualTo(model.Price));
+            Assert.That(existingMetalBar.Metal, Is.EqualTo(model.Metal));
+            Assert.That(existingMetalBar.Purity, Is.EqualTo(model.Purity));
+            Assert.That(existingMetalBar.IsForSale, Is.EqualTo(model.IsForSale));
+            Assert.That(existingMetalBar.Weight, Is.EqualTo(model.Weight));
+            Assert.That(existingMetalBar.Dimensions, Is.EqualTo(model.Dimensions));
+        }
     }
 }

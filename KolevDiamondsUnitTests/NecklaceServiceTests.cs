@@ -135,5 +135,63 @@ namespace KolevDiamondsUnitTests
             _mockRepository.Verify(r => r.AddAsync(It.IsAny<Necklace>()), Times.Once);
             _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
         }
+
+        [Test]
+        public async Task Update_UpdatesNecklaceInRepository()
+        {
+            // Arrange
+            int id = 1;
+            var model = new NecklaceModel
+            {
+                Name = "Updated Necklace",
+                ImagePath = "path/to/updated/image",
+                Price = 300,
+                Carats = 2.0,
+                Colour = DiamondColor.R,
+                Clarity = DiamondClarity.VVS1,
+                Cut = DiamondCut.VeryGood,
+                Metal = MetalVariation.Gold,
+                Purity = "24K",
+                IsForSale = true,
+                Length = 22 // Updated length
+            };
+
+            var existingNecklace = new Necklace
+            {
+                Id = id,
+                Name = "Existing Necklace",
+                ImagePath = "path/to/image",
+                Price = 200,
+                Carats = 1.5,
+                Colour = DiamondColor.Q,
+                Clarity = DiamondClarity.I3,
+                Cut = DiamondCut.Excellent,
+                Metal = MetalVariation.Silver,
+                Purity = "18K",
+                IsForSale = true,
+                Length = 20
+            };
+
+            var data = new List<Necklace> { existingNecklace }.AsQueryable().BuildMock();
+            _mockRepository.Setup(r => r.All<Necklace>())
+                           .Returns(data);
+
+            // Act
+            await _necklaceService.Update(id, model);
+
+            // Assert
+            _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
+            Assert.That(existingNecklace.Name, Is.EqualTo(model.Name));
+            Assert.That(existingNecklace.ImagePath, Is.EqualTo(model.ImagePath));
+            Assert.That(existingNecklace.Price, Is.EqualTo(model.Price));
+            Assert.That(existingNecklace.Carats, Is.EqualTo(model.Carats));
+            Assert.That(existingNecklace.Colour, Is.EqualTo(model.Colour));
+            Assert.That(existingNecklace.Clarity, Is.EqualTo(model.Clarity));
+            Assert.That(existingNecklace.Cut, Is.EqualTo(model.Cut));
+            Assert.That(existingNecklace.Metal, Is.EqualTo(model.Metal));
+            Assert.That(existingNecklace.Purity, Is.EqualTo(model.Purity));
+            Assert.That(existingNecklace.IsForSale, Is.EqualTo(model.IsForSale));
+            Assert.That(existingNecklace.Length, Is.EqualTo(model.Length));
+        }
     }
 }

@@ -140,5 +140,59 @@ namespace KolevDiamondsUnitTests
             _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
         }
 
+        [Test]
+        public async Task Update_UpdatesRingInRepository()
+        {
+            // Arrange
+            int id = 1;
+            var model = new RingModel
+            {
+                Name = "Updated Ring",
+                ImagePath = "path/to/updated/image",
+                Price = 300,
+                Carats = 2.0,
+                Colour = DiamondColor.R,
+                Clarity = DiamondClarity.VVS1,
+                Cut = DiamondCut.VeryGood,
+                Metal = MetalVariation.Gold,
+                Purity = "24K",
+                IsForSale = true
+            };
+
+            var existingRing = new Ring
+            {
+                Id = id,
+                Name = "Existing Ring",
+                ImagePath = "path/to/image",
+                Price = 200,
+                Carats = 1.5,
+                Colour = DiamondColor.Q,
+                Clarity = DiamondClarity.I3,
+                Cut = DiamondCut.Excellent,
+                Metal = MetalVariation.Silver,
+                Purity = "18K",
+                IsForSale = true
+            };
+
+            var data = new List<Ring> { existingRing }.AsQueryable().BuildMock();
+            _mockRepository.Setup(r => r.All<Ring>())
+                           .Returns(data);
+
+            // Act
+            await _ringService.Update(id, model);
+
+            // Assert
+            _mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
+            Assert.That(existingRing.Name, Is.EqualTo(model.Name));
+            Assert.That(existingRing.ImagePath, Is.EqualTo(model.ImagePath));
+            Assert.That(existingRing.Price, Is.EqualTo(model.Price));
+            Assert.That(existingRing.Carats, Is.EqualTo(model.Carats));
+            Assert.That(existingRing.Colour, Is.EqualTo(model.Colour));
+            Assert.That(existingRing.Clarity, Is.EqualTo(model.Clarity));
+            Assert.That(existingRing.Cut, Is.EqualTo(model.Cut));
+            Assert.That(existingRing.Metal, Is.EqualTo(model.Metal));
+            Assert.That(existingRing.Purity, Is.EqualTo(model.Purity));
+            Assert.That(existingRing.IsForSale, Is.EqualTo(model.IsForSale));
+        }
     }
 }
