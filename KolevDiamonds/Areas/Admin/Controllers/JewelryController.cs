@@ -14,7 +14,9 @@ using KolevDiamonds.Core.Models.Ring;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
+using KolevDiamonds.Areas.Admin.Services;
 using static KolevDiamonds.Areas.Admin.Constants.JewelryConstants;
+using KolevDiamonds.Areas.Admin.Contracts;
 
 namespace KolevDiamonds.Areas.Admin.Controllers
 {
@@ -25,13 +27,15 @@ namespace KolevDiamonds.Areas.Admin.Controllers
         private readonly IMetalBarService _metalBarService;
         private readonly IInvestmentDiamondService _investmentDiamondService;
         private readonly IInvestmentCoinService _investmentCoinService;
+        private readonly IAdminJewelryServiceContract _adminJewelryService;
 
         public JewelryController(
             IRingService ringService,
             INecklaceService necklaceService,
             IMetalBarService metalBarService,
             IInvestmentDiamondService investmentDiamondService,
-            IInvestmentCoinService investmentCoinService
+            IInvestmentCoinService investmentCoinService,
+            IAdminJewelryServiceContract adminJewelryService,
             )
         {
             this._ringService = ringService;
@@ -39,12 +43,13 @@ namespace KolevDiamonds.Areas.Admin.Controllers
             this._metalBarService = metalBarService;
             this._investmentCoinService = investmentCoinService;
             this._investmentDiamondService = investmentDiamondService;
+            this._adminJewelryService = adminJewelryService;
         }
 
         [HttpGet]
         public async Task<IActionResult> All([FromQuery] ProductQueryModel query)
         {
-            var model = new ProductQueryModel { Products = await GetAllJewelry(query) };
+            var model = new ProductQueryModel { Products = await this._adminJewelryService.GetAllJewelry(query) };
 
             query.TotalProductCount = model.TotalProductCount;
             query.Products = model.Products;
@@ -142,53 +147,6 @@ namespace KolevDiamonds.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "An error occurred while processing the request: " + ex.Message });
             }
-        }
-
-    [NonAction]
-        public async Task<IEnumerable<ProductIndexServiceModel>> GetAllJewelry(ProductQueryModel query)
-        {
-            var rings = await this._ringService.GetFilteredRingsAsync(
-                    query.PriceFilter,
-                    query.CurrentPage,
-                    JewelryTypeItemPerPage,
-                    query.IsForSale
-            );
-
-            var necklaces = await this._necklaceService.GetFilteredNecklacesAsync(
-                query.PriceFilter,
-                query.CurrentPage,
-                JewelryTypeItemPerPage,
-                query.IsForSale
-            );
-
-            var metalBars = await this._metalBarService.GetFilteredMetalBarsAsync(
-                query.PriceFilter,
-                query.CurrentPage,
-                JewelryTypeItemPerPage,
-                query.IsForSale
-            );
-
-            var investmentCoins = await this._investmentCoinService.GetFilteredInvestmentCoinsAsync(
-                query.PriceFilter,
-                query.CurrentPage,
-                JewelryTypeItemPerPage,
-                query.IsForSale
-            );
-
-            var investmentDiamonds = await this._investmentDiamondService.GetFilteredInvestmentDiamondsAsync(
-                query.PriceFilter,
-                query.CurrentPage,
-                JewelryTypeItemPerPage,
-                query.IsForSale
-            );
-
-            var allProducts = rings.Products
-             .Concat(necklaces.Products)
-             .Concat(metalBars.Products)
-             .Concat(investmentCoins.Products)
-             .Concat(investmentDiamonds.Products);
-
-            return allProducts;
         }
 
         [NonAction]
