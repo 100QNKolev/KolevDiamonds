@@ -47,6 +47,7 @@ namespace KolevDiamonds.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [NonAction]
         private List<ProductIndexServiceModel> GetCartItems()
         {
             var cartItemsJson = _httpContextAccessor.HttpContext?.Session.GetString("CartItems");
@@ -57,6 +58,7 @@ namespace KolevDiamonds.Controllers
             return JsonConvert.DeserializeObject<List<ProductIndexServiceModel>>(cartItemsJson);
         }
 
+        [NonAction]
         private void SaveCartItems(List<ProductIndexServiceModel> cartItems)
         {
             var cartItemsJson = JsonConvert.SerializeObject(cartItems);
