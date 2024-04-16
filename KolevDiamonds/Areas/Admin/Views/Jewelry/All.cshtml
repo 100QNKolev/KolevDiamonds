@@ -30,7 +30,7 @@
                         <td>@item.Price.ToString("C")</td>
                         <td>
                             <div class="card-body">
-                                <a href="#" class="btn btn-primary">Edit</a>
+                                <a class="btn btn-primary" asp-area="Admin" asp-controller="Jewelry" asp-action="Edit" asp-route-id="@item.Id" asp-route-productType="@item.ProductType">Edit</a>
                                 @if(item.IsForSale == true) 
                                 {
                                     <a class="btn btn-primary" asp-area="Admin" asp-controller="Jewelry" asp-action="Delete" asp-route-id="@item.Id" asp-route-productType="@item.ProductType">Delete</a>

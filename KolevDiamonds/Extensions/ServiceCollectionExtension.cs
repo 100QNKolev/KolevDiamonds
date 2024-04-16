@@ -1,4 +1,6 @@
-﻿using KolevDiamonds.Core.Contracts.InvestmentCoin;
+﻿using KolevDiamonds.Areas.Admin.Services;
+using KolevDiamonds.Core.Contracts;
+using KolevDiamonds.Core.Contracts.InvestmentCoin;
 using KolevDiamonds.Core.Contracts.InvestmentDiamond;
 using KolevDiamonds.Core.Contracts.MetalBar;
 using KolevDiamonds.Core.Contracts.Necklace;
@@ -24,6 +26,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IMetalBarService, MetalBarService>();
             services.AddScoped<IInvestmentDiamondService, InvestmentDiamondService>();
             services.AddScoped<IInvestmentCoinService, InvestmentCoinService>();
+            services.AddScoped<IAdminJewelryServiceContract, AdminJewelryService>();
 
             return services;
         }

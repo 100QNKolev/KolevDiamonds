@@ -30,5 +30,11 @@ namespace KolevDiamonds.Infrastructure.Data.Common
         /// </summary>
         /// <param>Entity to add</param>
         Task AddAsync<T>(T entity) where T : class;
+
+        /// <summary>
+        /// Update a record in database
+        /// </summary>
+        /// <param>Entity for record to be updated</param>
+        void Update<T>(T entity) where T : class;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using KolevDiamonds.Core.Contracts.InvestmentCoin;
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.InvestmentCoin;
+using KolevDiamonds.Core.Models.MetalBar;
 using KolevDiamonds.Core.Models.Necklace;
 using KolevDiamonds.Core.Services.Ring;
 using KolevDiamonds.Infrastructure.Data.Common;
@@ -8,9 +9,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace KolevDiamonds.Core.Services.InvestmentCoin
 {
@@ -19,26 +23,10 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
         private readonly IRepository _repository;
         private readonly ILogger logger;
 
-        public InvestmentCoinService(IRepository repository, ILogger<RingService> _logger)
+        public InvestmentCoinService(IRepository repository, ILogger<InvestmentCoinService> _logger)
         {
             this._repository = repository;
             this.logger = _logger;
-        }
-
-        public async Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentCoins()
-        {
-            return await this._repository
-                .AllReadOnly<Infrastructure.Data.Models.InvestmentCoin>()
-                .OrderByDescending(r => r.Id)
-                .Select(r => new ProductIndexServiceModel()
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    ImagePath = r.ImagePath,
-                    Price = r.Price,
-                    ProductType = nameof(InvestmentCoin),
-                })
-                .ToListAsync();
         }
 
         public async Task<Infrastructure.Data.Models.InvestmentCoin?> GetByIdAsync(int id)
@@ -91,9 +79,9 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
 
         }
 
-        public async Task Delete(int investmentCoinId)
+        public async Task Delete(int Id)
         {
-            var InvestmentCoin = await GetByIdAsyncAsTracking(investmentCoinId);
+            var InvestmentCoin = await GetByIdAsyncAsTracking(Id);
 
             if (InvestmentCoin != null)
             {
@@ -119,12 +107,46 @@ namespace KolevDiamonds.Core.Services.InvestmentCoin
                 LegalTender = model.LegalTender,
                 Manufacturer = model.Manufacturer,
                 Packaging = model.Packaging,
-                IsForSale = model.IsForSale,
+                IsForSale = model.IsForSale
             };
 
             try
             {
                 await _repository.AddAsync(investmentCoin);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
+        }
+
+        public async Task Update(int id, InvestmentCoinModel model)
+        {
+            var investmentCoin = await GetByIdAsyncAsTracking(id);
+
+            if (investmentCoin == null)
+            {
+                throw new ApplicationException("Database failed to find investment coin info");
+            }
+
+            investmentCoin.Name = model.Name;
+            investmentCoin.ImagePath = model.ImagePath;
+            investmentCoin.Price = model.Price;
+            investmentCoin.Metal = model.Metal;
+            investmentCoin.Purity = model.Purity;
+            investmentCoin.Weight = model.Weight;
+            investmentCoin.Quality = model.Quality;
+            investmentCoin.Circulation = model.Circulation;
+            investmentCoin.Diameter = model.Diameter;
+            investmentCoin.LegalTender = model.LegalTender;
+            investmentCoin.Manufacturer = model.Manufacturer;
+            investmentCoin.Packaging = model.Packaging;
+            investmentCoin.IsForSale = model.IsForSale;
+
+            try
+            {
                 await _repository.SaveChangesAsync();
             }
             catch (Exception ex)

@@ -11,14 +11,10 @@ namespace KolevDiamonds.Core.Contracts.InvestmentCoin
 {
     public interface IInvestmentCoinService : IService<InvestmentCoinModel>
     {
-        Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentCoins();
-
         Task<Infrastructure.Data.Models.InvestmentCoin?> GetByIdAsync(int id);
 
         Task<Infrastructure.Data.Models.InvestmentCoin?> GetByIdAsyncAsTracking(int id);
 
         Task<ProductQueryModel> GetFilteredInvestmentCoinsAsync(decimal? priceFilter, int currentPage, int productsPerPage, bool isForSale = true);
-
-        Task Delete(int investmentCoinId);
     }
 }

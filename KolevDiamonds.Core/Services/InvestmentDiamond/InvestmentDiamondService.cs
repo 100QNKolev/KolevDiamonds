@@ -1,9 +1,13 @@
 ﻿using KolevDiamonds.Core.Contracts.InvestmentDiamond;
 using KolevDiamonds.Core.Models;
+using KolevDiamonds.Core.Models.InvestmentCoin;
 using KolevDiamonds.Core.Models.InvestmentDiamond;
 using KolevDiamonds.Infrastructure.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Linq;
 
 namespace KolevDiamonds.Core.Services.InvestmentDiamond
 {
@@ -16,22 +20,6 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
         {
             this._repository = repository;
             this.logger = _logger;
-        }
-
-        public async Task<IEnumerable<ProductIndexServiceModel>> AllInvestmentDiamonds()
-        {
-            return await this._repository
-                .AllReadOnly<Infrastructure.Data.Models.InvestmentDiamond>()
-                .OrderByDescending(r => r.Id)
-                .Select(r => new ProductIndexServiceModel()
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    ImagePath = r.ImagePath,
-                    Price = r.Price,
-                    ProductType = nameof(InvestmentDiamond)
-                })
-                .ToListAsync();
         }
 
         public async Task<Infrastructure.Data.Models.InvestmentDiamond?> GetByIdAsync(int id)
@@ -82,9 +70,9 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
             };
         }
 
-        public async Task Delete(int investmentDiamondId)
+        public async Task Delete(int Id)
         {
-            var InvestmentDiamond = await GetByIdAsyncAsTracking(investmentDiamondId);
+            var InvestmentDiamond = await GetByIdAsyncAsTracking(Id);
 
             if (InvestmentDiamond != null)
             {
@@ -121,6 +109,37 @@ namespace KolevDiamonds.Core.Services.InvestmentDiamond
                 throw new ApplicationException("Database failed to save info", ex);
             }
 
+        }
+
+        public async Task Update(int id, InvestmentDiamondModel model)
+        {
+            var investmentCoin = await GetByIdAsyncAsTracking(id);
+
+            if (investmentCoin == null)
+            {
+                throw new ApplicationException("Database failed to find investment diamond info");
+            }
+
+            investmentCoin.Name = model.Name;
+            investmentCoin.ImagePath = model.ImagePath;
+            investmentCoin.Price = model.Price;
+            investmentCoin.Carats = model.Carats;
+            investmentCoin.Colour = model.Colour;
+            investmentCoin.Clarity = model.Clarity;
+            investmentCoin.Cut = model.Cut;
+            investmentCoin.CertifyingLaboratory = model.CertifyingLaboratory;
+            investmentCoin.Proportions = model.Proportions;
+            investmentCoin.IsForSale = model.IsForSale;
+
+            try
+            {
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using KolevDiamonds.Core.Contracts.Necklace;
 using KolevDiamonds.Core.Models;
 using KolevDiamonds.Core.Models.Necklace;
+using KolevDiamonds.Core.Models.Ring;
 using KolevDiamonds.Core.Services.Ring;
 using KolevDiamonds.Infrastructure.Data.Common;
 using Microsoft.EntityFrameworkCore;
@@ -13,28 +14,11 @@ namespace KolevDiamonds.Core.Services.Necklace
         private readonly IRepository _repository;
         private readonly ILogger logger;
 
-        public NecklaceService(IRepository repository, ILogger<RingService> _logger)
+        public NecklaceService(IRepository repository, ILogger<NecklaceService> _logger)
         {
             this._repository = repository;
             this.logger = _logger;
         }
-
-        public async Task<IEnumerable<ProductIndexServiceModel>> AllNecklaces()
-        {
-            return await this._repository
-                .AllReadOnly<Infrastructure.Data.Models.Necklace>()
-                .OrderByDescending(r => r.Id)
-                .Select(r => new ProductIndexServiceModel()
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    ImagePath = r.ImagePath,
-                    Price = r.Price,
-                    ProductType = nameof(Necklace)
-                })
-                .ToListAsync();
-        }
-
 
         public async Task<Infrastructure.Data.Models.Necklace?> GetByIdAsync(int id)
         {
@@ -85,9 +69,9 @@ namespace KolevDiamonds.Core.Services.Necklace
             };
         }
 
-        public async Task Delete(int necklaceId)
+        public async Task Delete(int Id)
         {
-            var necklace = await GetByIdAsyncAsTracking(necklaceId);
+            var necklace = await GetByIdAsyncAsTracking(Id);
 
             if (necklace != null)
             {
@@ -117,6 +101,38 @@ namespace KolevDiamonds.Core.Services.Necklace
             try
             {
                 await _repository.AddAsync(necklace);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
+        }
+
+        public async Task Update(int id, NecklaceModel model)
+        {
+            var necklace = await GetByIdAsyncAsTracking(id);
+
+            if (necklace == null)
+            {
+                throw new ApplicationException("Database failed to find necklace info");
+            }
+
+            necklace.Name = model.Name;
+            necklace.ImagePath = model.ImagePath;
+            necklace.Price = model.Price;
+            necklace.Carats = model.Carats;
+            necklace.Colour = model.Colour;
+            necklace.Clarity = model.Clarity;
+            necklace.Cut = model.Cut;
+            necklace.Metal = model.Metal;
+            necklace.Purity = model.Purity;
+            necklace.IsForSale = model.IsForSale;
+            necklace.Length = model.Length;
+
+            try
+            {
                 await _repository.SaveChangesAsync();
             }
             catch (Exception ex)

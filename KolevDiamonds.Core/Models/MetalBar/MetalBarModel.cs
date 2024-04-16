@@ -7,6 +7,8 @@ namespace KolevDiamonds.Core.Models.MetalBar
 {
     public class MetalBarModel
     {
+        public int? Id { get; set; }
+
         [Required(ErrorMessage = ValidationMessagesConstants.NameRequired)]
         [StringLength(MetalBarNameMaximumLength, MinimumLength = MetalBarNameMinimumLength, ErrorMessage = ValidationMessagesConstants.NameLength)]
         public string Name { get; set; } = string.Empty;

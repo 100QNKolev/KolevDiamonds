@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace KolevDiamonds.Areas.Admin.Constants
+namespace KolevDiamonds.Core.Constants
 {
     [Comment("Jewelry constants")]
     public static class JewelryConstants

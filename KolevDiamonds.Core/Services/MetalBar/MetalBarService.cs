@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace KolevDiamonds.Core.Services.MetalBar
 {
@@ -19,26 +22,10 @@ namespace KolevDiamonds.Core.Services.MetalBar
         private readonly IRepository _repository;
         private readonly ILogger logger;
 
-        public MetalBarService(IRepository repository, ILogger<RingService> _logger)
+        public MetalBarService(IRepository repository, ILogger<MetalBarService> _logger)
         {
             this._repository = repository;
             this.logger = _logger;
-        }
-
-        public async Task<IEnumerable<ProductIndexServiceModel>> AllMetalBars()
-        {
-            return await this._repository
-                .AllReadOnly<Infrastructure.Data.Models.MetalBar>()
-                .OrderByDescending(r => r.Id)
-                .Select(r => new ProductIndexServiceModel()
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    ImagePath = r.ImagePath,
-                    Price = r.Price,
-                    ProductType = nameof(MetalBar)
-                })
-                .ToListAsync();
         }
 
         public async Task<Infrastructure.Data.Models.MetalBar?> GetByIdAsync(int id)
@@ -90,9 +77,9 @@ namespace KolevDiamonds.Core.Services.MetalBar
             };
         }
 
-        public async Task Delete(int metalBarId)
+        public async Task Delete(int Id)
         {
-            var metalBar = await GetByIdAsyncAsTracking(metalBarId);
+            var metalBar = await GetByIdAsyncAsTracking(Id);
 
             if (metalBar != null)
             {
@@ -119,6 +106,35 @@ namespace KolevDiamonds.Core.Services.MetalBar
             try
             {
                 await _repository.AddAsync(metalBar);
+                await _repository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
+        }
+
+        public async Task Update(int id, MetalBarModel model)
+        {
+            var metalBar = await GetByIdAsyncAsTracking(id);
+
+            if (metalBar == null)
+            {
+                throw new ApplicationException("Database failed to find metal bar info");
+            }
+
+            metalBar.Name = model.Name;
+            metalBar.ImagePath = model.ImagePath;
+            metalBar.Price = model.Price;
+            metalBar.Metal = model.Metal;
+            metalBar.Purity = model.Purity;
+            metalBar.IsForSale = model.IsForSale;
+            metalBar.Weight = model.Weight;
+            metalBar.Dimensions = model.Dimensions;
+
+            try
+            {
                 await _repository.SaveChangesAsync();
             }
             catch (Exception ex)

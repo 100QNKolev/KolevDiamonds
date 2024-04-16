@@ -13,9 +13,7 @@ namespace KolevDiamonds.Core.Extensions
         public static string GetInformation(this IProductModel model) 
         {
             string info = model.Name.Replace(" ", "-") + GetPrice(model);
-            Regex.Replace(info, @"[^a-zA-Z0-9\-]", string.Empty);
-
-            return info;
+            return Regex.Replace(info, @"[^a-zA-Z0-9\-]", string.Empty);
         }
 
         private static string GetPrice(IProductModel model)

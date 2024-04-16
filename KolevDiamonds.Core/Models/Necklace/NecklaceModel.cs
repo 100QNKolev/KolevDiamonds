@@ -7,6 +7,8 @@ namespace KolevDiamonds.Core.Models.Necklace
 {
     public class NecklaceModel
     {
+        public int? Id { get; set; }
+
         [Required(ErrorMessage = ValidationMessagesConstants.NameRequired)]
         [StringLength(NecklaceNameMaximumLength, MinimumLength = NecklaceNameMinimumLength, ErrorMessage = ValidationMessagesConstants.NameLength)]
         public string Name { get; set; } = string.Empty;
