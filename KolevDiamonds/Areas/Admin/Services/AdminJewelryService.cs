@@ -11,7 +11,7 @@ using KolevDiamonds.Areas.Admin.Contracts;
 
 namespace KolevDiamonds.Areas.Admin.Services
 {
-    public class AdminJewelryServices : IAdminJewelryServiceContract
+    public class AdminJewelryService : IAdminJewelryServiceContract
     {
         private readonly IRingService _ringService;
         private readonly INecklaceService _necklaceService;
@@ -19,7 +19,7 @@ namespace KolevDiamonds.Areas.Admin.Services
         private readonly IInvestmentDiamondService _investmentDiamondService;
         private readonly IInvestmentCoinService _investmentCoinService;
 
-        public AdminJewelryServices(
+        public AdminJewelryService(
             IRingService ringService,
             INecklaceService necklaceService,
             IMetalBarService metalBarService,
@@ -80,6 +80,6 @@ namespace KolevDiamonds.Areas.Admin.Services
             return allProducts;
         }
 
-
+      
     }
 }
