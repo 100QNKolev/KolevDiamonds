@@ -24,9 +24,18 @@
                     <div><strong>Purity:</strong> @Model.Purity</div>
                     <div><strong>Length:</strong> @Model.Length</div>
                 </div>
-                <div class="buy-button">
-                    <button type="button" onclick="addToCart()">Buy Now</button>
-                </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="buy-button">
+                        <button type="button" onclick="addToCart()">Buy Now</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="buy-button">
+                        <button type="button" disabled>Log in to Buy</button>
+                    </div>
+                }
             </div>
         </div>
     </div>
